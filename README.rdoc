@@ -16,3 +16,8 @@
 - To create test files using rspec
   - rails g rspec:model
   - rails g rpec:controller
+
+
+## Redis
+- brew install redis
+- 'redis-server' to active a live redis server
