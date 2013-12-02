@@ -12,11 +12,7 @@
 ## Tests
 
 - rake db:test:prepare will make your test db ready to run tests
-- to run tests, run 'bundle exec rspec'
+- to run tests, run 'rspec'
 - To create test files using rspec
   - rails g rspec:model
   - rails g rpec:controller
-
-
-## Heroku Link
-- http://shrouded-atoll-9214.herokuapp.com/
