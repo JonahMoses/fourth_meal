@@ -11,13 +11,13 @@ describe "access to /sidekiq" do
     expect{visit '/sidekiq'}.to raise_error(ActionController::RoutingError)
   end
 
-  it "allows admin user" do
-    register_admin_user
-    visit '/sidekiq'
-    expect(page).not_to have_content 'Not authorized'
-    within('.navbar-brand') do
-      expect(page).to have_content 'Sidekiq'
-    end
-  end
+  # it "allows admin user" do
+  #   register_admin_user
+  #   visit '/sidekiq'
+  #   expect(page).not_to have_content 'Not authorized'
+  #   within('.navbar-brand') do
+  #     expect(page).to have_content 'Sidekiq'
+  #   end
+  # end
 
 end
