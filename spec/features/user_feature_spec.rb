@@ -27,7 +27,7 @@ describe "the signin process" do
   end
 
   it "logs me out" do
-    visit '/'
+    visit '/items'
     click_link_or_button 'Log Out'
     expect(page).to have_content 'Logged out'
     expect(page).to have_content 'Log In'
@@ -56,7 +56,7 @@ describe "member" do
 
   it "can edit her own user details" do
     register_changeable_user
-    visit '/'
+    visit '/items'
     click_on 'My profile'
     fill_in 'user_email', :with => "adminOne@example.com"
     click_link_or_button 'Update User'

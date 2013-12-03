@@ -60,45 +60,44 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  private
-    def set_order_item
-      @order_item = OrderItem.find(params[:id])
-    end
+private
 
-    def order_item_params
-      params.require(:order_item).permit(:item_id, :order_id, :quantity)
-    end
+  def set_order_item
+    @order_item = OrderItem.find(params[:id])
+  end
 
-    def load_order
-      find_or_create_cart
-    end
+  def order_item_params
+    params.require(:order_item).permit(:item_id, :order_id, :quantity)
+  end
 
-    def find_or_create_cart
-      create_and_log_in_guest_user unless current_user
-      @order = find_or_create_order
-      #binding.pry
-      save_order_and_set_session if @order.new_record?
-    end
+  def load_order
+    find_or_create_cart
+  end
 
-    def create_and_log_in_guest_user
-      session[:user_id] = User.new_guest_user_id
-    end
+  def find_or_create_cart
+    create_and_log_in_guest_user unless current_user
+    @order = find_or_create_order
+    save_order_and_set_session if @order.new_record?
+  end
 
-    def save_order_and_set_session
-      #binding.pry
-      @order.save!
-      session[:order_id] = @order.id
-    end
+  def create_and_log_in_guest_user
+    session[:user_id] = User.new_guest_user_id
+  end
 
-    def find_or_create_order
-      existing_order = Order.find_unsubmitted_order_for(current_user.id)
-      existing_order ? existing_order : get_order_and_assign_to_user
-    end
+  def save_order_and_set_session
+    @order.save!
+    session[:order_id] = @order.id
+  end
 
-    def get_order_and_assign_to_user
-      order = Order.find_or_initialize_by(id: session[:order_id], status: "unsubmitted")
-      order.user_id = current_user.id
-      order
-    end
+  def find_or_create_order
+    existing_order = Order.find_unsubmitted_order_for(current_user.id)
+    existing_order ? existing_order : get_order_and_assign_to_user
+  end
+
+  def get_order_and_assign_to_user
+    order = Order.find_or_initialize_by(id: session[:order_id], status: "unsubmitted")
+    order.user_id = current_user.id
+    order
+  end
 
 end

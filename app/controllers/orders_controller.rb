@@ -60,16 +60,18 @@ class OrdersController < ApplicationController
   def confirmation
   end
 
-  private
-    def set_order
-      if current_user.admin?
-        @order = Order.find(params[:id])
-      else
-        @order = current_user.orders.find(params[:id])
-      end
-    end
+private
 
-    def order_params
-      params.require(:order).permit(:user_id, :status)
+  def set_order
+    if current_user.admin?
+      @order = Order.find(params[:id])
+    else
+      @order = current_user.orders.find(params[:id])
     end
+  end
+
+  def order_params
+    params.require(:order).permit(:user_id, :status)
+  end
+
 end

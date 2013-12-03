@@ -23,7 +23,7 @@ describe "the checkout process for a guest" do
 
   before :all do
     make_an_item
-    visit '/'
+    visit '/items'
     click_on 'Log Out'
   end
 

@@ -1,13 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user, :order_items_count
+  helper_method              :current_user, :order_items_count
+  delegate                   :allow?, to: :current_permission
+  helper_method              :allow?
+  before_action              :authorize
 
-  before_action :authorize
-
-  delegate :allow?, to: :current_permission
-  helper_method :allow?
-
-  private
+private
 
     def order_items_count
       if current_user
@@ -28,7 +26,7 @@ class ApplicationController < ActionController::Base
 
     def authorize
       if !current_permission.allow?(params[:controller], params[:action])
-        redirect_to root_url, alert: "Not authorized"
+        redirect_to "/items", alert: "Not authorized"
       end
     end
 

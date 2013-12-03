@@ -45,18 +45,18 @@ class ItemsController < ApplicationController
     end
   end
 
-  private
+private
 
-    def set_item
-      @item = Item.find(params[:id])
-    end
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
-    def item_params
-      params.require(:item).permit(:title, :description, :price, :active, :item_categories, :image)
-    end
+  def item_params
+    params.require(:item).permit(:title, :description, :price, :active, :item_categories, :image)
+  end
 
-    def categories(ids)
-      ids.map {|id| Category.find_by_id(id) }.compact
-    end
+  def categories(ids)
+    ids.map {|id| Category.find_by_id(id) }.compact
+  end
 
 end

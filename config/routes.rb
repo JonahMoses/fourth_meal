@@ -4,7 +4,8 @@ require 'admin_constraint'
 Foodfight::Application.routes.draw do
   get "dashboard" => "dashboard#index", :as => 'dashboard'
   resources :categories
-  root :to => "home#home_page"
+
+  root :to => "restaurants#index"
 
   resources :orders do
     post 'purchase', :on => :member
