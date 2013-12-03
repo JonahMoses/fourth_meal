@@ -2,47 +2,47 @@ module UserHelpers
 
   def register_user
     User.where(:email => "user@example.com").first_or_create(
-                :email => "user@example.com",
-                :full_name => "bo jangles",
-                :display_name => "bj",
-                :password => "foobarbaz",
-                :password_confirmation => "foobarbaz")
+               :email => "user@example.com",
+               :full_name => "bo jangles",
+               :display_name => "bj",
+               :password => "foobarbaz",
+               :password_confirmation => "foobarbaz")
     visit '/log_in'
-    fill_in 'email', :with => "user@example.com"
+    fill_in 'email',    :with => "user@example.com"
     fill_in 'password', :with => "foobarbaz"
     click_button 'Log In'
   end
 
   def register_admin_user
     User.where(:email => "admin@example.com").first_or_create(
-                :email => "admin@example.com",
-                :full_name => "bo jangles",
-                :display_name => "bj",
-                :password => "foobarbaz",
-                :password_confirmation => "foobarbaz",
-                :admin => true)
+               :email => "admin@example.com",
+               :full_name => "bo jangles",
+               :display_name => "bj",
+               :password => "foobarbaz",
+               :password_confirmation => "foobarbaz",
+               :admin => true)
     visit '/log_in'
-    fill_in 'email', :with => "admin@example.com"
+    fill_in 'email',    :with => "admin@example.com"
     fill_in 'password', :with => "foobarbaz"
     click_button 'Log In'
   end
 
   def log_in_user
     visit '/log_in'
-    fill_in 'email', :with => "user@example.com"
+    fill_in 'email',    :with => "user@example.com"
     fill_in 'password', :with => "foobarbaz"
     click_button 'Log In'
   end
 
   def register_changeable_user # this user's info is going to change under you
     User.where(:email => "confused@example.com").first_or_create(
-                 :email => "confused@example.com",
-                 :full_name => "confused guy",
-                 :display_name => "conf",
-                 :password => "foobar",
-                 :password_confirmation => "foobar")
+               :email => "confused@example.com",
+               :full_name => "confused guy",
+               :display_name => "conf",
+               :password => "foobar",
+               :password_confirmation => "foobar")
     visit '/log_in'
-    fill_in 'email', :with => "confused@example.com"
+    fill_in 'email',    :with => "confused@example.com"
     fill_in 'password', :with => "foobar"
     within('form') do
       click_link_or_button 'Log In'
@@ -51,28 +51,27 @@ module UserHelpers
 
   def make_an_item_via_db
     Item.create!(:title => 'potatoe wedges',
-                :description => 'wet',
-                :price => '1.99')
+                 :description => 'wet',
+                 :price => '1.99')
   end
 
-  def make_an_item
-    # will need to be an admin
+  def make_an_item # will need to be an admin
     user = User.where(:email => "admin1@example.com").first_or_create(
-                :email => "admin1@example.com",
-                :full_name => "admin",
-                :password => "foobar",
-                :password_confirmation => "foobar",
-                :admin => true)
+                      :email => "admin1@example.com",
+                      :full_name => "admin",
+                      :password => "foobar",
+                      :password_confirmation => "foobar",
+                      :admin => true)
     visit '/log_in'
-    fill_in 'email', :with => "admin1@example.com"
+    fill_in 'email',    :with => "admin1@example.com"
     fill_in 'password', :with => "foobar"
     click_button 'Log In'
 
     visit '/items'
     click_on 'New Item'
-    fill_in 'item_title', :with => 'fries'
+    fill_in 'item_title',       :with => 'fries'
     fill_in 'item_description', :with => 'wet'
-    fill_in 'item_price', :with => '1.99'
+    fill_in 'item_price',       :with => '1.99'
     click_button 'Create Item'
   end
 

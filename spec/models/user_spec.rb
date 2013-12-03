@@ -12,15 +12,15 @@ describe User do
 
   it "limits short length of display_name" do
     short_user = User.new(:email => "dragons@example.com", :full_name => "yes sir",
-                    :display_name => "1",
-                    :password => "foobar", :password_confirmation => "foobar")
+                          :display_name => "1",
+                          :password => "foobar", :password_confirmation => "foobar")
     short_user.valid?.should be_false
   end
 
   it "limits long length of display_name" do
     long_user = User.new(:email => "dragons@example.com", :full_name => "yes sir",
-                    :display_name => "3"*33,
-                    :password => "foobar", :password_confirmation => "foobar")
+                         :display_name => "3"*33,
+                         :password => "foobar", :password_confirmation => "foobar")
     long_user.valid?.should be_false
   end
 
@@ -40,13 +40,13 @@ describe User do
 
   it "rejects invalid email addresses" do
     no_at = User.new(:email => "dragonxample.com", :full_name => "yeas",
-                    :password => "foobar", :password_confirmation => "foobar")
+                     :password => "foobar", :password_confirmation => "foobar")
     no_tld = User.new(:email => "dragonx@llample", :full_name => "yeas",
-                    :password => "foobar", :password_confirmation => "foobar")
+                      :password => "foobar", :password_confirmation => "foobar")
     no_name = User.new(:email => "@dragonxample.com", :full_name => "yeas",
-                    :password => "foobar", :password_confirmation => "foobar")
+                       :password => "foobar", :password_confirmation => "foobar")
     valid_user = User.new(:email => "dragon@example.com", :full_name => "yeas",
-                    :password => "foobar", :password_confirmation => "foobar")
+                          :password => "foobar", :password_confirmation => "foobar")
     no_at.valid?.should be_false
     no_tld.valid?.should be_false
     no_name.valid?.should be_false
@@ -55,17 +55,17 @@ describe User do
 
   it "rejects case-insensitive duplicate emails" do
     first_user = User.new(:email => "first_user@example.com", :full_name => "yeas",
-                  :password => "foobar", :password_confirmation => "foobar")
+                          :password => "foobar", :password_confirmation => "foobar")
     first_user.save!
     second_user = User.new(:email => "First_user@example.com", :full_name => "yeas",
-                  :password => "foobar", :password_confirmation => "foobar")
+                           :password => "foobar", :password_confirmation => "foobar")
     first_user.valid?.should be_true
     second_user.valid?.should be_false
   end
 
   it "saves a users email address downcased" do
     first_user = User.new(:email => "First_user@example.com", :full_name => "yeas",
-                    :password => "foobar", :password_confirmation => "foobar")
+                          :password => "foobar", :password_confirmation => "foobar")
     first_user.save!
 
     expect(first_user.email).to eq("first_user@example.com")
