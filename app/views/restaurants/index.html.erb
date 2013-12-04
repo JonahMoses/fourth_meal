@@ -1,5 +1,11 @@
+<%- model_class = Restaurant -%>
 <div class="jumbotron center-text">
-  <%= image_tag('pig_roast.jpg', class: "pig_image") %>
   <h1>WELCOME TO FOOD FIGHT!</h1>
-  <p><%= link_to "View Menu", items_path, class: "btn btn-primary btn-lg" %></p>
+  <div class="container">
+    <% @restaurants.in_groups_of(3, false).each do |restaurant_array| %>
+      <div class="row col-md-4">
+        <%= render partial: 'restaurants/restaurant', collection: restaurant_array %>
+      </div>
+    <% end %>
+  </div>
 </div>
