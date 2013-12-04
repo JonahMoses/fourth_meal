@@ -9,7 +9,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @restaurant = Restaurant.find_by(true)
+    @restaurant = Restaurant.find_by(title: params[:title])
   end
 
 private

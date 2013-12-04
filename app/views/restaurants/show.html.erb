@@ -1,1 +1,5 @@
-<%= @restaurant.title %>
+Title:<%= @restaurant.title %></br>
+Description:<%= @restaurant.description %></br>
+<% @restaurant.items.each do |item| %>
+  Item:<p><%= item.title %></p>
+<% end %> 

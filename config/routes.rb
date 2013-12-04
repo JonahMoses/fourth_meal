@@ -26,6 +26,8 @@ Foodfight::Application.routes.draw do
 
   resources :restaurants
 
+  get ":title", to: "restaurants#show"
+
   mount Sidekiq::Web, at: '/sidekiq', :constraints => AdminConstraint.new
 
 end

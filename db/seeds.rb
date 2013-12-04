@@ -3,7 +3,7 @@ class Seeder
   def create_data
     create_categories
     #create_orders
-    10.times do
+    100.times do
       create_item
     end
     create_restaurants
