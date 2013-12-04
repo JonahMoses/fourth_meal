@@ -1,5 +1,16 @@
-Title:<%= @restaurant.title %></br>
-Description:<%= @restaurant.description %></br>
-<% @restaurant.items.each do |item| %>
-  Item:<p><%= item.title %></p>
-<% end %> 
+<%= @restaurant.title %></br>
+<%= @restaurant.description %></br>
+ 
+
+ <% @restaurant.items.each do |item| %>
+<dl class="dl-horizontal">
+  <dt><strong> Item:</strong></dt>
+  <dd><%= item.title %></dd>
+  <dt><strong>Description:</strong></dt>
+  <dd><%= item.description %></dd>
+  <dt><strong>Price:</strong></dt>
+  <dd><%= item.price %></dd>
+  <dt><strong>Status:</strong></dt>
+  <dd><%= print_status item.active %></dd>
+</dl>
+ <% end %>
