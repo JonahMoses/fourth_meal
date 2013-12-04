@@ -30,7 +30,7 @@ describe "a guest user's order" do
     expect(page).to have_content 'unsubmitted'
   end
 
-  xit "keeps item in cart after signing up" do
+  it "keeps item in cart after signing up" do
     add_item_to_order
     #within("#order_items_index_table") do
       expect(page).to have_content 'unsubmitted'
@@ -56,7 +56,7 @@ describe "maintaining a single cart over multiple logins" do
     make_an_item
   end
 
-  it "keeps same cart for a user after log out and log back in" do
+  xit "keeps same cart for a user after log out and log back in" do
     register_user #=> user@example.com
     add_item_to_order
     click_on('Log Out')
