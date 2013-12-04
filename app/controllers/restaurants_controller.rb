@@ -8,10 +8,14 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new(restaurant_params)
   end
 
+  def show
+    @restaurant = Restaurant.find_by(true)
+  end
+
 private
 
-  def item_params
-    params.require(:restaurant).permit(:title, :description)
+  def restaurant_params
+    params.require(:restaurant).permit(:title, :description, :id)
   end
 
 end
