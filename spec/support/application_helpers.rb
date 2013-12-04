@@ -52,7 +52,8 @@ module UserHelpers
   def make_an_item_via_db
     Item.create!(:title => 'potatoe wedges',
                  :description => 'wet',
-                 :price => '1.99')
+                 :price => '1.99',
+                 :restaurant_id => 1)
   end
 
   def make_an_item # will need to be an admin
@@ -61,7 +62,8 @@ module UserHelpers
                       :full_name => "admin",
                       :password => "foobar",
                       :password_confirmation => "foobar",
-                      :admin => true)
+                      :admin => true,
+                      )
     visit '/log_in'
     fill_in 'email',    :with => "admin1@example.com"
     fill_in 'password', :with => "foobar"

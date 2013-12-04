@@ -6,6 +6,7 @@ class Seeder
     10.times do
       create_item
     end
+    create_restaurants
     create_users
   end
 
@@ -17,6 +18,7 @@ private
       puts "Created category: #{category.name}"
     end
   end
+
 
   def category_names
    [
@@ -32,8 +34,37 @@ private
    ]
   end
 
+  def create_restaurants
+    restaurant_names.each do |restaurant_name|
+      restaurant = Restaurant.create(
+                         title: restaurant_name,
+                         description: Faker::Lorem.words(2).join(" "),
+                        )
+      puts "Created restaurant: #{restaurant.title}"
+    end
+  end
+
+  def restaurant_names
+    [
+      "Antony's",
+      "Bryana's",
+      "Jonah's",
+      "Q's",
+      "Ben's",
+      "Adam's",
+      "Nikhil's",
+      "Persa's",
+      "Bree's",
+      "Louisa's",
+    ]
+  end
+
   def sample_prices
     [10.02, 1.04, 9.99, 0.99]
+  end
+
+  def sample_restaurant_ids
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   end
 
   def create_item
@@ -41,7 +72,8 @@ private
       title: Faker::Lorem.words(1).join(" "),
       description: Faker::Lorem.words(5).join(" "),
       active: true,
-      price: sample_prices.sample.to_s
+      price: sample_prices.sample.to_s,
+      restaurant_id: sample_restaurant_ids.sample.to_s
     )
     all_categories = Category.all
     item.categories << all_categories.sample

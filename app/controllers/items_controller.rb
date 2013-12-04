@@ -18,6 +18,8 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
 
+    # assign current restaurant's ID to restaurant_id for item
+
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
@@ -52,7 +54,7 @@ private
   end
 
   def item_params
-    params.require(:item).permit(:title, :description, :price, :active, :item_categories, :image)
+    params.require(:item).permit(:title, :description, :price, :active, :item_categories, :image, :restaurant_id)
   end
 
   def categories(ids)

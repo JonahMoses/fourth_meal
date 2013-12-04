@@ -24,6 +24,8 @@ Foodfight::Application.routes.draw do
   resources :item_categories
   resources :items
 
+  resources :restaurants
+
   mount Sidekiq::Web, at: '/sidekiq', :constraints => AdminConstraint.new
 
 end

@@ -15,6 +15,9 @@
         <%= restaurant.description %>
       </p>
     </div>
+    <div id="view-menu">
+    <%= button_to 'View Menu', restaurant, method: :get, class: "item-show", id: "btn-view-menu-#{restaurant.id}" %>
+    </div>
   </div>
 </div>
 
