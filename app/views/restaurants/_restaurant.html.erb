@@ -12,7 +12,8 @@
         <%= restaurant.title %>
       </h5>
       <p class="item-description">
-        <%= restaurant.description %>
+        <%= restaurant.description[0..100] %>
+          <%="…" if restaurant.description.length > 100 %>
       </p>
     </div>
     <div id="view-menu">

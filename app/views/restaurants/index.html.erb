@@ -2,10 +2,6 @@
 <div class="jumbotron center-text">
   <h1>WELCOME TO FOOD FIGHT!</h1>
   <div class="container">
-    <% @restaurants.in_groups_of(3, false).each do |restaurant_array| %>
-      <div class="row col-md-4">
-        <%= render partial: 'restaurants/restaurant', collection: restaurant_array %>
-      </div>
-    <% end %>
+    <%= render partial: 'restaurants/restaurant', collection: @restaurants %>
   </div>
 </div>
