@@ -20,8 +20,8 @@
       <div class="item-status pull-right">
         <%= print_status item.active %>
       </div><br />
-      <div class="pull-right">
-        <%= button_to 'Add to Cart', order_items_path(item_id: item.id), class: 'btn btn-danger btn-xs' %>
+      <div class="pull-right" data-no-turbolink>
+        <%= link_to 'Add to Cart', "#{current_restaurant.slug}/order/#{item.id}", { method: :post, class: 'btn btn-danger btn-xs' } %>
       </div>
       <%= link_to 'Show', restaurant_item_path(item.restaurant.slug, item), class: "item-show btn btn-default btn-xs" %>
       <% if allow? "items", "edit" %>

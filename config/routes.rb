@@ -24,9 +24,11 @@ Foodfight::Application.routes.draw do
   resources :item_categories
   resources :items, except: [:index, :show]
 
-  resources :restaurants, except: [:show]
+  resources :restaurants
   get ":slug", to: "restaurants#show", as: :restaurant_name
   get ":slug/:id", to: "items#show", as: :restaurant_item
+  post ":slug/order/:item_id", to: "order_items#create", as: :create_restaurant_order
+  get ":slug/order/:id", to: "orders#show", as: :restaurant_order
 
   mount Sidekiq::Web, at: '/sidekiq', :constraints => AdminConstraint.new
 

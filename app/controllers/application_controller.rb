@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method              :current_user, :order_items_count
+  helper_method              :current_user, :order_items_count, :current_restaurant
   delegate                   :allow?, to: :current_permission
   helper_method              :allow?
   before_action              :authorize
@@ -17,9 +17,9 @@ private
       end
     end
 
-    # def current_restaurant
-      # @restaurant = restaurant.find_by(:slug)
-    # end
+    def current_restaurant
+      @restaurant ||= Restaurant.find_by(slug: params[:slug])
+    end
 
     def current_user
       @current_user ||= User.find(session[:user_id]) if session[:user_id]

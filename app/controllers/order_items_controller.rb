@@ -2,6 +2,8 @@ class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:show, :edit, :destroy]
   before_action :load_order, only: [:create, :update]
 
+  attr_accessor :restaurant_id
+
   def index
     @order_items = OrderItem.order("created_at DESC")
   end
@@ -22,7 +24,7 @@ class OrderItemsController < ApplicationController
       @order_item.quantity += 1
       respond_to do |format|
         if @order_item.save
-          format.html { redirect_to order_path(@order), notice: 'Successfully added product to cart.' }
+          format.html { redirect_to "/#{current_restaurant.slug}/order/#{@order.id}", notice: 'Successfully added product to cart.' }
         else
           format.html { render action: 'new' }
         end
@@ -71,10 +73,6 @@ private
   end
 
   def load_order
-    find_or_create_cart
-  end
-
-  def find_or_create_cart
     create_and_log_in_guest_user unless current_user
     @order = find_or_create_order
     save_order_and_set_session if @order.new_record?
@@ -90,14 +88,15 @@ private
   end
 
   def find_or_create_order
-    existing_order = Order.find_unsubmitted_order_for(current_user.id)
-    existing_order ? existing_order : get_order_and_assign_to_user
+    Order.find_unsubmitted_order_for(current_user.id) || create_order
   end
 
-  def get_order_and_assign_to_user
-    order = Order.find_or_initialize_by(id: session[:order_id], status: "unsubmitted")
-    order.user_id = current_user.id
-    order
+  def create_order
+    Order.find_or_initialize_by(
+      id:            session[:order_id],
+      status:        "unsubmitted",
+      restaurant_id: current_restaurant.id,
+      user_id:       current_user.id
+      )
   end
-
 end

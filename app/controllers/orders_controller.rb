@@ -17,7 +17,6 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.new(order_params)
-
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
@@ -71,7 +70,7 @@ private
   end
 
   def order_params
-    params.require(:order).permit(:user_id, :status)
+    params.require(:order).permit(:user_id, :status, :restaurant_id)
   end
 
 end
