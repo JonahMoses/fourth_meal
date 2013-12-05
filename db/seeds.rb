@@ -56,6 +56,8 @@ private
       "Persa's",
       "Bree's",
       "Louisa's",
+      "Rolen's",
+      "Kevin's"
     ]
   end
 
@@ -64,7 +66,7 @@ private
   end
 
   def sample_restaurant_ids
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   end
 
   def create_item
