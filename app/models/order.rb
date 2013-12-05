@@ -1,7 +1,10 @@
 class Order < ActiveRecord::Base
+  validates  :restaurant_id, presence: true
+
   has_many   :order_items, dependent: :destroy
   has_many   :items, through: :order_items
   belongs_to :user
+  belongs_to :restaurant
 
   def total
     order_items.map(&:subtotal).reduce(:+)

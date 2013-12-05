@@ -3,17 +3,17 @@ require 'spec_helper'
 describe Restaurant do
 
   it "creates a restaurant with status being true" do
-    restaurant = Restaurant.create(:title => "ABC Restaurant", :description => "GOOD FOOD")
+    restaurant = Restaurant.create(:title => "Restaurant 2", :description => "GOOD FOOD")
     restaurant.status.should eq(true)
   end
 
   it "knows if restaurant is not active" do
-    Restaurant.create(:title => "ABC Restaurant", :description => "GOOD FOOD", :status => false)
+    Restaurant.create(:title => "Restaurant 3", :description => "GOOD FOOD", :status => false)
     Restaurant.active.should be_empty
   end
 
   it "knows if restaurant is active" do
-    Restaurant.create(:title => "ABC Restaurant", :description => "GOOD FOOD")
+    Restaurant.create(:title => "Restaurant 4", :description => "GOOD FOOD")
     Restaurant.active.should be_true
   end
 

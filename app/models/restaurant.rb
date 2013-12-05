@@ -2,6 +2,7 @@ class Restaurant < ActiveRecord::Base
   validates :title, :description, presence: true
   validates :title, uniqueness: true
   has_many  :items
+  has_many  :orders
 
   after_create :set_defaults
 
