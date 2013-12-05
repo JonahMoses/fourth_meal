@@ -13,7 +13,7 @@ describe Order do
                        :password => "foobar", :password_confirmation => "foobar")
     result = @restaurant.orders.create(:user_id => user.id, :restaurant_id => @restaurant.id, :status => "unsubmitted")
     @restaurant.orders.create(:user_id => user.id, :status => "gary")
-    found_orders = @restaurant.orders.find_unsubmitted_order_for(user.id)
+    found_orders = @restaurant.orders.find_unsubmitted_order_for(user.id, @restaurant.id)
     expect(result.status).to eq "unsubmitted"
     expect(result.restaurant).to eq @restaurant
     found_orders.status.should eq('unsubmitted')
