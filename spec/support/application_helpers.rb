@@ -77,8 +77,20 @@ module UserHelpers
     click_button 'Create Item'
   end
 
+  def create_restaurant_with_item
+    restaurant = Restaurant.create(
+      :title => "ABC Restaurant",
+      :description => "GOOD FOOD")
+    item = Item.create(
+      :title => "ABC Item",
+      :description => "Item Food",
+      :price => "$1.09",
+      :restaurant_id => restaurant.id)
+  end
+
   def add_item_to_order
-    visit '/items'
+    create_restaurant_with_item
+    visit "/#{restaurant.slug}"
     click_on('Add to Cart')
   end
 

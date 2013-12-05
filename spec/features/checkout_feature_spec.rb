@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe "the checkout process" do
 
-  before :all do
-    register_user
-    make_an_item
-    add_item_to_order
-  end
+  # before :all do
+  #   register_user
+  #   make_an_item
+  #   add_item_to_order
+  # end
 
-  it "updates order and directs to confirmation page" do
+  xit "updates order and directs to confirmation page" do
     visit '/orders'
     click_on 'Show'
     click_on 'Purchase'
@@ -21,13 +21,13 @@ end
 
 describe "the checkout process for a guest" do
 
-  before :all do
-    make_an_item
-    visit '/items'
-    click_on 'Log Out'
-  end
+  # before :all do
+  #   make_an_item
+  #   visit '/items'
+  #   click_on 'Log Out'
+  # end
 
-  it "brings user to sign up page and back to order" do
+  xit "brings user to sign up page and back to order" do
     add_item_to_order
     visit '/orders'
     click_on 'Show'
@@ -51,11 +51,11 @@ end
 
 describe "making a new order after purchasing an order" do
 
-  before :all do
+  # before :all do
     #make_an_item_via_db
-  end
+  # end
 
-  it "should create a new order after purchasing" do
+  xit "should create a new order after purchasing" do
     register_user
     add_item_to_order
     visit '/orders'

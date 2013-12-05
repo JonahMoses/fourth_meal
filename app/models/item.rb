@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  validates                 :title, :description, :price, presence: true
+  validates                 :title, :description, :price, :restaurant_id, presence: true
   validates                 :title, uniqueness: true
   validates                 :price, :numericality => { :greater_than => 0 }
 
@@ -26,7 +26,7 @@ class Item < ActiveRecord::Base
   end
 
   def to_param
-    "#{id} #{title}".parameterize
+    "#{id}".parameterize
   end
 
   def category_names

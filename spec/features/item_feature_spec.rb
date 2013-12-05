@@ -10,7 +10,8 @@ describe ItemsController do
         :description => "GOOD FOOD")
       item = restaurant.items.create(
         :title => "ABC Item",
-        :description => "Item Food")
+        :description => "Item Food",
+        :price => "$1.09")
       visit "/#{restaurant.slug}/#{item.id}"
       expect(page).to have_content(item.title)
     end
