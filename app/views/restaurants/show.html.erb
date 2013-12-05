@@ -1,16 +1,15 @@
 <%= @restaurant.title %></br>
 <%= @restaurant.description %></br>
- 
 
- <% @restaurant.items.each do |item| %>
-<dl class="dl-horizontal">
-  <dt><strong> Item:</strong></dt>
-  <dd><%= item.title %></dd>
-  <dt><strong>Description:</strong></dt>
-  <dd><%= item.description %></dd>
-  <dt><strong>Price:</strong></dt>
-  <dd><%= item.price %></dd>
-  <dt><strong>Status:</strong></dt>
-  <dd><%= print_status item.active %></dd>
-</dl>
- <% end %>
+<div class="container">
+  <% @restaurant.items.in_groups_of(3, false).each do |item_array| %>
+    <div class="row col-md-4">
+      <%= render partial: 'items/item', collection: item_array %>
+    </div>
+  <% end %>
+</div>
+
+<% if allow? "items", "create" %>
+  <%= link_to "New Item", new_item_path, :class => 'btn btn-primary' %>
+<% end %>
+
