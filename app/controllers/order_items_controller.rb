@@ -74,26 +74,22 @@ private
 
   def load_order
     create_and_log_in_guest_user unless current_user
+
     @order = find_or_create_order
-    save_order_and_set_session if @order.new_record?
+    session[:order_id] = @order.id
+    @order
   end
 
   def create_and_log_in_guest_user
     session[:user_id] = User.new_guest_user_id
   end
 
-  def save_order_and_set_session
-    @order.save!
-    session[:order_id] = @order.id
-  end
-
   def find_or_create_order
-    Order.find_unsubmitted_order_for(current_user.id) || create_order
+    Order.find_unsubmitted_order_for(current_user.id, current_restaurant.id) || create_order
   end
 
   def create_order
-    Order.find_or_initialize_by(
-      id:            session[:order_id],
+    order = Order.find_or_create_by(
       status:        "unsubmitted",
       restaurant_id: current_restaurant.id,
       user_id:       current_user.id
