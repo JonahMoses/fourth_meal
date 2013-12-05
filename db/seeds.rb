@@ -38,7 +38,7 @@ private
     restaurant_names.each do |restaurant_name|
       restaurant = Restaurant.create(
                          title: restaurant_name,
-                         description: Faker::Lorem.words(2).join(" "),
+                         description: Faker::Lorem.words(25).join(" "),
                         )
       puts "Created restaurant: #{restaurant.title}"
     end
@@ -50,14 +50,14 @@ private
       "Bryana's",
       "Jonah's",
       "Q's",
-      "Ben's",
-      "Adam's",
+      "Jorge's",
+      "Kevin's",
       "Nikhil's",
-      "Persa's",
+      "Katrina's",
       "Bree's",
       "Louisa's",
-      "Rolen's",
-      "Kevin's"
+      "Ben's",
+      "Tyler's"
     ]
   end
 
