@@ -15,7 +15,7 @@ gem 'delayed_paperclip'
 gem 'sinatra', require: false
 gem 'slim'
 
-group :developemt, :test do
+group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'capybara'
   gem 'pry'

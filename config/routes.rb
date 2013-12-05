@@ -22,11 +22,11 @@ Foodfight::Application.routes.draw do
   resources :sessions
   get "/code" => redirect("https://github.com/JonahMoses/dinner_dash")
   resources :item_categories
-  resources :items
+  resources :items, except: [:index, :show]
 
-  resources :restaurants
-
-  get ":title", to: "restaurants#show"
+  resources :restaurants, except: [:show]
+  get ":slug", to: "restaurants#show", as: :restaurant_name
+  get ":slug/:id", to: "items#show", as: :restaurant_item
 
   mount Sidekiq::Web, at: '/sidekiq', :constraints => AdminConstraint.new
 

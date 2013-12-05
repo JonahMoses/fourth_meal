@@ -16,7 +16,7 @@
       </p>
     </div>
     <div id="view-menu">
-    <%= button_to 'View Menu', "#{restaurant.title}", method: :get, class: "item-show", id: "btn-view-menu-#{restaurant.id}" %>
+      <%= link_to 'View Menu', restaurant.slug, class: "item-show btn btn-default", id: "btn-view-menu-#{restaurant.id}" %>
     </div>
   </div>
 </div>

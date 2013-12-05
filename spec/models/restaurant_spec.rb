@@ -17,4 +17,12 @@ describe Restaurant do
     Restaurant.active.should be_true
   end
 
+  it "should have a slug" do
+    restaurant = Restaurant.create(:title => "ABC's Restaurant:", :description => "GOOD FOOD")
+    restaurant.slug.should eq("abc-s-restaurant")
+
+    target = Restaurant.find_by(slug: "abc-s-restaurant")
+    target.should eq restaurant
+  end
+
 end

@@ -25,6 +25,10 @@ class Item < ActiveRecord::Base
     super
   end
 
+  def to_param
+    "#{id} #{title}".parameterize
+  end
+
   def category_names
     self.categories.collect do |c|
       c.name

@@ -10,12 +10,16 @@
 <div class="container-fluid">
 
   <div class="col-lg-12">
-    
+
     <% if @restaurant %>
+      <br />
       <%= render 'restaurants/restaurant_header' %>
+      <br />
       <%= render 'restaurants/restaurant_nav_bar' %>
     <% else %>
+      <br />
       <%= render 'layouts/header' %>
+      <br />
       <%= render 'layouts/navbar' %>
     <% end %>
     <%= render 'layouts/messages' %>
