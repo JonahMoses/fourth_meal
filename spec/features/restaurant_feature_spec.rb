@@ -15,7 +15,7 @@ describe RestaurantsController do
 
   describe 'restaurant root' do
     it 'should work' do
-      restaurant = Restaurant.create(:title => "Restaurant 1", :description => "GOOD FOOD")
+      restaurant = FactoryGirl.create(:restaurant)
       visit restaurant_name_path(restaurant.slug)
       expect(page).to have_content(restaurant.title)
     end
