@@ -25,9 +25,28 @@ describe "a guest user's order" do
   #   make_an_item
   # end
 
-  xit "adds item to an order" do
+  it "adds item to an order" do
     add_item_to_order
     expect(page).to have_content 'unsubmitted'
+    expect(page).to have_content "#{@restaurant.title}"
+  end
+
+  it "creates new order when add item to cart in different restaurant" do 
+    add_item_to_order
+    expect(page).to have_content "#{@restaurant.title}"
+    new_restaurant = Restaurant.create(
+      :title => "New Restuarant",
+      :description => "GOOD FOOD")
+    new_item = Item.create(
+      :title => "Bacon",
+      :description => "Yummy",
+      :price => "$10.09",
+      :restaurant_id => new_restaurant.id)
+    #add buttons to go back to other restaurant
+    visit "/#{new_restaurant.slug}"
+    click_on('Add to Cart')
+    expect(page).to have_no_content("ABC")
+    expect(page).to have_content("Bacon")
   end
 
   xit "keeps item in cart after signing up" do

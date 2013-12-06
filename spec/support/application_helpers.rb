@@ -78,19 +78,19 @@ module UserHelpers
   end
 
   def create_restaurant_with_item
-    restaurant = Restaurant.create(
+    @restaurant = Restaurant.create(
       :title => "ABC Restaurant",
       :description => "GOOD FOOD")
     item = Item.create(
       :title => "ABC Item",
       :description => "Item Food",
       :price => "$1.09",
-      :restaurant_id => restaurant.id)
+      :restaurant_id => @restaurant.id)
   end
 
   def add_item_to_order
     create_restaurant_with_item
-    visit "/#{restaurant.slug}"
+    visit "/#{@restaurant.slug}"
     click_on('Add to Cart')
   end
 
