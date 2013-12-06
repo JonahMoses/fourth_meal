@@ -34,15 +34,9 @@ describe "a guest user's order" do
   it "creates new order when add item to cart in different restaurant" do 
     add_item_to_order
     expect(page).to have_content "#{@restaurant.title}"
-    new_restaurant = Restaurant.create(
-      :title => "New Restuarant",
-      :description => "GOOD FOOD")
-    new_item = Item.create(
-      :title => "Bacon",
-      :description => "Yummy",
-      :price => "$10.09",
-      :restaurant_id => new_restaurant.id)
-    #add buttons to go back to other restaurant
+    new_restaurant = FactoryGirl.create(:restaurant)
+    new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
+    #TODO: add buttons to go back to other restaurant
     visit "/#{new_restaurant.slug}"
     click_on('Add to Cart')
     expect(page).to have_no_content("ABC")
