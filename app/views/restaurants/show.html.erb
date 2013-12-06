@@ -1,15 +1,12 @@
-<%= @restaurant.title %></br>
-<%= @restaurant.description %></br>
+<div class="jumbotron center-text">
+  <%= @restaurant.title %></br>
+  <%= @restaurant.description %></br>
 
-<div class="container">
-  <% @restaurant.items.in_groups_of(3, false).each do |item_array| %>
-    <div class="row col-md-4">
-      <%= render partial: 'items/item', collection: item_array %>
-    </div>
+  <div class="container">
+    <%= render partial: 'items/item', collection: @restaurant.items %>
+  </div>
+
+  <% if allow? "items", "create" %>
+    <%= link_to "New Item", new_item_path, :class => 'btn btn-primary' %>
   <% end %>
 </div>
-
-<% if allow? "items", "create" %>
-  <%= link_to "New Item", new_item_path, :class => 'btn btn-primary' %>
-<% end %>
-

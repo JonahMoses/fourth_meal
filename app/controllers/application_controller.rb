@@ -7,32 +7,31 @@ class ApplicationController < ActionController::Base
 
 private
 
-    def order_items_count
-      if current_user
-        current_cart = Order.find_unsubmitted_order_for(current_user.id, current_restaurant.id)
-        # current_cart = current_restaurant.orders.find_unsubmitted_order_for(current_user.id)
-        current_cart.items_count if current_cart
-      else
-        0
-      end
+  def order_items_count
+    if current_user
+      current_cart = Order.find_unsubmitted_order_for(current_user.id, current_restaurant.id)
+      current_cart.items_count if current_cart
+    else
+      0
     end
+  end
 
-    def current_restaurant
-      @restaurant ||= Restaurant.find_by(slug: params[:slug])
-    end
+  def current_restaurant
+    @restaurant ||= Restaurant.find_by(slug: params[:slug])
+  end
 
-    def current_user
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    end
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
 
-    def current_permission
-      @current_permission ||= Permission.new(current_user)
-    end
+  def current_permission
+    @current_permission ||= Permission.new(current_user)
+  end
 
-    def authorize
-      if !current_permission.allow?(params[:controller], params[:action])
-        redirect_to "/items", alert: "Not authorized"
-      end
+  def authorize
+    if !current_permission.allow?(params[:controller], params[:action])
+      redirect_to "/items", alert: "Not authorized"
     end
+  end
 
 end
