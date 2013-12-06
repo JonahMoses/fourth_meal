@@ -15,6 +15,7 @@ gem 'delayed_paperclip'
 gem 'sinatra', require: false
 gem 'slim'
 
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'capybara'
@@ -22,6 +23,7 @@ group :development, :test do
   gem 'launchy'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "factory_girl_rails", "~> 4.0"
 end
 
 group :test do
