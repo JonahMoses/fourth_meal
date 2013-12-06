@@ -1,4 +1,5 @@
 class RestaurantsController < ApplicationController
+  before_action :create_and_log_in_guest_user, only: [:show]
 
   def index
     @restaurants = Restaurant.active
@@ -10,6 +11,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = current_restaurant
+    @restaurant_order = current_user.orders.order("created_at DESC")
   end
 
 private

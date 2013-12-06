@@ -80,9 +80,6 @@ private
     @order
   end
 
-  def create_and_log_in_guest_user
-    session[:user_id] = User.new_guest_user_id
-  end
 
   def find_or_create_order
     Order.find_unsubmitted_order_for(current_user.id, current_restaurant.id) || create_order

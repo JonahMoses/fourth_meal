@@ -34,9 +34,14 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <% if current_user %>
-        <li><%= link_to "Items in cart: #{order_items_count}", orders_path %></a></li>
+      <% if @restaurant_order.first != nil %>
+        <% if current_restaurant.id == @restaurant_order.first.restaurant_id %>
+          <li><%= link_to "Items in cart: #{order_items_count}", @restaurant_order.first %></a></li>
+        <% else %>
+          <li><%= link_to "Items in cart: #{order_items_count}", "#" %></a></li>
+        <% end %>
       <% end %>
+
       <%= render "users/user_nav" %>
     </ul>
 
