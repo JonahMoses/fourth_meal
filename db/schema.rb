@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131205170053) do
+ActiveRecord::Schema.define(version: 20131207211011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,20 @@ ActiveRecord::Schema.define(version: 20131205170053) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "guest"
-    t.boolean  "admin",         default: false
+    t.boolean  "admin",                         default: false
+    t.string   "credit_card_number", limit: 16
+    t.integer  "billing_address"
+    t.integer  "shipping_address"
+    t.string   "billing_street"
+    t.string   "shipping_street"
+    t.string   "billing_apt"
+    t.string   "shipping_apt"
+    t.string   "billing_city"
+    t.string   "shipping_city"
+    t.string   "billing_state"
+    t.string   "shipping_state"
+    t.string   "billing_zip_code",   limit: 5
+    t.string   "shipping_zip_code",  limit: 5
   end
 
 end

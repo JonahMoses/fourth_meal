@@ -57,6 +57,10 @@ class OrdersController < ApplicationController
   end
 
   def guest_purchase
+    @user = current_user
+  end
+
+  def guest_confirm_purchase
   end
 
   def confirmation
