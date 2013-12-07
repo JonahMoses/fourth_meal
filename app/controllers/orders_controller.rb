@@ -49,6 +49,7 @@ class OrdersController < ApplicationController
       session[:order_id] = nil
       redirect_to confirmation_order_path(@order)
     elsif @order.user.guest
+      @order.save
       session[:last_order_page] = request.env['HTTP_REFERER'] || orders_path
       redirect_to sign_up_path, notice: "Please sign up to purchase your cart"
     else
@@ -61,6 +62,12 @@ class OrdersController < ApplicationController
   end
 
   def guest_confirm_purchase
+    fail #saying not authorized
+    @order = current_order
+    @user = current_user
+    @order.purchase!
+    session[:order_id] = nil
+    redirect_to confirmation_order_path(@order)
   end
 
   def confirmation

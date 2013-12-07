@@ -2,6 +2,7 @@ require 'sidekiq/web'
 require 'admin_constraint'
 
 Foodfight::Application.routes.draw do
+  get "/guest_confirm_purchase" => "orders#guest_confirm_purchase", as: :guest_confirm_purchase
   get "/guest" => "orders#guest_purchase", as: :guest_purchase
   get "dashboard" => "dashboard#index", :as => 'dashboard'
   resources :categories
@@ -20,6 +21,7 @@ Foodfight::Application.routes.draw do
   post "log_out" => "sessions#destroy"
   get "log_in" => "sessions#new"
   get "sign_up" => "users#new"
+
 
   resources :users
   resources :sessions

@@ -25,7 +25,7 @@ class Order < ActiveRecord::Base
   end
 
   def purchase!
-    return unless purchaseable?
+    # return unless purchaseable?
     update_attributes(:status => "paid")
   end
 
