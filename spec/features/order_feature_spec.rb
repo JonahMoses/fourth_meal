@@ -31,7 +31,7 @@ describe "a guest user's order" do
     expect(page).to have_content "#{@restaurant.title}"
   end
 
-  it "creates new order when add item to cart in different restaurant" do 
+  it "creates new order when add item to cart in different restaurant" do
     add_item_to_order
     expect(page).to have_content "#{@restaurant.title}"
     new_restaurant = FactoryGirl.create(:restaurant)
@@ -42,6 +42,26 @@ describe "a guest user's order" do
     expect(page).to have_no_content("ABC")
     expect(page).to have_content("Bacon")
   end
+
+  it "has unique cart for each restaurant" do
+    new_restaurant = FactoryGirl.create(:restaurant)
+    new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
+    visit "/#{new_restaurant.slug}"
+    click_on('Add to Cart')
+    expect(page).to have_content("Bacon")
+        new_restaurant2 = FactoryGirl.create(:restaurant, title: "Parsley", description: "blah balh")
+        new_item2 = FactoryGirl.create(:item, restaurant_id: new_restaurant2.id, title: "brown fried food", description: "fried brown food")
+    visit "/#{new_restaurant2.slug}"
+    click_on('Add to Cart')
+    expect(page).to have_no_content("Bacon")
+    expect(page).to have_content("fried brown food")
+  end
+
+
+
+
+
+
 
   xit "keeps item in cart after signing up" do
     add_item_to_order
