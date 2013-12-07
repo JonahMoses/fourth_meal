@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "the signup process", :type => :feature do
 
-  it "signs me up" do
+  xit "signs me up" do
     visit '/sign_up'
     fill_in 'user_email',                 :with => "bj@example.com"
     fill_in 'user_full_name',             :with => "Bo Jangles"

@@ -52,8 +52,11 @@ class OrdersController < ApplicationController
       session[:last_order_page] = request.env['HTTP_REFERER'] || orders_path
       redirect_to sign_up_path, notice: "Please sign up to purchase your cart"
     else
-      redirect_to @order, notice: "That order is #{@order.status} and can't be purchased.  Please purcahse your current cart."
+      redirect_to @order, notice: "That order is #{@order.status} and can't be purchased.  Please purchase your current cart."
     end
+  end
+
+  def guest_purchase
   end
 
   def confirmation

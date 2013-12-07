@@ -17,6 +17,15 @@ describe "the checkout process" do
     end
   end
 
+  it "offers guest checkout option if not signed in" do 
+    new_restaurant = FactoryGirl.create(:restaurant)
+    new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
+    visit "/#{new_restaurant.slug}"
+    click_on('Add to Cart')
+    click_link_or_button('Purchase')
+    click_link_or_button('Checkout as Guest')
+  end
+
 end
 
 describe "the checkout process for a guest" do

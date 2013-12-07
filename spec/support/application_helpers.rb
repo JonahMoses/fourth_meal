@@ -50,10 +50,8 @@ module UserHelpers
   end
 
   def make_an_item_via_db
-    Item.create!(:title => 'potatoe wedges',
-                 :description => 'wet',
-                 :price => '1.99',
-                 :restaurant_id => 1)
+    FactoryGirl.create(:restaurant)
+    FactoryGirl.create(:item)
   end
 
   def make_an_item # will need to be an admin

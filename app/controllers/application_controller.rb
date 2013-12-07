@@ -34,7 +34,7 @@ private
 
   def authorize
     if !current_permission.allow?(params[:controller], params[:action])
-      redirect_to "/items", alert: "Not authorized"
+      redirect_to "/", alert: "Not authorized"
     end
   end
 
