@@ -62,7 +62,6 @@ class OrdersController < ApplicationController
   end
 
   def guest_confirm_purchase
-    fail #saying not authorized
     @order = current_order
     @user = current_user
     @order.purchase!
