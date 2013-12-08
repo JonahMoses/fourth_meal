@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def new
     @user  = User.new
-    @order = current_order
+    # @order = current_order
   end
 
   def create

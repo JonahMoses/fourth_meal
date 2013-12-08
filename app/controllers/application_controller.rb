@@ -25,7 +25,7 @@ private
   end
 
   def current_order
-    @current_order ||= Order.find(session[:order_id])
+    @current_order ||= Order.find(session[:order_id]) if session[:order_id]
   end
 
   def create_and_log_in_guest_user

@@ -58,7 +58,11 @@ class OrdersController < ApplicationController
   end
 
   def guest_purchase
-    @user = current_user
+    if current_order == nil
+      redirect_to :back, notice: "Nothing In Cart"
+    else
+      @user = current_user
+    end
   end
 
   def guest_confirm_purchase
