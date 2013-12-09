@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    @restaurants = Restaurant.all
     @user = User.new(user_params)
     if @user.save
       current_user.move_to(@user) if is_guest?
