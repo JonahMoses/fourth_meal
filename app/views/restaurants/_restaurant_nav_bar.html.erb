@@ -29,11 +29,13 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <% if @restaurant_order.first != nil %>
-        <% if current_restaurant.id == @restaurant_order.first.restaurant_id %>
-          <li><%= link_to "Items in cart: #{order_items_count}", @restaurant_order.first %></a></li>
-        <% else %>
-          <li><%= link_to "Items in cart: #{order_items_count}", "#" %></a></li>
+      <% if @restaurant_order != nil %>
+        <% if @restaurant_order.first != nil %>
+          <% if current_restaurant.id == @restaurant_order.first.restaurant_id %>
+            <li><%= link_to "Items in cart: #{order_items_count}", @restaurant_order.first %></a></li>
+          <% else %>
+            <li><%= link_to "Items in cart: #{order_items_count}", "#" %></a></li>
+          <% end %>
         <% end %>
       <% end %>
 

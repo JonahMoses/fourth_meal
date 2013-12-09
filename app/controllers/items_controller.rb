@@ -10,6 +10,7 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @current_restaurant = current_restaurant
   end
 
   def edit
