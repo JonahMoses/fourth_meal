@@ -62,8 +62,9 @@ class OrdersController < ApplicationController
     if current_user.update_attributes(user_params) && current_user.validate_guest_order
       current_user.save
       current_order.update_attributes(status: "paid")
+      order = current_order
       session[:order_id] = nil
-      redirect_to confirmation_order_path(current_order)
+      redirect_to confirmation_order_path(order)
     else
       render :guest_purchase
     end
