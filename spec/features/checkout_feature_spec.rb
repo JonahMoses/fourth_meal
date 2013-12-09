@@ -42,14 +42,14 @@ describe "the checkout process for a guest" do
   describe 'with invalid info' do
     it "redirects back and requires all fields" do
       click_on 'Submit Order'
-      page.should have_content 'required'
+      page.should have_content 'invalid'
     end
   end
 
   describe 'with valid info' do
     it 'redirects to confirmation page' do
       fill_in "user_full_name", with: "Test Ing"
-      fill_in "user_email", with: "test@exampl.com"
+      fill_in "user_email", with: "test@example.com"
       fill_in "user_credit_card_number", with: "4242424242424242"
       fill_in "user_billing_street", with: "123 Amber Rd"
       fill_in "user_billing_city", with: "Denver"

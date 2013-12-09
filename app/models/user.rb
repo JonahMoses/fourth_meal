@@ -16,13 +16,13 @@ class User < ActiveRecord::Base
   end
 
   def validate_guest_order
-    self.errors.add(:full_name, "required") if full_name.blank?
-    self.errors.add(:email, "required") if email.blank?
-    self.errors.add(:credit_card_number, "required") if credit_card_number.blank?
-    self.errors.add(:billing_street, "required") if billing_street.blank?
-    self.errors.add(:billing_city, "required") if billing_city.blank?
-    self.errors.add(:billing_state, "required") if billing_state.blank?
-    self.errors.add(:billing_zip_code, "required") if billing_zip_code.blank?
+    self.errors.add(:full_name) if full_name.blank?
+    self.errors.add(:email) unless email =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+    self.errors.add(:credit_card_number) unless credit_card_number =~ /^\d{16}$/
+    self.errors.add(:billing_street) if billing_street.blank?
+    self.errors.add(:billing_city) if billing_city.blank?
+    self.errors.add(:billing_state) unless billing_state =~ /^\D{2}$/
+    self.errors.add(:billing_zip_code) unless billing_zip_code =~ /^\d{5}$/
     return false if self.errors.present?
     return true unless self.errors.present?
   end
