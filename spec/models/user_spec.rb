@@ -73,9 +73,16 @@ describe User do
 
   describe '#validate_guest_order' do
     let(:user) { FactoryGirl.create(:user, :guest)}
-    it 'requires a email?' do
+
+    it 'requires all information' do
       user.validate_guest_order
-      user.errors[:email].should include("email required")
+      user.errors[:email].should include("required")
+      user.errors[:full_name].should include("required")
+      user.errors[:credit_card_number].should include("required")
+      user.errors[:billing_street].should include("required")
+      user.errors[:billing_city].should include("required")
+      user.errors[:billing_state].should include("required")
+      user.errors[:billing_zip_code].should include("required")
     end
 
     it 'returns false when invalid' do

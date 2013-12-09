@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :user do
     email { Faker::Internet.email }
-    full_name {Faker::Name.name }
+    full_name { Faker::Name.name }
     display_name { Faker::Name.name }
     admin false
     guest false
@@ -11,7 +11,7 @@ FactoryGirl.define do
     trait :guest do
       email { "" }
       full_name { "" }
-      display_name { "" }
+      # display_name { "" }
       guest true
     end
   end

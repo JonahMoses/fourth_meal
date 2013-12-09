@@ -12,26 +12,27 @@
   <% end %>
 
   <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
     <%= f.label :full_name %><br />
     <%= f.text_field :full_name %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
   </p>
   <p>
     <%= f.label :credit_card_number %><br />
     <%= f.text_field :credit_card_number %>
   </p>
 
-    Billing Information:</br>
+  <h2>Billing Address:</h2>
+  Default Shipping Address<br><br>
   <p>
-    <%= f.label :Address %><br />
-    <%= f.text_field :billing_address %>
-  </p>
-   <p>
     <%= f.label :Street %><br />
     <%= f.text_field :billing_street %>
+  </p>
+   <p>
+    <%= f.label :City %><br />
+    <%= f.text_field :billing_city %>
   </p>
    <p>
     <%= f.label :Apt %><br />
@@ -45,14 +46,16 @@
     <%= f.label :Zip %><br />
     <%= f.text_field :billing_zip_code %>
   </p>
-  Shipping Information:</br>
+  <h2>Shipping Information:</h2>
+  If different from billing address
+  <br><br>
   <p>
-    <%= f.label :Address %><br />
-    <%= f.text_field :shipping_address %>
-  </p>
-   <p>
     <%= f.label :Street %><br />
     <%= f.text_field :shipping_street %>
+  </p>
+   <p>
+    <%= f.label :City %><br />
+    <%= f.text_field :shipping_city %>
   </p>
    <p>
     <%= f.label :Apt %><br />
@@ -67,5 +70,5 @@
     <%= f.text_field :shipping_zip_code %>
   </p>
 
-  <p class="button"><%= f.submit "Checkout" %></p>
+  <p class="button"><%= f.submit "Submit Order" %></p>
 <% end %>

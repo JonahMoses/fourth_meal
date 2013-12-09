@@ -41,15 +41,21 @@ describe "the checkout process for a guest" do
 
   describe 'with invalid info' do
     it "redirects back and requires all fields" do
-      click_on 'Checkout'
-      page.should have_content 'email required'
+      click_on 'Submit Order'
+      page.should have_content 'required'
     end
   end
 
   describe 'with valid info' do
-    it 'redirecurcts to confirmation page' do
-      fill_in "user_email", with: "blair@exampl.com"
-      click_on('Checkout')
+    it 'redirects to confirmation page' do
+      fill_in "user_full_name", with: "Test Ing"
+      fill_in "user_email", with: "test@exampl.com"
+      fill_in "user_credit_card_number", with: "4242424242424242"
+      fill_in "user_billing_street", with: "123 Amber Rd"
+      fill_in "user_billing_city", with: "Denver"
+      fill_in "user_billing_state", with: "CO"
+      fill_in "user_billing_zip_code", with: "80204"
+      click_on('Submit Order')
       expect(page).to have_content("Confirmation")
     end
   end

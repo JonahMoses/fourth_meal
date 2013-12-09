@@ -16,11 +16,13 @@ class User < ActiveRecord::Base
   end
 
   def validate_guest_order
-    validate_things
-  end
-
-  def validate_things
-    self.errors.add(:email, "email required") if email.blank?
+    self.errors.add(:full_name, "required") if full_name.blank?
+    self.errors.add(:email, "required") if email.blank?
+    self.errors.add(:credit_card_number, "required") if credit_card_number.blank?
+    self.errors.add(:billing_street, "required") if billing_street.blank?
+    self.errors.add(:billing_city, "required") if billing_city.blank?
+    self.errors.add(:billing_state, "required") if billing_state.blank?
+    self.errors.add(:billing_zip_code, "required") if billing_zip_code.blank?
     return false if self.errors.present?
     return true unless self.errors.present?
   end
