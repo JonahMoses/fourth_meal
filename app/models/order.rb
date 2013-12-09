@@ -29,4 +29,5 @@ class Order < ActiveRecord::Base
     update_attributes(:status => "paid")
   end
 
+
 end

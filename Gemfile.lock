@@ -239,6 +239,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionmailer
   aws-sdk
   bcrypt-ruby
   better_errors
