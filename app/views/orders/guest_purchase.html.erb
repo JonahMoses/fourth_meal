@@ -1,10 +1,10 @@
-<%= form_for @user, url: guest_confirm_purchase_path, method: "GET" do |f| %>
-  <% if @user.errors.any? %>
+<%= form_for current_user, url: guest_confirm_purchase_path, method: "POST" do |f| %>
+  <% if current_user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(current_user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
-      <% @user.errors.full_messages.each do |msg| %>
+      <% current_user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -23,7 +23,7 @@
     <%= f.label :credit_card_number %><br />
     <%= f.text_field :credit_card_number %>
   </p>
- 
+
     Billing Information:</br>
   <p>
     <%= f.label :Address %><br />
@@ -67,6 +67,5 @@
     <%= f.text_field :shipping_zip_code %>
   </p>
 
-
-  <p class="button"><%= f.submit %></p>
+  <p class="button"><%= f.submit "Checkout" %></p>
 <% end %>

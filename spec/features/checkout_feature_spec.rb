@@ -17,7 +17,7 @@ describe "the checkout process" do
     end
   end
 
-  it "offers guest checkout option if not signed in" do 
+  it "offers guest checkout option if not signed in" do
     new_restaurant = FactoryGirl.create(:restaurant)
     new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
     visit "/#{new_restaurant.slug}"
@@ -30,29 +30,27 @@ end
 
 describe "the checkout process for a guest" do
 
-  # before :all do
-  #   make_an_item
-  #   visit '/items'
-  #   click_on 'Log Out'
-  # end
+  before do
+    new_restaurant = FactoryGirl.create(:restaurant)
+    new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
+    visit "/#{new_restaurant.slug}"
+    click_on('Add to Cart')
+    click_link_or_button('Purchase')
+    click_link_or_button('Checkout as Guest')
+  end
 
-  xit "brings user to sign up page and back to order" do
-    add_item_to_order
-    visit '/orders'
-    click_on 'Show'
-    click_on 'Purchase'
-    #within('h1') do
-      expect(page).to have_content 'Sign Up'
-    #end
-    fill_in 'user_email',                 :with => "newUser@example.com"
-    fill_in 'user_full_name',             :with => "new"
-    fill_in 'user_display_name',          :with => "new"
-    fill_in 'user_password',              :with => "foobar"
-    fill_in 'user_password_confirmation', :with => "foobar"
-    click_link_or_button 'Create User'
-    click_on 'Purchase'
-    within('.confirmation-banner') do
-      expect(page).to have_content 'Confirmation'
+  describe 'with invalid info' do
+    it "redirects back and requires all fields" do
+      click_on 'Checkout'
+      page.should have_content 'email required'
+    end
+  end
+
+  describe 'with valid info' do
+    it 'redirecurcts to confirmation page' do
+      fill_in "user_email", with: "blair@exampl.com"
+      click_on('Checkout')
+      expect(page).to have_content("Confirmation")
     end
   end
 
