@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
-gem 'pg'
 gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'faker'
 gem 'twitter-bootstrap-rails'
@@ -23,6 +22,12 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem "factory_girl_rails", "~> 4.0"
+  gem 'sqlite3'
+  gem 'guard'
+  gem 'guard-rspec', require: false
+end
+
+group :development do
 end
 
 group :test do
@@ -30,6 +35,7 @@ group :test do
 end
 
 group :production do
+  gem 'pg'
   gem 'rails_12factor'
 end
 
