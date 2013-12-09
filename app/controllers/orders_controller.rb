@@ -49,28 +49,24 @@ class OrdersController < ApplicationController
       session[:order_id] = nil
       redirect_to confirmation_order_path(@order)
     elsif @order.user.guest
-      @order.save
-      session[:last_order_page] = request.env['HTTP_REFERER'] || orders_path
-      redirect_to sign_up_path, notice: "Please sign up to purchase your cart"
+      redirect_to sign_up_path
     else
       redirect_to @order, notice: "That order is #{@order.status} and can't be purchased.  Please purchase your current cart."
     end
   end
 
   def guest_purchase
-    if current_order == nil
-      redirect_to :back, notice: "Nothing In Cart"
-    else
-      @user = current_user
-    end
   end
 
   def guest_confirm_purchase
-    @order = current_order
-    @user = current_user
-    @order.purchase!
-    session[:order_id] = nil
-    redirect_to confirmation_order_path(@order)
+    if current_user.update_attributes(user_params) && current_user.validate_guest_order
+      current_user.save
+      current_order.update_attributes(status: "paid")
+      session[:order_id] = nil
+      redirect_to confirmation_order_path(current_order)
+    else
+      render :guest_purchase
+    end
   end
 
   def confirmation
@@ -88,6 +84,23 @@ private
 
   def order_params
     params.require(:order).permit(:user_id, :status, :restaurant_id)
+  end
+
+  def user_params
+    params.require(:user).permit(
+      :email,
+      :full_name,
+      :credit_card_number,
+      :billing_address,
+      :billing_street,
+      :billing_apt,
+      :billing_state,
+      :billing_zip_code,
+      :shipping_address,
+      :shipping_street,
+      :shipping_apt,
+      :shipping_state,
+      :shipping_zip_code)
   end
 
 end
