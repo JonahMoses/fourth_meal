@@ -60,6 +60,7 @@ class OrdersController < ApplicationController
   end
 
   def guest_confirm_purchase
+    @restaurants = Restaurant.all
     if current_user.update_attributes(user_params) && current_user.validate_guest_order
       current_user.save
       current_order.update_attributes(status: "paid")

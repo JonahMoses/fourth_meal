@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
+    @restaurants = Restaurant.all
   end
 
   def create
