@@ -11,8 +11,8 @@ class UserMailer < ActionMailer::Base
   def order_confirmation(current_user, order)
     @user = current_user
     @order = order
-    mail(to: @user.email,
-         subject: 'Thank you for your order!')
+    mail({to: @user.email,
+         subject: 'Thank you for your order!'})
   end
 
 end
