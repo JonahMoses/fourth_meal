@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def new
     @user  = User.new
-    # @order = current_order
+    @restaurants = Restaurant.all
   end
 
   def create

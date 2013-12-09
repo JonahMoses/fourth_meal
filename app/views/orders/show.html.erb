@@ -37,7 +37,7 @@
   </tr>
 </table>
 
-<%= link_to "Purchase", purchase_order_path(@order), method: :post %>
+<%= link_to "Purchase", purchase_order_path(current_restaurant.slug, @order), method: :post %>
 <%= link_to "Empty Cart", @order, data: { confirm: 'Are you sure?' }, method: :delete %>
 <% if allow? "orders", "edit" %>
   <%= link_to 'Edit', edit_order_path(@order) %>

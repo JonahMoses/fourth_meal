@@ -56,6 +56,7 @@ class OrdersController < ApplicationController
   end
 
   def guest_purchase
+    @restaurants = Restaurant.all
   end
 
   def guest_confirm_purchase
@@ -71,6 +72,7 @@ class OrdersController < ApplicationController
   end
 
   def confirmation
+    @restaurants = Restaurant.all
   end
 
 private

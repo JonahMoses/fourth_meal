@@ -10,7 +10,7 @@ Foodfight::Application.routes.draw do
   root :to => "restaurants#index"
 
   resources :orders do
-    post 'purchase', :on => :member
+    # post 'purchase', :on => :member
     get 'confirmation', :on => :member
   end
 
@@ -34,6 +34,7 @@ Foodfight::Application.routes.draw do
   get ":slug/:id", to: "items#show", as: :restaurant_item
   post ":slug/order/:item_id", to: "order_items#create", as: :create_restaurant_order
   get ":slug/order/:id", to: "orders#show", as: :restaurant_order
+  post ":slug/orders/:id/purchase", to: "orders#purchase", as: :purchase_order
   get ":slug/items/new", to: "items#new", as: :new_restaurant_item
 
   mount Sidekiq::Web, at: '/sidekiq', :constraints => AdminConstraint.new
