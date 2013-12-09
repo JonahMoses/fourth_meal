@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      UserMailer.welcome_email(@user).deliver
       current_user.move_to(@user) if is_guest?
       session[:user_id] = @user.id
       redirect_to session[:last_order_page] || orders_path, :notice => "Signed up!"

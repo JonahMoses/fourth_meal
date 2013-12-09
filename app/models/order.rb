@@ -21,12 +21,13 @@ class Order < ActiveRecord::Base
   end
 
   def purchaseable?
-    status == "unsubmitted" && user && !user.guest 
+    status == "unsubmitted" && user && !user.guest
   end
 
   def purchase!
     return unless purchaseable?
     update_attributes(:status => "paid")
   end
+
 
 end

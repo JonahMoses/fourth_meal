@@ -14,6 +14,7 @@ gem 'sidekiq'
 gem 'delayed_paperclip'
 gem 'sinatra', require: false
 gem 'slim'
+gem 'actionmailer'
 
 
 group :development, :test do
