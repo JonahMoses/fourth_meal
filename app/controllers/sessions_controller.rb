@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    @restaurants = Restaurant.all
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
@@ -19,5 +20,6 @@ class SessionsController < ApplicationController
     reset_session
     redirect_to '/', :notice => "Logged out!"
   end
+
 
 end
