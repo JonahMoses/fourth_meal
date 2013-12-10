@@ -10,8 +10,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @current_restaurant = current_restaurant
-    @current_order = current_restaurant.orders.find_unsubmitted_order_for(current_user, current_restaurant.id)
+    @current_order = current_restaurant.orders.find_unsubmitted_order_for(@current_user, current_restaurant.id)
   end
 
 private
