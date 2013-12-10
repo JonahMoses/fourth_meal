@@ -33,7 +33,6 @@
         <% if @restaurant_order.first != nil %>
           <% if current_restaurant.id == @restaurant_order.first.restaurant_id %>
             <li><%= link_to "View Items in Cart: #{order_items_count}", "/#{current_restaurant.slug}/order/#{@restaurant_order.first.id}" %></a></li>
-            <!-- @restaurant_order.first  -->
           <% else %>
             <li><a>Empty Cart :(</a></li>
           <% end %>
