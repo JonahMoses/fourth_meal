@@ -12,7 +12,7 @@ describe "a logged in user's order" do
     expect(page).not_to have_content 'unsubmitted'
   end
 
-  xit "shows the added item in the order" do
+  it "shows the added item in the order" do
     log_in_user
     visit '/items'
     click_on('Add to Cart')
@@ -56,12 +56,6 @@ describe "a guest user's order" do
     expect(page).to have_no_content("Bacon")
     expect(page).to have_content("fried brown food")
   end
-
-
-
-
-
-
 
   xit "keeps item in cart after signing up" do
     add_item_to_order
