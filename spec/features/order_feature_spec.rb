@@ -57,12 +57,6 @@ describe "a guest user's order" do
     expect(page).to have_content("fried brown food")
   end
 
-
-
-
-
-
-
   xit "keeps item in cart after signing up" do
     add_item_to_order
     #within("#order_items_index_table") do
@@ -99,4 +93,5 @@ describe "maintaining a single cart over multiple logins" do
       expect(page).to have_content('2')
     end
   end
+
 end

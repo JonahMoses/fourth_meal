@@ -9,6 +9,7 @@ class OrderItemsController < ApplicationController
   end
 
   def show
+    @restaurant = Restaurant.all
   end
 
   def new
@@ -58,7 +59,7 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url }
+      format.html { redirect_to :back }
     end
   end
 
