@@ -10,8 +10,8 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @restaurant = current_restaurant
-    @restaurant_order = current_user.orders.order("created_at DESC")
+    @current_restaurant = current_restaurant
+    @current_order = current_order
   end
 
 private

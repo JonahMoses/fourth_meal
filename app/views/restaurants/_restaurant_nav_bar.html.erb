@@ -29,14 +29,12 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <% if @restaurant_order != nil %>
-        <% if @restaurant_order.first != nil %>
-          <% if current_restaurant.id == @restaurant_order.first.restaurant_id %>
-            <li><%= link_to "View Items in Cart: #{order_items_count}", "/#{current_restaurant.slug}/order/#{@restaurant_order.first.id}", class: "View Items" %></a></li>
-          <% else %>
-            <li><a>Empty Cart :(</a></li>
+      <% if @current_order != nil %>
+          <% if @current_restaurant.id == @current_order.restaurant_id %>
+            <li><%= link_to "View Items in Cart: #{order_items_count}", "/#{@current_restaurant.slug}/order/#{@current_order.id}", class: "View Items" %></a></li>
           <% end %>
-        <% end %>
+      <% else %>
+          <li><a>Empty Cart :(</a></li>
       <% end %>
 
       <%= render "users/user_nav" %>

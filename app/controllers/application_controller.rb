@@ -17,7 +17,7 @@ private
   end
 
   def current_restaurant
-    @restaurant ||= Restaurant.find_by(slug: params[:slug])
+    @restaurant = Restaurant.find_by(slug: params[:slug])
   end
 
   def current_user
