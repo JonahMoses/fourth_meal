@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
-      if user.orders.any? {|order| order.status == "unsubmitted"}
+      if current_order != nil && user.orders.any? {|order| order.status == "unsubmitted"}
         unsubmitted_order_restaurant = @restaurants.select { |restaurant| restaurant.id == current_order.restaurant_id }
         redirect_to "/#{unsubmitted_order_restaurant.first.slug}/order/#{current_order.id}", :notice => "redirected to unfinished order"
       else
