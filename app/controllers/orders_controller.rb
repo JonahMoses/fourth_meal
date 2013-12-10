@@ -67,6 +67,7 @@ class OrdersController < ApplicationController
       current_user.save
       current_order.update_attributes(status: "paid")
       order = current_order
+      UserMailer.order_confirmation(current_user, current_order).deliver
       session[:order_id] = nil
       redirect_to confirmation_order_path(order)
     else
