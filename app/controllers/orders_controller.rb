@@ -7,6 +7,9 @@ class OrdersController < ApplicationController
   end
 
   def show
+    if current_order.order_items.empty?
+      redirect_to "/#{current_restaurant.slug}"
+    end
   end
 
   def new
