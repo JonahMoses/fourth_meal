@@ -27,7 +27,7 @@ describe "a guest user's order" do
 
   it "adds item to an order" do
     add_item_to_order
-
+    click_on 'View Items in Cart: 1'
     expect(page).to have_content 'unsubmitted'
     expect(page).to have_content "#{@restaurant.title}"
   end

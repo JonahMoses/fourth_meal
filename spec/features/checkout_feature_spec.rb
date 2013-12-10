@@ -22,6 +22,7 @@ describe "the checkout process" do
     new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
     visit "/#{new_restaurant.slug}"
     click_on('Add to Cart')
+    click_link_or_button('View Items in Cart: 1')
     click_link_or_button('Purchase')
     click_link_or_button('Checkout as Guest')
   end
@@ -35,6 +36,7 @@ describe "the checkout process for a guest" do
     new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
     visit "/#{new_restaurant.slug}"
     click_on('Add to Cart')
+    click_link_or_button('View Items in Cart: 1')
     click_link_or_button('Purchase')
     click_link_or_button('Checkout as Guest')
   end
