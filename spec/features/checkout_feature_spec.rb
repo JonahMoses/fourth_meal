@@ -93,8 +93,10 @@ describe "editing quantity in cart" do
     end
     within('.order_item_0') do
       fill_in 'order_item[quantity]', :with => 2
-      save_and_open_page
       click_on 'Update'
+    end
+    within('.order_item_0') do
+      expect(page.find_field('order_item[quantity]').value).to eq "2"
     end
     within('.cart_total_price') do
       expect(page).to have_content("$2.18")
