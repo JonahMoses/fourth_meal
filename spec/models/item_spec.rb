@@ -29,7 +29,7 @@ describe Item do
     fries.valid?.should be_false
   end
 
-  xit "rejects an empty restaurant id" do
+  it "rejects an empty restaurant id" do
     fries = Item.create(title: "thing", description: "blah", price: "2.2")
     fries.valid?.should be_false
   end
@@ -57,7 +57,6 @@ describe Item do
   it "truncates to 2 decimals for 3 decimal places" do
     fries = Item.create!(title: "Fries", description: "sample", price: "2.123", restaurant_id: 1)
     fries.price.should eq(BigDecimal.new("2.123"))
-    # this test is odd, it's returning bigDecimal
   end
 
   it { should have_many(:categories).through(:item_categories) }
