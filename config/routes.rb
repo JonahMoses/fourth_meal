@@ -16,7 +16,7 @@ Foodfight::Application.routes.draw do
 
   resources :order_items
   # , except: [:edit]
-  # get ":slug/order/:id/:item_id", to: "order_items#edit", as: :order_item_edit
+  # get ":slug/order/:id/order_items/:item_id", to: "order_items#edit", as: :edit_order_item
 
   post "log_out" => "sessions#destroy"
   get "log_in" => "sessions#new"
