@@ -9,6 +9,7 @@ class OrderItemsController < ApplicationController
   end
 
   def show
+    @restaurant = Restaurant.all
   end
 
   def new
@@ -16,6 +17,7 @@ class OrderItemsController < ApplicationController
   end
 
   def edit
+    @restaurant = Restaurant.all
   end
 
   def create
@@ -24,7 +26,7 @@ class OrderItemsController < ApplicationController
       @order_item.quantity += 1
       respond_to do |format|
         if @order_item.save
-          format.html { redirect_to "/#{current_restaurant.slug}/order/#{@order.id}", notice: 'Successfully added product to cart.' }
+          format.html { redirect_to "/#{current_restaurant.slug}", notice: 'Successfully added product to cart.' }
         else
           format.html { render action: 'new' }
         end
@@ -34,19 +36,15 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  # def not_active?(item)
-  #   item[:active] == 'true'
-  # end
-
   def update
-    @order_item = OrderItem.find_by(id: params[:id])
+    @order_item = OrderItem.find_by(id: params[:item_id])
     respond_to do |format|
       if order_quantity_set_to_zero?
         @order_item.destroy
-        format.html { redirect_to @order_item.order, notice: 'Item was removed from the order.' }
+        format.html { redirect_to :back, notice: 'Item was removed from the order.' }
       else
         @order_item.update(quantity: params[:order_item][:quantity].to_i)
-        format.html { redirect_to @order_item.order, notice: 'Order item was successuflly updated.' }
+        format.html { redirect_to :back, notice: 'Order item was successuflly updated.' }
       end
     end
   end
@@ -58,7 +56,7 @@ class OrderItemsController < ApplicationController
   def destroy
     @order_item.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url }
+      format.html { redirect_to :back }
     end
   end
 

@@ -14,9 +14,8 @@ Foodfight::Application.routes.draw do
     get 'confirmation', :on => :member
   end
 
-  resources :order_items
-  # , except: [:edit]
-  # get ":slug/order/:id/:item_id", to: "order_items#edit", as: :order_item_edit
+  resources :order_items, except: [:update]
+  patch ":slug/order/:id/order_items/:item_id", to: "order_items#update", as: :update_order_item
 
   post "log_out" => "sessions#destroy"
   get "log_in" => "sessions#new"

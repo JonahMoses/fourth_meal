@@ -22,6 +22,7 @@ describe "the checkout process" do
     new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
     visit "/#{new_restaurant.slug}"
     click_on('Add to Cart')
+    click_link_or_button('View Items in Cart: 1')
     click_link_or_button('Purchase')
     click_link_or_button('Checkout as Guest')
   end
@@ -35,6 +36,7 @@ describe "the checkout process for a guest" do
     new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
     visit "/#{new_restaurant.slug}"
     click_on('Add to Cart')
+    click_link_or_button('View Items in Cart: 1')
     click_link_or_button('Purchase')
     click_link_or_button('Checkout as Guest')
   end
@@ -77,6 +79,27 @@ describe "making a new order after purchasing an order" do
     add_item_to_order
     within('.item_quantity') do
       expect(page).to have_content('1')
+    end
+  end
+end
+
+describe "editing quantity in cart" do
+
+  it "should update qty of an item while in the cart" do
+    add_item_to_order
+    click_on 'View Items in Cart'
+    within('.cart_total_price') do
+      expect(page).to have_content("$1.09")
+    end
+    within('.order_item_0') do
+      fill_in 'order_item[quantity]', :with => 2
+      click_on 'Update'
+    end
+    within('.order_item_0') do
+      expect(page.find_field('order_item[quantity]').value).to eq "2"
+    end
+    within('.cart_total_price') do
+      expect(page).to have_content("$2.18")
     end
   end
 
