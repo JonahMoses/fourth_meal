@@ -2,19 +2,10 @@ require 'spec_helper'
 
 describe "the checkout process" do
 
-  # before :all do
-  #   register_user
-  #   make_an_item
-  #   add_item_to_order
-  # end
-
-  xit "updates order and directs to confirmation page" do
-    visit '/orders'
-    click_on 'Show'
-    click_on 'Purchase'
-    within('.confirmation-banner') do
-      expect(page).to have_content 'Confirmation'
-    end
+  it "updates order and directs to confirmation page" do
+    add_item_to_order
+    click_on 'View Items'
+    expect(page).to have_content 'Your Order'
   end
 
   it "offers guest checkout option if not signed in" do
@@ -90,19 +81,36 @@ end
 
 describe "making a new order after purchasing an order" do
 
-  # before :all do
-    #make_an_item_via_db
-  # end
-
-  xit "should create a new order after purchasing" do
+  it "should create a new order after purchasing" do
     register_user
     add_item_to_order
-    visit '/orders'
-    click_on 'Show'
+    click_on 'View Items'
     click_on 'Purchase'
+    visit "/#{@restaurant.slug}"
+    click_on('Add to Cart')
+    click_on 'View Items'
+    expect(page).to have_content('1')
+    expect(page).to have_content('unsubmitted')
+  end
+end
+
+describe "editing quantity in cart" do
+
+  it "should update qty of an item while in the cart" do
     add_item_to_order
-    within('.item_quantity') do
-      expect(page).to have_content('1')
+    click_on 'View Items in Cart'
+    within('.cart_total_price') do
+      expect(page).to have_content("$1.09")
+    end
+    within('.order_item_0') do
+      fill_in 'order_item[quantity]', :with => 2
+      click_on 'Update'
+    end
+    within('.order_item_0') do
+      expect(page.find_field('order_item[quantity]').value).to eq "2"
+    end
+    within('.cart_total_price') do
+      expect(page).to have_content("$2.18")
     end
   end
 

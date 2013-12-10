@@ -18,7 +18,6 @@ class OrderItemsController < ApplicationController
 
   def edit
     @restaurant = Restaurant.all
-
   end
 
   def create
@@ -38,15 +37,14 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    @order_item = OrderItem.find_by(id: params[:id])
+    @order_item = OrderItem.find_by(id: params[:item_id])
     respond_to do |format|
       if order_quantity_set_to_zero?
         @order_item.destroy
-        format.html { redirect_to "/#{current_restaurant.slug}/order/#{current_order.id}", notice: 'Item was removed from the order.' }
-        # @order_item.order
+        format.html { redirect_to :back, notice: 'Item was removed from the order.' }
       else
         @order_item.update(quantity: params[:order_item][:quantity].to_i)
-        format.html { redirect_to @order_item.order, notice: 'Order item was successuflly updated.' }
+        format.html { redirect_to :back, notice: 'Order item was successuflly updated.' }
       end
     end
   end
