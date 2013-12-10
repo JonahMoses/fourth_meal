@@ -55,6 +55,30 @@ describe "the checkout process for a guest" do
 
 end
 
+describe "the checkout process for a guest which signs in" do
+
+  xit "logging in during checkout redirects back to cart" do
+    new_restaurant = FactoryGirl.create(:restaurant)
+    new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
+    order = Order.create(restaurant_id: new_restaurant.id,)
+    register_user
+    click_link_or_button('Log Out')
+    visit "/#{new_restaurant.slug}"
+    click_on('Add to Cart')
+    click_link_or_button('View Items in Cart: 1')
+    click_link_or_button('Purchase')
+    click_on('Log In')
+    fill_in 'Email', :with => "user@example.com"
+    fill_in 'Password', :with => "foobarbaz"
+    click_button 'Log In'
+    page.should have_content "Email"
+  end
+end
+
+
+
+
+
 describe "making a new order after purchasing an order" do
 
   it "should create a new order after purchasing" do
