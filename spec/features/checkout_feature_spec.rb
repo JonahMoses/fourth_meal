@@ -81,5 +81,24 @@ describe "making a new order after purchasing an order" do
       expect(page).to have_content('1')
     end
   end
+end
+
+describe "editing quantity in cart" do
+
+  it "should update qty of an item while in the cart" do
+    add_item_to_order
+    click_on 'View Items in Cart'
+    within('.cart_total_price') do
+      expect(page).to have_content("$1.09")
+    end
+    within('.order_item_0') do
+      fill_in 'order_item[quantity]', :with => 2
+      save_and_open_page
+      click_on 'Update'
+    end
+    within('.cart_total_price') do
+      expect(page).to have_content("$2.18")
+    end
+  end
 
 end

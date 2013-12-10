@@ -90,7 +90,6 @@ module UserHelpers
     create_restaurant_with_item
     visit "/#{@restaurant.slug}"
     click_on('Add to Cart')
-
   end
 
   def register_new_user
