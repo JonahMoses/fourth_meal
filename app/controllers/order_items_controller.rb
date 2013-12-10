@@ -72,7 +72,7 @@ private
 
   def load_order
     create_and_log_in_guest_user unless current_user
-
+    
     @order = find_or_create_order
     session[:order_id] = @order.id
     @order
