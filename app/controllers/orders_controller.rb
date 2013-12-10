@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :purchase, :confirmation]
+  before_action :set_order, only: [ :edit, :update, :destroy, :purchase, :confirmation]
 
   def index
     @restaurants = Restaurant.all
@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @order = current_order
     if current_order.order_items.empty?
       redirect_to "/#{current_restaurant.slug}"
     end
