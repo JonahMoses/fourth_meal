@@ -20,14 +20,13 @@ describe "the signin process" do
     register_user
   end
 
-  xit "logs me in" do
+  it "logs me in" do
     within("#flash_notice") do
       expect(page).to have_content 'Logged in'
     end
   end
 
-  xit "logs me out" do
-    visit '/items'
+  it "logs me out" do
     click_link_or_button 'Log Out'
     expect(page).to have_content 'Logged out'
     expect(page).to have_content 'Log In'
@@ -37,7 +36,7 @@ end
 
 describe "guest user" do
 
-  xit "cannot edit item" do
+  it "cannot edit item" do
     item = make_an_item_via_db
     visit edit_item_path(item)
     page.should have_content("Not authorized")
@@ -47,18 +46,19 @@ end
 
 describe "member" do
 
-  xit "cannot edit item" do
+  it "cannot edit item" do
     item = make_an_item_via_db
     register_user
     visit edit_item_path(item)
     page.should have_content("Not authorized")
   end
 
-  xit "can edit her own user details" do
+  it "can edit her own user details" do
     register_changeable_user
-    visit '/items'
     click_on 'My profile'
     fill_in 'user_email', :with => "adminOne@example.com"
+    fill_in 'user_password', :with => "password"
+    fill_in 'user_password_confirmation', :with => "password"
     click_link_or_button 'Update User'
     page.status_code.should eql(200)
     within('.navbar') do

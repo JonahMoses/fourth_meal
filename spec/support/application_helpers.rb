@@ -92,6 +92,11 @@ module UserHelpers
     click_on('Add to Cart')
   end
 
+  def add_to_cart
+    visit "/#{@restaurant.slug}"
+    click_on('Add to Cart')
+  end
+
   def register_new_user
     fill_in 'user_email',                 :with => "armstrong@example.com"
     fill_in 'user_full_name',             :with => "doping"

@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @restaurants ||= Restaurant.all
   end
 
   def update
@@ -31,6 +32,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @restaurants ||= Restaurant.all
   end
 
   def is_guest?
