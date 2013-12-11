@@ -25,7 +25,7 @@
 <p class="cart_total_price"><strong>Total:</strong><%= print_price @order.total %></p>
 
 <%= link_to "Checkout", purchase_order_path(current_restaurant.slug, @order), method: :post %>
-<%= link_to "Empty Cart", @order, data: { confirm: 'Are you sure?' }, method: :delete %>
+<%= link_to "Empty Cart", destroy_restaurant_order_path(current_restaurant.slug, @order), data: { confirm: 'Are you sure?' }, method: :delete %>
 <% if allow? "orders", "edit" %>
   <%= link_to 'Edit', edit_order_path(@order) %>
 <% end %>

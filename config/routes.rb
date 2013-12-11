@@ -34,6 +34,7 @@ Foodfight::Application.routes.draw do
   get ":slug",                      to: "restaurants#show",   as: :restaurant_name
   post ":slug/order/:item_id",      to: "order_items#create", as: :create_restaurant_order
   get ":slug/order/:id",            to: "orders#show",        as: :restaurant_order
+  delete ":slug/order/:id",            to: "orders#destroy",     as: :destroy_restaurant_order
   post ":slug/orders/:id/purchase", to: "orders#purchase",    as: :purchase_order
   get ":slug/:id",                  to: "items#show",         as: :restaurant_item
   get ":slug/items/new",            to: "items#new",          as: :new_restaurant_item
