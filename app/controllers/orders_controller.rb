@@ -85,6 +85,17 @@ class OrdersController < ApplicationController
 
 private
 
+  # require 'twilio-ruby'
+
+  #   account_sid = "AC14a7433b640c35adf748c8e7fb2c7c1f"
+  #   auth_token = "5d61bfcd8c12c9fe222f2a056871ac21"
+
+  #   @client = Twilio::REST::Client.new account_sid, auth_token
+
+  #   @message = @client.account.messages.create({:to => "+12316851234",
+  #                                      :from => "+15555555555",
+  #                                      :body => "Hello there!"})
+
   def set_order
     if current_user.admin?
       @order = Order.find(params[:id])
