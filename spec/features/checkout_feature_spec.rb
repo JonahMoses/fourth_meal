@@ -59,7 +59,7 @@ end
 
 describe "the checkout process for a guest which signs in" do
 
-  xit "logging in during checkout redirects back to cart" do
+  it "logging in during checkout redirects back to cart" do
     new_restaurant = FactoryGirl.create(:restaurant)
     new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
     register_user
@@ -69,10 +69,12 @@ describe "the checkout process for a guest which signs in" do
     click_on('Add to Cart')
     click_link_or_button('View Items in Cart:')
     click_link_or_button('Checkout')
-    click_on('Log In')
-    fill_in 'Email', :with => "user@example.com"
-    fill_in 'Password', :with => "foobarbaz"
-    click_button 'Log In'
+
+    within("form[action='/sessions']") do
+      fill_in 'Email',    :with => "user@example.com"
+      fill_in 'Password', :with => "foobarbaz"
+      click_button 'Log In'
+    end
     page.should have_content "redirected to unfinished order"
   end
 end
