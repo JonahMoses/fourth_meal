@@ -60,28 +60,29 @@ describe "the checkout process for a guest which signs in" do
   xit "logging in during checkout redirects back to cart", js: true do
     new_restaurant = FactoryGirl.create(:restaurant)
     new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
-    order = Order.create(restaurant_id: new_restaurant.id,)
     register_user
-    sleep 4
+    order = Order.create(restaurant_id: new_restaurant.id, user_id: 1)
+    sleep 2
     click_link_or_button('Log Out')
-    sleep 4
+    sleep 2
     visit "/#{new_restaurant.slug}"
-    sleep 4
+    sleep 2
     click_on('Add to Cart')
-    # sleep 4
-    # click_link_or_button('View Items in Cart: 4')
-    # sleep 4
-    # click_link_or_button('Purchase')
-    # sleep 4
-    # click_on('Log In')
-    # sleep 4
-    # fill_in 'Email', :with => "user@example.com"
-    # sleep 4
-    # fill_in 'Password', :with => "foobarbaz"
-    # sleep 4
-    # click_button 'Log In'
-    # sleep 4
-    # page.should have_content "Email"
+    sleep 2
+    click_link_or_button('View Items in Cart:')
+    sleep 2
+    click_link_or_button('Purchase')
+    sleep 2
+    click_on('Log In')
+    sleep 2
+    fill_in 'Email', :with => "user@example.com"
+    sleep 2
+    fill_in 'Password', :with => "foobarbaz"
+    sleep 2
+    click_button 'Log In'
+    sleep 2
+    page.should have_content "redirected to unfinished order"
+    sleep 10
   end
 end
 
