@@ -12,7 +12,8 @@
         <%= item.title %>
       </h5>
       <p class="item-description">
-        <%= item.description %>
+        <%= item.description[0..25] %>
+        <%="…" if item.description.length > 25 %>
       </p>
       <div class="item-price pull-left">
         <%= print_price item.price %>
