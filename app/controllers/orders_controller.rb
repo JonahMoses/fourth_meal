@@ -6,7 +6,8 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = current_order
+    @order = current_restaurant.orders.find_unsubmitted_order_for(@current_user, current_restaurant.id)
+    # @order = current_order
     if current_order.order_items.empty?
       redirect_to "/#{current_restaurant.slug}"
     end
