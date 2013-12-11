@@ -71,7 +71,7 @@ describe "the checkout process for a guest which signs in" do
     fill_in 'Email', :with => "user@example.com"
     fill_in 'Password', :with => "foobarbaz"
     click_button 'Log In'
-    page.should have_content "Email"
+    page.should have_content "unsubmitted"
   end
 end
 
