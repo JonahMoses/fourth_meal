@@ -1,4 +1,4 @@
-pclass User < ActiveRecord::Base
+class User < ActiveRecord::Base
   attr_accessor :password
   has_many :orders
   before_validation :downcase_email
