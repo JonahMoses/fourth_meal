@@ -2,11 +2,11 @@ require "spec_helper"
 
 describe UserMailer do
   describe "logged in user's order_confirmation" do
-    user = User.create(email: "me@example.com",
+    let(:user) { User.create(email: "me@example.com",
                         full_name: "Antony",
                         password: "hellothere",
-                        password_confirmation: "hellothere")
-    order = Order.create(user_id: user.id, restaurant_id: 1)
+                        password_confirmation: "hellothere") }
+    let(:order) { Order.create(user_id: user.id, restaurant_id: 1)}
     let(:mail) { UserMailer.order_confirmation(user, order)}
 
     it "renders the headers" do
@@ -21,15 +21,15 @@ describe UserMailer do
   end
 
   describe "guest user's order confirmation" do
-    user = User.create(email: "me@example.com",
+    let(:user) { User.create(email: "me@example.com",
                         full_name: "Antony",
                         credit_card_number: "1234123412341234",
                         billing_street: "123 Main st",
                         billing_city: "Denver",
                         billing_state: "CO",
                         billing_zip_code: "12345",
-                        guest: true)
-    order = Order.create(user_id: user.id, restaurant_id: 100)
+                        guest: true)}
+    let(:order) { Order.create(user_id: user.id, restaurant_id: 100) }
     let(:mail) { UserMailer.order_confirmation(user, order)}
 
     it "renders the headers" do

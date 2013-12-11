@@ -63,6 +63,7 @@ GEM
     coffee-script-source (1.6.3)
     commonjs (0.2.7)
     connection_pool (1.1.0)
+    database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     delayed_paperclip (2.6.1)
       paperclip (>= 3.3.0)
@@ -255,6 +256,7 @@ DEPENDENCIES
   binding_of_caller
   capybara
   coffee-rails (~> 4.0.0)
+  database_cleaner
   delayed_paperclip
   factory_girl_rails (~> 4.0)
   faker
