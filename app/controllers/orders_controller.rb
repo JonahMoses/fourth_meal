@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [ :edit, :update, :destroy, :purchase, :confirmation]
 
   def index
-    @restaurants = Restaurant.all
     @orders = current_user.orders.order("created_at DESC")
   end
 
@@ -45,7 +44,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to items_path }
+      format.html { redirect_to root_path, notice: 'Order has been deleted'}
     end
   end
 
@@ -56,32 +55,29 @@ class OrdersController < ApplicationController
       session[:order_id] = nil
       redirect_to confirmation_order_path(@order)
     elsif @order.user.guest
-      redirect_to sign_up_path
+      redirect_to purchase_users_path
     else
       redirect_to @order, notice: "That order is #{@order.status} and can't be purchased.  Please purchase your current cart."
     end
   end
 
   def guest_purchase
-    @restaurants = Restaurant.all
   end
 
-    def guest_confirm_purchase
-      @restaurants = Restaurant.all
-      if current_user.update_attributes(user_params) && current_user.validate_guest_order
-        current_user.save
-        current_order.update_attributes(status: "paid")
-        order = current_order
-        UserMailer.order_confirmation(current_user, current_order).deliver
-        session[:order_id] = nil
-        redirect_to confirmation_order_path(order)
-      else
-        render :guest_purchase
-      end
+  def guest_confirm_purchase
+    if current_user.update_attributes(user_params) && current_user.validate_guest_order
+      current_user.save
+      current_order.update_attributes(status: "paid")
+      order = current_order
+      UserMailer.order_confirmation(current_user, current_order).deliver
+      session[:order_id] = nil
+      redirect_to confirmation_order_path(order)
+    else
+      render :guest_purchase
+    end
   end
 
   def confirmation
-    @restaurants = Restaurant.all
   end
 
 private

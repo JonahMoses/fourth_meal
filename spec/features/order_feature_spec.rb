@@ -64,26 +64,24 @@ describe "a guest user's order" do
     end
   end
 
-  xit "keeps item in cart after signing up" do
+  it "keeps item in cart after signing up" do
     add_item_to_order
     click_on("View Items")
     expect(page).to have_content 'unsubmitted'
-    click_on('Become a member')
-    register_new_user
+    click_on('Checkout')
+    within("form[action='/users/1']") do
+      fill_in 'user_email',                  :with => "user@example.com"
+      fill_in 'user_full_name',              :with => "foobarbaz"
+      fill_in 'user_password',               :with => "foobarbaz"
+      fill_in 'user_password_confirmation',  :with => "foobarbaz"
+      click_on('Update User')
+    end
     within('#flash_notice') do
-      expect(page).to have_content 'Signed up!'
+      expect(page).to have_content 'redirected to unfinished order'
     end
-
-    # Currently Create User button goes to
-    # /orders and the "Show" button there
-    # is trying to go to /orders/45 which doesn't exists anymore
-
-    click_on("Show")
-    within('#order_items_index_table') do
-      expect(page).to have_content 'unsubmitted'
-    end
+    expect(page).to have_content 'unsubmitted'
     within('#order_items_table') do
-      expect(page).to have_content 'fries'
+      expect(page).to have_content 'ABC Item'
     end
   end
 
@@ -96,7 +94,7 @@ describe "maintaining a single cart over multiple logins" do
     add_item_to_order
     click_on('Log Out')
     register_user #=> user@example.com
-    visit("#{@restaurant.slug}")
+    visit("/#{@restaurant.slug}")
     click_on("Add to Cart")
     click_on("View Items")
     expect(page).to have_content('2')

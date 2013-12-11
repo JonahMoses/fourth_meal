@@ -9,7 +9,6 @@ class OrderItemsController < ApplicationController
   end
 
   def show
-    @restaurant = Restaurant.all
   end
 
   def new
@@ -17,7 +16,6 @@ class OrderItemsController < ApplicationController
   end
 
   def edit
-    @restaurant = Restaurant.all
   end
 
   def create
@@ -72,12 +70,11 @@ private
 
   def load_order
     create_and_log_in_guest_user unless current_user
-    
+
     @order = find_or_create_order
     session[:order_id] = @order.id
     @order
   end
-
 
   def find_or_create_order
     Order.find_unsubmitted_order_for(current_user.id, current_restaurant.id) || create_order

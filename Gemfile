@@ -20,6 +20,8 @@ group :development, :test do
   gem 'capybara'
   gem 'pry'
   gem 'launchy'
+  gem 'selenium-webdriver'
+  gem "database_cleaner"
   gem 'better_errors'
   gem 'binding_of_caller'
   gem "factory_girl_rails", "~> 4.0"

@@ -1,6 +1,7 @@
 <h1>Your Order</h1>
 
-<p>Restaurant: <%= @order.restaurant.title %></p>
+<p>Restaurant: <%= current_restaurant.title %></p>
+
 
 <p>Status: <%= @order.status %></p>
 <p>Items: <%= @order.order_items.count %></p>
@@ -24,8 +25,8 @@
 
 <p class="cart_total_price"><strong>Total:</strong><%= print_price @order.total %></p>
 
-<%= link_to "Purchase", purchase_order_path(current_restaurant.slug, @order), method: :post %>
-<%= link_to "Empty Cart", @order, data: { confirm: 'Are you sure?' }, method: :delete %>
+<%= link_to "Checkout", purchase_order_path(current_restaurant.slug, @order), method: :post %>
+<%= link_to "Empty Cart", destroy_restaurant_order_path(current_restaurant.slug, @order), data: { confirm: 'Are you sure?' }, method: :delete %>
 <% if allow? "orders", "edit" %>
   <%= link_to 'Edit', edit_order_path(@order) %>
 <% end %>
