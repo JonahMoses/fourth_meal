@@ -1,6 +1,7 @@
 <h1>Your Order</h1>
 
-<p>Restaurant: <%= @order.restaurant.title %></p>
+<p>Restaurant: <%= current_restaurant.title %></p>
+
 
 <p>Status: <%= @order.status %></p>
 <p>Items: <%= @order.order_items.count %></p>
