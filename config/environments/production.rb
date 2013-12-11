@@ -1,5 +1,18 @@
 Foodfight::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+# Settings specified here will take precedence over those in config/application.rb.
+
+
+# Change mail delvery to either :smtp, :sendmail, :file, :test
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    address:              'smtp.sendgrid.net',
+    port:                 587,
+    domain:               'heroku.com',
+    user_name:            'app20191928@heroku.com',
+    password:             'iwoj8a8c',
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 
   config.paperclip_defaults = {
     :storage => :s3,

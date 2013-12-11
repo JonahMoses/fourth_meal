@@ -15,7 +15,7 @@
     Item: <%= @order_item.item[:title] %>
   </div>
   <div class="field">
-    <%= f.label :quantity %>: <%= f.number_field :quantity, :min=>0 %>
+    <%= f.label :quantity %>: <%= f.number_field :quantity, :min=>0, style: "height: 28px" %>
   </div>
   <div class="actions">
     <%= f.submit %>

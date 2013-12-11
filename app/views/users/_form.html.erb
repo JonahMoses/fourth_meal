@@ -34,3 +34,7 @@
 
   <p class="button"><%= f.submit %></p>
 <% end %>
+
+<% if @user.id == nil %>
+  <%= link_to 'Checkout as Guest', guest_purchase_path %>
+<% end %>

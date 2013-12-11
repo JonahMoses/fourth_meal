@@ -7,6 +7,7 @@ class OrderItem < ActiveRecord::Base
     quantity*item.price
   end
 
+
   def active?
     item.active
   end

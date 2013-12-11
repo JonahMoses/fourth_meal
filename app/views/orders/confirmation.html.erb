@@ -1,3 +1,12 @@
 <div class="confirmation-banner">
   Confirmation
+  <ul>
+  Order #<%= @order.id %><br/>
+  Restaurant: <%= @order.restaurant.title %><br/>
+  Status: <%= @order.status %><br/>
+    <% @order.order_items.each do |order_item| %>
+    <li>Item ordered: <%= order_item.item.title %></li>
+    <li>Quantity:<%= order_item.quantity %></li>
+    <% end %>
+  </ul>
 </div>

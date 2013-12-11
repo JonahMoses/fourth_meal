@@ -3,7 +3,7 @@ class Seeder
   def create_data
     create_categories
     #create_orders
-    10.times do
+    500.times do
       create_item
     end
     create_restaurants
@@ -38,7 +38,7 @@ private
     restaurant_names.each do |restaurant_name|
       restaurant = Restaurant.create(
                          title: restaurant_name,
-                         description: Faker::Lorem.words(2).join(" "),
+                         description: Faker::Lorem.words(25).join(" "),
                         )
       puts "Created restaurant: #{restaurant.title}"
     end
@@ -50,12 +50,14 @@ private
       "Bryana's",
       "Jonah's",
       "Q's",
-      "Ben's",
-      "Adam's",
+      "Jorge's",
+      "Kevin's",
       "Nikhil's",
-      "Persa's",
+      "Katrina's",
       "Bree's",
       "Louisa's",
+      "Ben's",
+      "Tyler's"
     ]
   end
 
@@ -64,7 +66,7 @@ private
   end
 
   def sample_restaurant_ids
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   end
 
   def create_item

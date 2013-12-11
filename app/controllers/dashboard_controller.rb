@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
 
   def index
+    @restaurants = Restaurant.all
     @orders_by_status = Order.count(:group => "status")
     if params[:status]
       @filtered_orders = Order.where(:status => params[:status])

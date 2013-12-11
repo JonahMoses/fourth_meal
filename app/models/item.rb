@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  validates                 :title, :description, :price, presence: true
+  validates                 :title, :description, :price, :restaurant_id, presence: true
   validates                 :title, uniqueness: true
   validates                 :price, :numericality => { :greater_than => 0 }
 
@@ -23,6 +23,10 @@ class Item < ActiveRecord::Base
   def price=(input)
     input.delete!("$")
     super
+  end
+
+  def to_param
+    "#{id}".parameterize
   end
 
   def category_names

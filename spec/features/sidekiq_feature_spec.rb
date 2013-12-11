@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe "access to /sidekiq" do
 
-  it "rejects guest user" do
+  xit "rejects guest user" do
     expect{visit '/sidekiq'}.to raise_error(ActionController::RoutingError)
   end
 
-  it "rejects member user" do
+  xit "rejects member user" do
     log_in_user
     expect{visit '/sidekiq'}.to raise_error(ActionController::RoutingError)
   end

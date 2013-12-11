@@ -1,41 +1,30 @@
 <h1>Your Order</h1>
 
-<table id="order_items_table">
-  <tr>
-    <th>Status:</th>
-    <td><%= @order.status %></td>
-  </tr>
-  <tr>
-    <th>Items:</th>
-    <td><%= @order.order_items.count %></td>
-  </tr>
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Quantity</th>
-    <th>Unit Price</th>
-    <th>Subtotal</th>
-  </tr>
-  <% @order.order_items.each do |item| %>
-    <tr>
-      <td><%= item.item.title %></td>
-      <td><%= item.item.description %></td>
-      <td><%= link_to item.quantity, edit_order_item_path(item), :class => 'item_quantity' %></td>
-      <td><%= print_price item.item.price %></td>
-      <td><%= print_price item.subtotal %></td>
-      <td><%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><strong>Total:</strong></td>
-    <td><%= print_price @order.total %></td>
-  </tr>
-</table>
+<p>Restaurant: <%= @order.restaurant.title %></p>
 
-<%= link_to "Purchase", purchase_order_path(@order), method: :post %>
+<p>Status: <%= @order.status %></p>
+<p>Items: <%= @order.order_items.count %></p>
+
+<div id="order_items_table">
+  <% @order.order_items.each_with_index do |item, index| %>
+    <div class="order_item_<%= index %>">
+      <%= form_for item, {url: update_order_item_path("#{current_restaurant.slug}", @order.id, item.id)} do |f| %>
+        <div>
+          <%= item.item.title %>
+          <%= f.text_field :quantity, :class => 'item_quantity' %>
+          <%= print_price item.item.price %>
+          <%= print_price item.subtotal %>
+          <%= f.submit 'Update' %>
+          <%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<p class="cart_total_price"><strong>Total:</strong><%= print_price @order.total %></p>
+
+<%= link_to "Purchase", purchase_order_path(current_restaurant.slug, @order), method: :post %>
 <%= link_to "Empty Cart", @order, data: { confirm: 'Are you sure?' }, method: :delete %>
 <% if allow? "orders", "edit" %>
   <%= link_to 'Edit', edit_order_path(@order) %>

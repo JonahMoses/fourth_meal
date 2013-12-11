@@ -1,16 +1,26 @@
 <%= form_for @item, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
+
+  <div class="control-group">
+    <%= f.label :restaurant, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :restaurant_id, :value => "#{current_restaurant.title}", :class => 'text_field', :readonly => true %>
+    </div>
+  </div>
+
   <div class="control-group">
     <%= f.label :title, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :title, :class => 'text_field' %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :description, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :description, :class => 'text_field' %>
     </div>
   </div>
+
   <div class="control-group">
     <%= f.label :price, :class => 'control-label' %>
     <div class="controls">
@@ -20,15 +30,17 @@
 
 
   <div class="control-group">
-    Categories:<br />
-    <% Category.all.each do |category| %>
-      <% if @item.categories.include?(category) %>
-        <%=hidden_field_tag "item[item_categories][]", "0"%>
-        <%= check_box_tag "item[item_categories][]", category.id, true %>-<%= category.name %>
-      <% else %>
-        <%= check_box_tag "item[item_categories][]", category.id %>-<%= category.name %>
+    <%= f.label :categories, :class => 'control-label' %>
+    <div class="controls">
+      <% Category.all.each do |category| %>
+        <% if @item.categories.include?(category) %>
+          <%=hidden_field_tag "item[item_categories][]", "0"%>
+          <%= check_box_tag "item[item_categories][]", category.id, true %>-<%= category.name %>
+        <% else %>
+          <%= check_box_tag "item[item_categories][]", category.id %>-<%= category.name %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 
 

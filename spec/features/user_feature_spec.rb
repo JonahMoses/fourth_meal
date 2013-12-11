@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "the signup process", :type => :feature do
 
-  it "signs me up" do
+  it "signs me up after I click become a member" do
     visit '/sign_up'
     fill_in 'user_email',                 :with => "bj@example.com"
     fill_in 'user_full_name',             :with => "Bo Jangles"
@@ -27,7 +27,6 @@ describe "the signin process" do
   end
 
   it "logs me out" do
-    visit '/items'
     click_link_or_button 'Log Out'
     expect(page).to have_content 'Logged out'
     expect(page).to have_content 'Log In'
@@ -56,9 +55,10 @@ describe "member" do
 
   it "can edit her own user details" do
     register_changeable_user
-    visit '/items'
     click_on 'My profile'
     fill_in 'user_email', :with => "adminOne@example.com"
+    fill_in 'user_password', :with => "password"
+    fill_in 'user_password_confirmation', :with => "password"
     click_link_or_button 'Update User'
     page.status_code.should eql(200)
     within('.navbar') do

@@ -1,4 +1,4 @@
- <div class="span4 well well-sm">
+<div class="span4 well well-sm">
   <div class="item">
     <div class="item-image">
       <td>
@@ -12,12 +12,14 @@
         <%= restaurant.title %>
       </h5>
       <p class="item-description">
-        <%= restaurant.description %>
+        <%= restaurant.description[0..100] %>
+          <%="…" if restaurant.description.length > 100 %>
       </p>
     </div>
     <div id="view-menu">
-    <%= button_to 'View Menu', restaurant, method: :get, class: "item-show", id: "btn-view-menu-#{restaurant.id}" %>
+
+      <%= link_to 'View Menu', restaurant.slug, class: "item-show btn btn-default", id: "btn-view-menu-#{restaurant.id}" %>
+
     </div>
   </div>
 </div>
-

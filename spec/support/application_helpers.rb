@@ -50,10 +50,8 @@ module UserHelpers
   end
 
   def make_an_item_via_db
-    Item.create!(:title => 'potatoe wedges',
-                 :description => 'wet',
-                 :price => '1.99',
-                 :restaurant_id => 1)
+    FactoryGirl.create(:restaurant)
+    FactoryGirl.create(:item)
   end
 
   def make_an_item # will need to be an admin
@@ -77,8 +75,25 @@ module UserHelpers
     click_button 'Create Item'
   end
 
+  def create_restaurant_with_item
+    @restaurant = Restaurant.create(
+      :title => "ABC Restaurant",
+      :description => "GOOD FOOD")
+    item = Item.create(
+      :title => "ABC Item",
+      :description => "Item Food",
+      :price => "$1.09",
+      :restaurant_id => @restaurant.id)
+  end
+
   def add_item_to_order
-    visit '/items'
+    create_restaurant_with_item
+    visit "/#{@restaurant.slug}"
+    click_on('Add to Cart')
+  end
+
+  def add_to_cart
+    visit "/#{@restaurant.slug}"
     click_on('Add to Cart')
   end
 

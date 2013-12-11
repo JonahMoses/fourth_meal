@@ -71,4 +71,36 @@ describe User do
     expect(first_user.email).to eq("first_user@example.com")
   end
 
+  describe '#validate_guest_order' do
+    let(:user) { FactoryGirl.create(:user, :guest)}
+
+    it 'requires all information' do
+      user.validate_guest_order
+      user.errors[:email].should include("is invalid")
+      user.errors[:full_name].should include("is invalid")
+      user.errors[:credit_card_number].should include("is invalid")
+      user.errors[:billing_street].should include("is invalid")
+      user.errors[:billing_city].should include("is invalid")
+      user.errors[:billing_state].should include("is invalid")
+      user.errors[:billing_zip_code].should include("is invalid")
+    end
+
+    it 'returns false when invalid' do
+      target = user.validate_guest_order
+      expect(target).to eq false
+    end
+
+    let(:user_attrs) do
+      {
+        email: Faker::Internet.email
+      }
+    end
+
+    it 'returns true when valid' do
+      user.update_attributes(user_attrs)
+      user.validate_guest_order
+      user.errors[:email].should_not include("email required")
+    end
+  end
+
 end
