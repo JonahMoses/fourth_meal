@@ -31,6 +31,10 @@ class User < ActiveRecord::Base
     new{ |u| u.guest = true }
   end
 
+  def has_unsubmitted_orders?
+    orders.where(status: "unsubmitted").any?
+  end
+
   def name
     guest ? "Guest" : email
   end

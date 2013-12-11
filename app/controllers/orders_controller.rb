@@ -65,18 +65,18 @@ class OrdersController < ApplicationController
     @restaurants = Restaurant.all
   end
 
-  def guest_confirm_purchase
-    @restaurants = Restaurant.all
-    if current_user.update_attributes(user_params) && current_user.validate_guest_order
-      current_user.save
-      current_order.update_attributes(status: "paid")
-      order = current_order
-      UserMailer.order_confirmation(current_user, current_order).deliver
-      session[:order_id] = nil
-      redirect_to confirmation_order_path(order)
-    else
-      render :guest_purchase
-    end
+    def guest_confirm_purchase
+      @restaurants = Restaurant.all
+      if current_user.update_attributes(user_params) && current_user.validate_guest_order
+        current_user.save
+        current_order.update_attributes(status: "paid")
+        order = current_order
+        UserMailer.order_confirmation(current_user, current_order).deliver
+        session[:order_id] = nil
+        redirect_to confirmation_order_path(order)
+      else
+        render :guest_purchase
+      end
   end
 
   def confirmation
