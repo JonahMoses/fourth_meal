@@ -3,6 +3,7 @@ class RestaurantsController < ApplicationController
 
   def index
     @restaurants = Restaurant.active
+    @current_user = current_user
   end
 
   def create

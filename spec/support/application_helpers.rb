@@ -44,7 +44,7 @@ module UserHelpers
     visit '/log_in'
     fill_in 'email',    :with => "confused@example.com"
     fill_in 'password', :with => "foobar"
-    within('form') do
+    within("form[action='/sessions']") do
       click_link_or_button 'Log In'
     end
   end

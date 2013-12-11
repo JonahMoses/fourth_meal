@@ -5,3 +5,8 @@
     <%= render partial: 'restaurants/restaurant', collection: @restaurants %>
   </div>
 </div>
+<div class="col-lg-12">
+  <% if @current_user && @current_user.authenticated? %>
+    <%= render 'layouts/footer' %>
+  <% end %>
+</div>

@@ -28,6 +28,17 @@ describe RestaurantsController do
       expect(page).to have_no_content(restaurant3.title)
       expect(page).to have_content(restaurant1.title)
     end
+
+    it 'should display a Create New Restaurant link for authenticated users' do
+      restaurant = FactoryGirl.create(:restaurant)
+      register_user
+      visit restaurants_path
+      find_button 'Create New Restaurant'
+      click_on 'Log Out'
+      expect(page).not_to have_content 'Create New Restaurant'
+    end
+
+
   end
 
   describe 'add item to cart refresh menu page' do

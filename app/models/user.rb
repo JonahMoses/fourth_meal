@@ -76,6 +76,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def authenticated?
+    self.password_hash?
+  end
+
 private
 
   def downcase_email

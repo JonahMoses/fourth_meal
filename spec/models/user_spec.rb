@@ -106,14 +106,24 @@ describe User do
   describe "#has_unsubmitted_orders?" do
     let(:user) { FactoryGirl.create(:user) }
 
-    it "returns true if user has unsubmitted orders" do 
+    it "returns true if user has unsubmitted orders" do
       Order.create(user_id: user.id, status: "unsubmitted", restaurant_id: 1)
-      expect(user.has_unsubmitted_orders?).to eq true 
+      expect(user.has_unsubmitted_orders?).to eq true
     end
 
     it "returns false if user has no unsubmitted orders" do
       expect(user.has_unsubmitted_orders?).to eq false
     end
   end
+
+  describe "authenticated user" do
+    let(:user) { FactoryGirl.create(:user, guest: false) }
+
+    it "authenticated?" do
+      expect(user.authenticated?).to eq true
+    end
+
+  end
+
 
 end
