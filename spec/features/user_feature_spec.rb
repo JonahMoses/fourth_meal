@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe "the signup process", :type => :feature do
 
-  it "signs me up after I click become a member" do
-    visit '/sign_up'
+  it "lets me create an account" do
+    visit root_path
+    click_on("Become a member")
     fill_in 'user_email',                 :with => "bj@example.com"
     fill_in 'user_full_name',             :with => "Bo Jangles"
     fill_in 'user_display_name',          :with => "BJ"
@@ -11,6 +12,17 @@ describe "the signup process", :type => :feature do
     fill_in 'user_password_confirmation', :with => "foobarbaz"
     click_link_or_button 'Create User'
     expect(page).to have_content 'Signed up!'
+  end
+end
+
+describe "the purchase page" do
+
+  it "should have sign up, sign in, and guest purchase forms" do
+    visit purchase_users_path
+    expect(current_path).to eq(purchase_users_path)
+    expect(page).to have_content 'Sign Up'
+    expect(page).to have_content 'Log In'
+    expect(page).to have_content 'Checkout As Guest'
   end
 
 end
@@ -28,7 +40,9 @@ describe "the signin process" do
 
   it "logs me out" do
     click_link_or_button 'Log Out'
-    expect(page).to have_content 'Logged out'
+    within("#flash_notice") do
+      expect(page).to have_content 'Logged out'
+    end
     expect(page).to have_content 'Log In'
   end
 

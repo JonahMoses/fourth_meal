@@ -75,7 +75,7 @@ describe "maintaining a single cart over multiple logins" do
     add_item_to_order
     click_on('Log Out')
     register_user #=> user@example.com
-    visit("#{@restaurant.slug}")
+    visit("/#{@restaurant.slug}")
     click_on("Add to Cart")
     click_on("View Items")
     expect(page).to have_content('2')

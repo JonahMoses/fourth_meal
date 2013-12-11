@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     orders.where(status: "unsubmitted").any?
   end
 
+  def unsubmitted_order
+    orders.where(status: "unsubmitted").last
+  end
+
   def name
     guest ? "Guest" : email
   end

@@ -3,11 +3,9 @@ class UsersController < ApplicationController
 
   def new
     @user  = User.new
-    @restaurants = Restaurant.all
   end
 
   def create
-    @restaurants = Restaurant.all
     @user = User.new(user_params)
     if @user.save
       UserMailer.welcome_email(@user).deliver
@@ -20,19 +18,30 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @restaurants ||= Restaurant.all
   end
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user)
+      if @user.guest
+        @user.update!(:guest => false) if @user.guest
+        order = (current_order || user.unsubmitted_order)
+        redirect_to restaurant_order_path(order.restaurant.slug, order), notice: "redirected to unfinished order"
+      else
+        redirect_to user_path(@user)
+      end
     else
       render 'new'
     end
   end
 
+  def purchase
+    if current_user == nil
+      create_and_log_in_guest_user
+    end
+    @user = current_user
+  end
+
   def show
-    @restaurants ||= Restaurant.all
   end
 
   def is_guest?

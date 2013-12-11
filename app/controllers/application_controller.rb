@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   delegate                   :allow?, to: :current_permission
   helper_method              :allow?
   before_action              :authorize
+  before_action              :all_restaurants
 
 private
 
@@ -26,6 +27,10 @@ private
 
   def current_order
     @current_order ||= Order.find(session[:order_id]) if session[:order_id]
+  end
+
+  def all_restaurants
+    @restaurants ||= Restaurant.all
   end
 
   def create_and_log_in_guest_user
