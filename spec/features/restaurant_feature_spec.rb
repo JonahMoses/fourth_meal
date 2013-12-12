@@ -50,11 +50,17 @@ describe RestaurantsController do
   end
 
   describe 'create a new restaurant' do
-    it 'should have a form' do
+    it 'should have a form for user to fill out with restaurant info' do
       register_user
       visit restaurants_path
       click_button 'Create New Restaurant'
       expect(page).to have_content 'New Restaurant Form'
+      expect(page).to have_content 'Restaurant name'
+      expect(page).to have_content 'Restaurant description'
+      fill_in "restaurant_title", with: "Tito's"
+      fill_in "restaurant_description", with: "Jorge's favorite place"
+      click_button('Create Restaurant')
+      expect(page).to have_content "Restaurant is submitted and pending approval"
     end
   end
 

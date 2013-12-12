@@ -8,10 +8,18 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
+
+    respond_to do |format|
+      if @restaurant.save
+        format.html { redirect_to '/', notice: 'Restaurant is submitted and pending approval' }
+      else
+        format.html { render action: 'new' }
+      end
+    end
   end
 
   def new
-
+    @restaurant = Restaurant.new
   end
 
   def show
