@@ -29,7 +29,7 @@ describe "a guest user's order" do
     expect(page).to have_content("Bacon")
   end
 
-  describe "adding items and viewing cart" do 
+  describe "adding items and viewing cart" do
 
     it "has unique cart for each restaurant" do
       new_restaurant = FactoryGirl.create(:restaurant)
@@ -45,7 +45,7 @@ describe "a guest user's order" do
       expect(page).to have_content("fried brown food")
     end
 
-    it "cart holds unsubmitted order for current restaurant after visiting different restaurant" do 
+    it "cart holds unsubmitted order for current restaurant after visiting different restaurant" do
        new_restaurant = FactoryGirl.create(:restaurant)
       new_item = FactoryGirl.create(:item, restaurant_id: new_restaurant.id)
       visit "/#{new_restaurant.slug}"
@@ -69,7 +69,7 @@ describe "a guest user's order" do
     click_on("View Items")
     expect(page).to have_content 'unsubmitted'
     click_on('Checkout')
-    within("form[action='/users/1']") do
+    within(".update_guest_to_user") do
       fill_in 'user_email',                  :with => "user@example.com"
       fill_in 'user_full_name',              :with => "foobarbaz"
       fill_in 'user_password',               :with => "foobarbaz"
