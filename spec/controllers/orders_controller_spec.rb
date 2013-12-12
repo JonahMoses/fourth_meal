@@ -52,7 +52,7 @@ describe OrdersController do
                             billing_apt: "104",
                             billing_state: "CO",
                             billing_zip_code: "80206"})
-      expect(GuestOrderMailerWorker).to have_received(:perform_async).to include("abc@example.com", "Jonah")
+      expect(GuestOrderMailerWorker).to have_received(:perform_async).with("abc@example.com", "Jonah")
     end
   end
 
