@@ -26,4 +26,5 @@ class Permission < Struct.new(:user)
     return true if controller == "items" && action.in?(%w[index show])
   end
 
+
 end

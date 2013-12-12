@@ -10,11 +10,12 @@ class UserMailer < ActionMailer::Base
           subject: 'Welcome to Food Fight')
   end
 
-  def order_confirmation(current_user, order)
-    @user = current_user
-    @order = order
+  def order_confirmation(user_attributes, order_attributes, order_total)
+    @user = user_attributes
+    @order = order_attributes
+    @total = order_total
     @url2 = 'http://fourth-meal.herokuapp.com'
-    mail(to: @user.email,
+    mail(to: @user[:email],
           subject: 'Thank you for your order!')
   end
 
