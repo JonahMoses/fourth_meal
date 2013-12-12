@@ -13,7 +13,6 @@ FactoryGirl.define do
     trait :guest do
       email { "" }
       full_name { "" }
-      # display_name { "" }
       guest true
     end
   end

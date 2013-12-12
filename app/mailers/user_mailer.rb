@@ -1,11 +1,12 @@
 class UserMailer < ActionMailer::Base
   default from: "foodfightinfo@gmail.com"
 
-  def welcome_email(user)
-    @user = user
+  def welcome_email(user_email, user_name)
+    @user_email = user_email
+    @user_name  = user_name
     @url = 'http://fourth-meal.herokuapp.com/log_in'
     @url2 = 'http://fourth-meal.herokuapp.com'
-    mail(to: @user.email,
+    mail(to: @user_email,
           subject: 'Welcome to Food Fight')
   end
 

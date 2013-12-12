@@ -32,4 +32,21 @@ describe UsersController do
     end
   end
 
+  describe "POST create" do
+    before :each do
+      UserMailerWorker.stub :perform_async
+    end
+
+    it "creates a user" do
+      expect do
+        post(:create, user: {email: "abc@example.com", full_name: "Abc Xyz", password: "password", password_confirmation: "password"})
+      end.to change(User, :count).by(1)
+    end
+
+    it "sends a welcome email to the user" do
+      post(:create, user: {email: "abc@example.com", full_name: "Abc Xyz", password: "password", password_confirmation: "password"})
+      expect(UserMailerWorker).to have_received(:perform_async).with("abc@example.com","Abc Xyz")
+    end
+  end
+
 end
