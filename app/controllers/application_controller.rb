@@ -21,12 +21,12 @@ private
     @restaurant = Restaurant.find_by(slug: params[:slug])
   end
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
-
   def current_order
     @current_order ||= Order.find(session[:order_id]) if session[:order_id]
+  end
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   def all_restaurants
