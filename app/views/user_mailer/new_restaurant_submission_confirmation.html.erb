@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><b><%=link_to "FoodFight.com", @url2 %></b></h1>
+    <b>Dear <%= @user.full_name %>, </b>
+    <p>
+      Thank you for submitting your new restaurant to FoodFight!
+    </p>
+    <p>
+      Your restaurant title is: <%= @restaurant.title %>.<br/>
+      Your restaurant description is: <%= @restaurant.description %>.
+    </p>
+    <p>
+      We are reviewing your submission.  After your restaurant has been reviewed and if your restaurant concept meets FoodFights standards we will let you know. Once the restaurant status has been updated you will recieve another email.
+    </p>
+    <p>Thanks for your submission and have a great day!</p>
+  </body>
+</html>

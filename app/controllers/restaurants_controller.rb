@@ -8,9 +8,10 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-
+    @user = current_user
     respond_to do |format|
       if @restaurant.save
+        UserMailer.new_restaurant_submission_confirmation(@user, @restaurant).deliver
         format.html { redirect_to '/', notice: 'Restaurant is submitted and pending approval' }
       else
         format.html { render action: 'new' }
