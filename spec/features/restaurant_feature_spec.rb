@@ -37,8 +37,6 @@ describe RestaurantsController do
       click_on 'Log Out'
       expect(page).not_to have_content 'Create New Restaurant'
     end
-
-
   end
 
   describe 'add item to cart refresh menu page' do
@@ -48,6 +46,15 @@ describe RestaurantsController do
       visit restaurant_name_path(restaurant.slug)
         click_link_or_button('Add to Cart')
         expect(page).to have_content 'View Items in Cart: 1'
+    end
+  end
+
+  describe 'create a new restaurant' do
+    it 'should have a form' do
+      register_user
+      visit restaurants_path
+      click_button 'Create New Restaurant'
+      expect(page).to have_content 'New Restaurant Form'
     end
   end
 
