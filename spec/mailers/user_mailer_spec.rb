@@ -8,7 +8,7 @@ describe UserMailer do
                         password_confirmation: "hellothere") }
     let(:order) { Order.create(user_id: user.id, restaurant_id: 1)}
     let(:total) { 10 }
-    let(:mail) { UserMailer.order_confirmation(user, order, total)}
+    let(:mail) { UserMailer.order_confirmation(order.id)}
 
     it "renders the headers" do
       mail.subject.should eq("Thank you for your order!")
@@ -32,7 +32,7 @@ describe UserMailer do
                         guest: true)}
     let(:order) { Order.create(user_id: user.id, restaurant_id: 100) }
     let(:total) { 10 }
-    let(:mail) { UserMailer.order_confirmation(user, order, total)}
+    let(:mail) { UserMailer.order_confirmation(order.id)}
 
     it "renders the headers" do
       mail.subject.should eq("Thank you for your order!")

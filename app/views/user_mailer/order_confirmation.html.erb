@@ -7,19 +7,19 @@
   <body>
     <h2>Thank you for ordering with <%=link_to "FoodFight.com", @url2 %>! Your order details are below:</h2>
 
-<h3>Order #<%= @order[:id] %>:</h3>
+<h3>Order #<%= @order.id %>:</h3>
 
-<% if @order[:user_id] %>
-  <p>User Full Name: <%= @user[:full_name] %></p>
-  <p>User ID:        <%= @user[:id] %></p>
-  <p>Email: <%= @user[:email] %></p>
+<% if @user.id %>
+  <p>User Full Name: <%= @user.full_name %></p>
+  <p>User ID:        <%= @user.id %></p>
+  <p>Email: <%= @user.email %></p>
 <% else %>
   <p><em>There is no user assigned to this order</em></p>
 <% end %>
 
 <p>Order Total: <%= number_to_currency(@order.total) %></p>
-<p>Status: <%= @order[:status] %></p>
-<p>Created At: <%= @order[:created_at] %></p>
+<p>Status: <%= @order.status %></p>
+<p>Created At: <%= @order.created_at %></p>
 
   <p><h3>Items Ordered:<h3>
     <% if @order.order_items.count == 0 %>

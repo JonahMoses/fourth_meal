@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131207211011) do
+ActiveRecord::Schema.define(version: 20131213211610) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20131207211011) do
     t.integer  "restaurant_id"
   end
 
+  add_index "items", ["active"], name: "index_items_on_active"
+
   create_table "order_items", force: true do |t|
     t.integer  "item_id"
     t.integer  "order_id"
@@ -54,6 +56,10 @@ ActiveRecord::Schema.define(version: 20131207211011) do
     t.integer  "restaurant_id"
   end
 
+  create_table "regions", force: true do |t|
+    t.string "name"
+  end
+
   create_table "restaurants", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -61,7 +67,10 @@ ActiveRecord::Schema.define(version: 20131207211011) do
     t.datetime "updated_at"
     t.boolean  "status",      default: true
     t.string   "slug"
+    t.integer  "region_id"
   end
+
+  add_index "restaurants", ["region_id"], name: "index_restaurants_on_region_id"
 
   create_table "users", force: true do |t|
     t.string   "email"
