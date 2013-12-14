@@ -5,7 +5,7 @@ describe Restaurant do
   let(:restaurant2) { Restaurant.create(:title => "Restaurant 3", :description => "GOOD FOOD", :status => false) }
 
   it "creates a restaurant with status being true" do
-    restaurant.status.should eq(true)
+    restaurant.status.should eq("pending")
   end
 
   describe '.active' do

@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
     else
       @filtered_orders = Order.order("created_at DESC")
     end
+    @restaurants = Restaurant.all
   end
 
 end

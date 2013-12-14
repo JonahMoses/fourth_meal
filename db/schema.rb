@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213211610) do
+ActiveRecord::Schema.define(version: 20131214192927) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -65,12 +65,13 @@ ActiveRecord::Schema.define(version: 20131213211610) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "status",      default: true
+    t.string   "status",      default: "pending"
     t.string   "slug"
     t.integer  "region_id"
   end
 
   add_index "restaurants", ["region_id"], name: "index_restaurants_on_region_id"
+  add_index "restaurants", ["status"], name: "index_restaurants_on_status"
 
   create_table "users", force: true do |t|
     t.string   "email"

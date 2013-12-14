@@ -12,15 +12,15 @@
 <h2>Orders by Status</h2>
 <div class="order-counts">
   <table class="table table-striped">
-    <tr>
+    <!-- <tr>
       <th>Status</th>
-      <th>Count</th>
-    </tr>
+      <th>Count</th> -->
+   <!--  </tr>
     <% @orders_by_status.each do |k,v| %>
       <tr>
         <td><%= k %></td>
         <td><%= v %><br /></td>
-      </tr>
+      </tr> -->
     <% end %>
   </table>
 </div>
@@ -29,4 +29,8 @@
 <% if @filtered_orders.empty? %>
   No orders found
 <% end %>
+
+<h2>Restaurants by Status</h2>
+
+<%= render partial: 'dashboard/restaurants/restaurant_table', locals: {restaurants: @restaurants} %>
 

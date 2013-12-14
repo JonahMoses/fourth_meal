@@ -21,6 +21,13 @@ describe OrdersController do
     end
   end
 
+  describe "creating a new restaurant" do 
+    it "defaults to pending when created" do 
+      restaurant = Restaurant.create(title: "Rolen's", description: "Asian Goodness")
+      expect(restaurant.status).to eq "pending"
+    end
+  end
+
   describe "POST guest_confirm_purchase" do 
 
     before :each do 
@@ -42,20 +49,6 @@ describe OrdersController do
                             billing_zip_code: "80206"})  
       expect(@order.reload.status).to eq "paid"
     end
-
-    # it "sends a order confirmation email to the user" do 
-    #   User.any_instance.stub :attributes => {name: "Jonah"} 
-    #   Order.any_instance.stub :attributes => {title: "Order 1"}
-    #   post(:guest_confirm_purchase, user: {email: "abc@example.com",
-    #                         full_name: "Jonah",
-    #                         credit_card_number: "1234123412341234",
-    #                         billing_street: "123 Main st",
-    #                         billing_city: "Denver",
-    #                         billing_apt: "104",
-    #                         billing_state: "CO",
-    #                         billing_zip_code: "80206"})
-    #   expect(GuestOrderMailerWorker).to have_received(:perform_async).with({title:"Order 1"}, {name: "Jonah"})
-    # end
   end
 
 end

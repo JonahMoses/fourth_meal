@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
       current_user.save
       current_order.update_attributes(status: "paid")
       order = current_order
-      GuestOrderMailerWorker.perform_async(order.)
+      GuestOrderMailerWorker.perform_async(order.id)
       session[:order_id] = nil
       redirect_to confirmation_order_path(order)
     else
