@@ -11,7 +11,7 @@ class Restaurant < ActiveRecord::Base
   end
 
   def approve
-    self.update(:status => "active")
+    self.update(:status => "approved")
   end
 
   def set_defaults

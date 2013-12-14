@@ -12,7 +12,7 @@ describe "dashboard controller" do
     expect(page).to have_content("Approve")
     expect(page).to have_content("pending")
     click_link_or_button("Approve")
-    expect(page).to have_content("active")
+    expect(page).to have_content("approved")
   end
 
 end

@@ -2,7 +2,7 @@
   <td><%= restaurant.title %></td>
   <td><%= restaurant.description %></td>
   <td><%= restaurant.status %></td>
-  <% if restaurant.status != "active" %>
+  <% if restaurant.status == "pending"   %>
   <td><%= link_to 'Approve', approve_restaurant_path(restaurant.slug), method: "put" %></td>
   <% end %>
 </tr>

@@ -32,7 +32,7 @@ describe "approve" do
     it "changes status to active" do 
       restaurant = FactoryGirl.create(:restaurant, status: "pending")
       restaurant.approve
-      expect(restaurant.status).to eq "active"
+      expect(restaurant.status).to eq "approved"
     end
   end
 
