@@ -28,10 +28,15 @@ class RestaurantsController < ApplicationController
     @current_restaurant = current_restaurant
   end
 
+  def approve
+    current_restaurant.approve
+    redirect_to '/dashboard'
+  end
+
 private
 
   def restaurant_params
-    params.require(:restaurant).permit(:title, :description, :id)
+    params.require(:restaurant).permit(:title, :description, :id, :status)
   end
 
 end

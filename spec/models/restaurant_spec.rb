@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Restaurant do
   let(:restaurant) { Restaurant.create(:title => "Restaurant 2", :description => "GOOD FOOD") }
-  let(:restaurant2) { Restaurant.create(:title => "Restaurant 3", :description => "GOOD FOOD", :status => false) }
+  let(:restaurant2) { Restaurant.create(:title => "Restaurant 3", :description => "GOOD FOOD", :status => "inactive") }
 
   it "creates a restaurant with status being true" do
     restaurant.status.should eq("pending")
@@ -26,6 +26,14 @@ describe Restaurant do
 
     target = Restaurant.find_by(slug: "abc-s-restaurant")
     target.should eq restaurant
+  end
+
+describe "approve" do 
+    it "changes status to active" do 
+      restaurant = FactoryGirl.create(:restaurant, status: "pending")
+      restaurant.approve
+      expect(restaurant.status).to eq "active"
+    end
   end
 
 end

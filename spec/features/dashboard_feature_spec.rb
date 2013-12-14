@@ -9,6 +9,10 @@ describe "dashboard controller" do
     expect(page).to have_content("Restaurants by Status")
     expect(page).to have_content("Status")
     expect(page).to have_content("Description")
+    expect(page).to have_content("Approve")
+    expect(page).to have_content("pending")
+    click_link_or_button("Approve")
+    expect(page).to have_content("active")
   end
 
 end
