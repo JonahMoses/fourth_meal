@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessor :password
   has_many :orders
+  has_one :job
   before_validation :downcase_email
 
   before_save   :encrypt_password

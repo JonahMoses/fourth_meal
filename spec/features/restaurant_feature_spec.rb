@@ -64,5 +64,27 @@ describe RestaurantsController do
     end
   end
 
+    it "creator id should be current user id" do 
+      user = User.where(:email => "user@example.com").first_or_create(
+               :email => "user@example.com",
+               :full_name => "bo jangles",
+               :display_name => "bj",
+               :password => "foobarbaz",
+               :password_confirmation => "foobarbaz")
+      visit '/log_in'
+      fill_in 'email',    :with => "user@example.com"
+      fill_in 'password', :with => "foobarbaz"
+      click_button 'Log In'
+      visit restaurants_path
+      click_button 'Create New Restaurant'
+      fill_in "restaurant_title", with: "Tito's"
+      fill_in "restaurant_description", with: "Jorge's favorite place"
+      click_button('Create Restaurant')
+      restaurant = Restaurant.first
+      expect(restaurant.creator_id).to eq user.id
+      expect(restaurant.jobs.count).to eq 1
+      expect(restaurant.jobs.last.restaurant_id).to eq restaurant.id
+      expect(restaurant.jobs.last.user_id).to eq user.id
+    end
 
 end

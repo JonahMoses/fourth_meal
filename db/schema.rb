@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214213555) do
+ActiveRecord::Schema.define(version: 20131214223755) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 20131214213555) do
   end
 
   add_index "items", ["active"], name: "index_items_on_active"
+
+  create_table "jobs", force: true do |t|
+    t.string  "role"
+    t.integer "restaurant_id"
+    t.integer "user_id"
+  end
 
   create_table "order_items", force: true do |t|
     t.integer  "item_id"
@@ -70,6 +76,7 @@ ActiveRecord::Schema.define(version: 20131214213555) do
     t.string   "status",      default: "pending"
     t.string   "slug"
     t.integer  "region_id"
+    t.integer  "creator_id"
   end
 
   add_index "restaurants", ["region_id"], name: "index_restaurants_on_region_id"
@@ -98,6 +105,7 @@ ActiveRecord::Schema.define(version: 20131214213555) do
     t.string   "shipping_state"
     t.string   "billing_zip_code",   limit: 5
     t.string   "shipping_zip_code",  limit: 5
+    t.string   "job_id"
   end
 
 end

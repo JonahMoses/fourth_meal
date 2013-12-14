@@ -3,6 +3,7 @@ class Restaurant < ActiveRecord::Base
   validates :title, uniqueness: true
   has_many  :items
   has_many  :orders
+  has_many  :jobs
 
   after_create :set_defaults
 

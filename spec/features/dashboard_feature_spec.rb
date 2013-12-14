@@ -14,5 +14,4 @@ describe "dashboard controller" do
     click_link_or_button("Approve")
     expect(page).to have_content("approved")
   end
-
 end
