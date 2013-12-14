@@ -6,8 +6,9 @@ describe "dashboard controller" do
     register_admin_user
     FactoryGirl.create(:restaurant)
     visit '/dashboard'
-    save_and_open_page
     expect(page).to have_content("Restaurants by Status")
+    expect(page).to have_content("Status")
+    expect(page).to have_content("Description")
   end
 
 end
