@@ -4,10 +4,10 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to <b>FoodFight.com</b>, <%= @user.full_name %></h1>
+    <h1>Welcome to <b><%=link_to "FoodFight.com", @url2 %></b>, <%= @user_name %></h1>
     <p>
       You have successfully signed up to foodfight.com,
-      your username is: <%= @user.email %>.<br/>
+      your username is: <%= @user_email %>.<br/>
     </p>
     <p>
       To login to the site, just follow this link: <%=link_to "FoodFight log_in", @url %>.

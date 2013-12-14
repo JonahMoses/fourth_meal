@@ -12,6 +12,7 @@ describe "the signup process", :type => :feature do
     fill_in 'user_password_confirmation', :with => "foobarbaz"
     click_link_or_button 'Create User'
     expect(page).to have_content 'Signed up!'
+    expect(ActionMailer::Base.deliveries.length).to eq(1)
   end
 end
 

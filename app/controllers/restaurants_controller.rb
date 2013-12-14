@@ -2,15 +2,16 @@ class RestaurantsController < ApplicationController
   before_action :create_and_log_in_guest_user, only: [:show]
 
   def index
-    @restaurants = Restaurant.active
+    @restaurants = Restaurant.where(:status => "active")
     @current_user = current_user
   end
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-
+    @user = current_user
     respond_to do |format|
       if @restaurant.save
+        UserMailer.new_restaurant_submission_confirmation(@user, @restaurant).deliver
         format.html { redirect_to '/', notice: 'Restaurant is submitted and pending approval' }
       else
         format.html { render action: 'new' }
@@ -27,10 +28,15 @@ class RestaurantsController < ApplicationController
     @current_restaurant = current_restaurant
   end
 
+  def approve
+    current_restaurant.approve
+    redirect_to '/dashboard'
+  end
+
 private
 
   def restaurant_params
-    params.require(:restaurant).permit(:title, :description, :id)
+    params.require(:restaurant).permit(:title, :description, :id, :status)
   end
 
 end

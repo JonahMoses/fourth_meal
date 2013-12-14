@@ -19,5 +19,6 @@ describe "access to /sidekiq" do
       expect(page).to have_content 'Sidekiq'
     end
   end
-
 end
+
+

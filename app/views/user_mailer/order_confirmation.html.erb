@@ -5,14 +5,14 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h2>Thank you for ordering with FoodFight! Your order details are below:</h2>
+    <h2>Thank you for ordering with <%=link_to "FoodFight.com", @url2 %>! Your order details are below:</h2>
 
 <h3>Order #<%= @order.id %>:</h3>
 
-<% if @order.user_id %>
-  <p>User Full Name: <%= @order.user.full_name %></p>
-  <p>User ID:        <%= @order.user_id %></p>
-  <p>Email: <%= @order.user.email %></p>
+<% if @user.id %>
+  <p>User Full Name: <%= @user.full_name %></p>
+  <p>User ID:        <%= @user.id %></p>
+  <p>Email: <%= @user.email %></p>
 <% else %>
   <p><em>There is no user assigned to this order</em></p>
 <% end %>

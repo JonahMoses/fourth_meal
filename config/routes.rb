@@ -5,6 +5,8 @@ Foodfight::Application.routes.draw do
   post "/guest_confirm_purchase" => "orders#guest_confirm_purchase", as: :guest_confirm_purchase
   get "/guest" => "orders#guest_purchase", as: :guest_purchase
   get "dashboard" => "dashboard#index", :as => 'dashboard'
+  put "/:slug/approve" => "restaurants#approve", :as => :approve_restaurant
+
   resources :categories
 
   root :to => "restaurants#index"

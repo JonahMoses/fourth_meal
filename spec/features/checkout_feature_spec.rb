@@ -52,6 +52,7 @@ describe "the checkout process for a guest" do
         click_on('Submit Order')
       end
       expect(page).to have_content("Confirmation")
+      expect(ActionMailer::Base.deliveries.length).to eq(1)
     end
   end
 

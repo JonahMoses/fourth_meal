@@ -7,7 +7,11 @@ class Restaurant < ActiveRecord::Base
   after_create :set_defaults
 
   def self.active
-    where(:status => true)
+    where(:status => "active")
+  end
+
+  def approve
+    self.update(:status => "approved")
   end
 
   def set_defaults

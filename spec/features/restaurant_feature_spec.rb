@@ -21,9 +21,9 @@ describe RestaurantsController do
     end
 
     it 'should not display inactive restaurants' do
-      restaurant1 = FactoryGirl.create(:restaurant)
+      restaurant1 = FactoryGirl.create(:restaurant, status: "active")
       restaurant2 = FactoryGirl.create(:restaurant, title: "Antony's")
-      restaurant3 = FactoryGirl.create(:restaurant, title: "WTPho", status: false)
+      restaurant3 = FactoryGirl.create(:restaurant, title: "WTPho", status: "inactive")
       visit restaurants_path
       expect(page).to have_no_content(restaurant3.title)
       expect(page).to have_content(restaurant1.title)
