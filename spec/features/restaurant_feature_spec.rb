@@ -132,8 +132,6 @@ describe RestaurantsController do
       fill_in 'password', :with => "foobarbaz"
       click_button "Log In"
       expect(page).to have_content("My Restaurants")
-
-
       end
 
 end
