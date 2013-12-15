@@ -5,7 +5,7 @@
       <li><%= link_to "Dashboard", dashboard_path %></li>
     <% end %>
     <% if current_user.restaurant_admin? %>
-      <li><% link_to "My Restuarants", "#" %></li>
+      <li><a href="#">My Restuarants</a></li>
     <% end %>
   <% end %>
 <% end %>
