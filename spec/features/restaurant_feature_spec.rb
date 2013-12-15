@@ -64,7 +64,7 @@ describe RestaurantsController do
     end
   end
 
-    it "creator id should be current user id" do 
+    it "creator id should be current user id" do
       user = User.where(:email => "user@example.com").first_or_create(
                :email => "user@example.com",
                :full_name => "bo jangles",
@@ -85,6 +85,15 @@ describe RestaurantsController do
       expect(restaurant.jobs.count).to eq 1
       expect(restaurant.jobs.last.restaurant_id).to eq restaurant.id
       expect(restaurant.jobs.last.user_id).to eq user.id
+      expect(restaurant.jobs.last.role).to eq "Creator"
+      click_on "Log Out"
+      expect(page).to have_content("Logged out")
+      click_on "Log In"
+      register_admin_user
+      expect(page).to have_content("Logged in")
+      visit "/dashboard"
+      click_on "Approve"
+      expect(restaurant.jobs.last.role).to eq "Admin"
     end
 
 end

@@ -19,5 +19,10 @@ class Restaurant < ActiveRecord::Base
     self.update(slug: title.parameterize)
   end
 
+  def pending_restaurant
+    creator_id = current_restaurant.creator_id
+    current_restaurant.jobs.where(user_id == creator_id)
+  end
+
 end
 

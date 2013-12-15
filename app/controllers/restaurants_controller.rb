@@ -13,7 +13,6 @@ class RestaurantsController < ApplicationController
     respond_to do |format|
       if @restaurant.save
         create_job(@user.id, @restaurant.id)
-        fail
         UserMailer.new_restaurant_submission_confirmation(@user, @restaurant).deliver
         format.html { redirect_to '/', notice: 'Restaurant is submitted and pending approval' }
       else
@@ -41,6 +40,13 @@ class RestaurantsController < ApplicationController
 
   def approve
     current_restaurant.approve
+    # Locate the creator_id
+    # locate user_id from creator_id
+    # Locate the jobs table row that has the
+      # user_id & restuarant_id
+    # change role from default "default role"
+      # to "Admin"
+    pending_restaurant.update(role: "Admin")
     redirect_to '/dashboard'
   end
 

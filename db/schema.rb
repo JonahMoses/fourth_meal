@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131214223755) do
+ActiveRecord::Schema.define(version: 20131215000302) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20131214223755) do
   add_index "items", ["active"], name: "index_items_on_active"
 
   create_table "jobs", force: true do |t|
-    t.string  "role"
+    t.string  "role",          default: "Creator"
     t.integer "restaurant_id"
     t.integer "user_id"
   end
