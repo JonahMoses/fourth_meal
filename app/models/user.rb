@@ -81,6 +81,16 @@ class User < ActiveRecord::Base
     self.password_hash?
   end
 
+  def restaurant_admin?
+    # is current user_id == any jobs user ids
+    # is that jobs role admin?
+    if @current_user
+      job = Job.where(user_id: @current_user.id)
+      job.role == "Admin"
+    else false
+    end
+  end
+
 private
 
   def downcase_email
