@@ -34,8 +34,19 @@ class RestaurantsController < ApplicationController
     @current_restaurant = current_restaurant
   end
 
+  def details
+
+  end
+
   def approve
     current_restaurant.approve
+    # Locate the creator_id
+    # locate user_id from creator_id
+    # Locate the jobs table row that has the
+      # user_id & restuarant_id
+    # change role from default "default role"
+      # to "Admin"
+    pending_restaurant.update(role: "Admin")
     redirect_to '/dashboard'
   end
 
@@ -43,6 +54,11 @@ private
 
   def restaurant_params
     params.require(:restaurant).permit(:title, :description, :id, :status)
+  end
+
+  def pending_restaurant
+    creator_id = current_restaurant.creator_id
+    current_restaurant.jobs.first
   end
 
 end
