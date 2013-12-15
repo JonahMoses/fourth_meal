@@ -122,8 +122,18 @@ describe User do
     it "authenticated?" do
       expect(user.authenticated?).to eq true
     end
-
   end
+
+  describe "restaurant admin" do
+    it 'knows if current user is restaurant_admin?' do
+      user = FactoryGirl.create(:user, id: 200)
+      job = Job.create(user_id: 200, role: 'Admin')
+      expect(user.restaurant_admin?).to eq true
+    end
+  end
+
+
+
 
 
 end

@@ -46,7 +46,7 @@ class RestaurantsController < ApplicationController
       # user_id & restuarant_id
     # change role from default "default role"
       # to "Admin"
-    pending_restaurant.update(role: "Admin")
+    pending_restaurant_job.update(role: "Admin")
     redirect_to '/dashboard'
   end
 
@@ -56,7 +56,7 @@ private
     params.require(:restaurant).permit(:title, :description, :id, :status)
   end
 
-  def pending_restaurant
+  def pending_restaurant_job
     creator_id = current_restaurant.creator_id
     current_restaurant.jobs.first
   end
