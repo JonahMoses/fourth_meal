@@ -3,6 +3,7 @@ class Restaurant < ActiveRecord::Base
   validates :title, uniqueness: true
   has_many  :items
   has_many  :orders
+  has_many  :jobs
 
   after_create :set_defaults
 
@@ -16,6 +17,11 @@ class Restaurant < ActiveRecord::Base
 
   def set_defaults
     self.update(slug: title.parameterize)
+  end
+
+  def pending_restaurant
+    creator_id = current_restaurant.creator_id
+    current_restaurant.jobs.where(user_id == creator_id)
   end
 
 end

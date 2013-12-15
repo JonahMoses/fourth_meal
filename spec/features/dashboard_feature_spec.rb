@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe "dashboard controller" do 
+describe "dashboard controller" do
 
-  it "global admin dashboard shows restaurants" do 
+  it "global admin dashboard shows restaurants" do
     register_admin_user
     FactoryGirl.create(:restaurant)
     visit '/dashboard'
@@ -14,5 +14,6 @@ describe "dashboard controller" do
     click_link_or_button("Approve")
     expect(page).to have_content("approved")
   end
+
 
 end

@@ -1,0 +1,21 @@
+Restaurant Details
+
+
+<dl class="dl-horizontal">
+  <dt><strong>Title:</strong></dt>
+  <dd><%= current_restaurant.title %></dd>
+
+  <dt><strong>Description:</strong></dt>
+  <dd><%= current_restaurant.description %></dd>
+
+  <dt><strong>Status:</strong></dt>
+  <dd><%= current_restaurant.status %></dd>
+  <% current_restaurant.jobs.each do |job| %>
+    <dt><strong>Role:</strong></dt>
+    <dd><%= job.role %></dd>
+    <dt><strong>User ID:</strong></dt>
+    <dd><%= job.user_id %></dd>
+    <dt><strong>Creator Email:</strong></dt>
+    <dd><%= User.where(id: job.user_id).first.email %></dd>
+  <% end %>
+</dl>
