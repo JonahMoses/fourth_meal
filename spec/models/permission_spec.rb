@@ -60,11 +60,6 @@ describe Permission do
     subject { Permission.new(User.new(:admin => false)) }
     it { should allow_access("items", "index") }
     it { should allow_access("items", "show") }
-    it { should_not allow_access("items", "new") }
-    it { should_not allow_access("items", "create") }
-    it { should_not allow_access("items", "edit") }
-    it { should_not allow_access("items", "update") }
-    it { should_not allow_access("items", "destroy") }
 
     it { should allow_access("sessions", "new") }
     it { should allow_access("sessions", "create") }

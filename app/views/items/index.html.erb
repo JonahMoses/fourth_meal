@@ -11,6 +11,8 @@
     <% end %>
 </div>
 
-<% if allow? "items", "create" %>
+<% if current_user.admin? || current_user.restaurant_admin? %>
+
   <%= link_to "New Item", new_item_path, :class => 'btn btn-primary' %>
+
 <% end %>

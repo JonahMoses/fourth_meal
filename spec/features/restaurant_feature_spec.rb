@@ -132,10 +132,12 @@ describe RestaurantsController do
       fill_in 'password', :with => "foobarbaz"
       click_button "Log In"
       expect(page).to have_content("My Restaurants")
+      click_link_or_button("My Restaurants")
+      expect(page).to have_content("Tito's")
+      expect(page).to have_content("Jorge's favorite place")
+    end
 
-      end
-
-      it 'should email user when new restaurant git approved' do
+    it 'should email user when new restaurant git approved' do
       user = User.where(:email => "user@example.com").first_or_create(
                :email => "user@example.com",
                :full_name => "bo jangles",
@@ -166,6 +168,6 @@ describe RestaurantsController do
       click_on "Approve"
       expect(ActionMailer::Base.deliveries.length).to eq(2)
       # 2 emails as user gets email when submitting email as well
-      end
+    end
 
 end

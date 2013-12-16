@@ -6,7 +6,7 @@
     <%= render partial: 'items/item', collection: @restaurant.items %>
   </div>
 
-  <% if allow? "items", "create" %>
+  <% if current_user.admin? || current_user.id == current_restaurant.creator_id %>
     <%= link_to "New Item", new_restaurant_item_path, :class => 'btn btn-primary' %>
   <% end %>
 </div>
