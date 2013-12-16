@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><b><%=link_to "FoodFight.com", @url2 %></b></h1>
+    <b>Dear <%= @platform_admin.full_name %>, </b>
+    <p>
+      A new restaurant, <%= @restaurant.title %>, has been submitted by <%= @user.email %> for review.
+    </p>
+    <p>
+      Restaurant title is: <%= @restaurant.title %>.<br/>
+      Restaurant description is: <%= @restaurant.description %>.
+    </p>
+    <p>Thanks for your work and have a nice day!</p>
+  </body>
+</html>

@@ -81,6 +81,19 @@ class User < ActiveRecord::Base
     self.password_hash?
   end
 
+  def restaurant_admin?
+    unless Job.where(user_id: self.id).empty?
+      Job.where(user_id: self.id)
+      job.role == "Admin"
+    end
+  end
+
+  def my_restaurants
+    unless Restaurant.where(creator_id: self.id).empty?
+      Restaurant.where(creator_id: self.id)
+    end
+  end
+
 private
 
   def downcase_email

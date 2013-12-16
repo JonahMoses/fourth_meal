@@ -29,6 +29,11 @@ private
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def platform_admin
+    @platform_admin ||= User.where(admin: true).last
+    binding.pry
+  end
+
   def all_restaurants
     @restaurants ||= Restaurant.all
   end
@@ -46,5 +51,6 @@ private
       redirect_to "/", alert: "Not authorized"
     end
   end
+
 
 end

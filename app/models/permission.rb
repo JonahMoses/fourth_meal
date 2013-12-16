@@ -3,9 +3,10 @@ class Permission < Struct.new(:user)
   def allow?(controller, action)
     return true if anyone_access(controller, action)
     if user
+      return true if user.admin?
+      return true if restuarant_admin_access(controller, action)
       return true if logged_in_user_access(controller, action)
       # All action/controller combinations do not have permission, then ask if user is admin:
-      return true if user.admin?
     end
     false
   end
@@ -24,6 +25,11 @@ class Permission < Struct.new(:user)
     return true if controller == "orders" && action.in?(%w[purchase confirmation])
     return true if controller == "users" && action.in?(%w[edit update])
     return true if controller == "items" && action.in?(%w[index show])
+    return true if controller == "restaurants" && action.in?(%w[create])
+  end
+
+  def restuarant_admin_access(controller, action)
+    return true if controller == "items" && action.in?(%w[new create])
   end
 
 

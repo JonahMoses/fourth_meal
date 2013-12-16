@@ -9,11 +9,13 @@ class RestaurantsController < ApplicationController
   def create
     @restaurant = Restaurant.new(restaurant_params)
     @user = current_user
+    @platform_admin = platform_admin
     @restaurant.creator_id = @user.id
     respond_to do |format|
       if @restaurant.save
         create_job(@user.id, @restaurant.id)
         UserMailer.new_restaurant_submission_confirmation(@user, @restaurant).deliver
+        UserMailer.new_restaurant_submission_notification(@platform_admin, @user, @restaurant).deliver
         format.html { redirect_to '/', notice: 'Restaurant is submitted and pending approval' }
       else
         format.html { render action: 'new' }
@@ -24,10 +26,6 @@ class RestaurantsController < ApplicationController
   def create_job(user_id, restaurant_id)
     Job.create(user_id: user_id, restaurant_id: restaurant_id)
   end
-
-  #create job when restaurant is created
-  # job user_id = restuarant creator_id
-  #job restaurant id = @restaurant_id
 
   def new
     @restaurant = Restaurant.new
@@ -42,7 +40,12 @@ class RestaurantsController < ApplicationController
 
   end
 
+  def admin_restaurants
+    @restaurants = current_user.my_restaurants
+  end
+
   def approve
+    @user = User.where(id: current_restaurant.creator_id).first
     current_restaurant.approve
     # Locate the creator_id
     # locate user_id from creator_id
@@ -50,7 +53,8 @@ class RestaurantsController < ApplicationController
       # user_id & restuarant_id
     # change role from default "default role"
       # to "Admin"
-    pending_restaurant.update(role: "Admin")
+    pending_restaurant_job.update(role: "Admin")
+    UserMailer.new_restaurant_approval(@user, @restaurant).deliver
     redirect_to '/dashboard'
   end
 
@@ -60,7 +64,7 @@ private
     params.require(:restaurant).permit(:title, :description, :id, :status)
   end
 
-  def pending_restaurant
+  def pending_restaurant_job
     creator_id = current_restaurant.creator_id
     current_restaurant.jobs.first
   end

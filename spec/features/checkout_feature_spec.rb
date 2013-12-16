@@ -4,7 +4,7 @@ describe "the checkout process" do
 
   it "updates order and directs to confirmation page" do
     add_item_to_order
-    click_on 'View Items'
+    click_on 'View Items in Cart'
     expect(page).to have_content 'Your Order'
   end
 
