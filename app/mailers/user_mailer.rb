@@ -14,7 +14,8 @@ class UserMailer < ActionMailer::Base
     @order = Order.find(order_id)
     @user = @order.user
     @url2 = 'http://fourth-meal.herokuapp.com'
-    mail(to: @user.email, subject: "Thank you for your order!")
+    mail(to: @user.email,
+           subject: "Thank you for your order!")
   end
 
   def new_restaurant_submission_confirmation(user, restaurant)

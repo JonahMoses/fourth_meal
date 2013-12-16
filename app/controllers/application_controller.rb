@@ -31,7 +31,6 @@ private
 
   def platform_admin
     @platform_admin ||= User.where(admin: true).last
-    binding.pry
   end
 
   def all_restaurants

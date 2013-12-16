@@ -51,13 +51,15 @@ describe RestaurantsController do
 
   describe 'create a new restaurant' do
     it 'should have a form for user to fill out with restaurant info' do
+      register_admin_user
+      click_on 'Log Out'
       register_user
       visit restaurants_path
       click_button 'Create New Restaurant'
       expect(page).to have_content 'New Restaurant Form'
       expect(page).to have_content 'Restaurant name'
       expect(page).to have_content 'Restaurant description'
-      fill_in "restaurant_title", with: "Tito's1"
+      fill_in "restaurant_title", with: "Tito's0"
       fill_in "restaurant_description", with: "Jorge's favorite place"
       click_button('Create Restaurant')
       expect(page).to have_content "Restaurant is submitted and pending approval"
@@ -87,6 +89,8 @@ describe RestaurantsController do
     end
 
     it "creator id should be current user id" do
+      register_admin_user
+      click_on 'Log Out'
       user = User.where(:email => "user@example.com").first_or_create(
                :email => "user@example.com",
                :full_name => "bo jangles",
@@ -119,6 +123,8 @@ describe RestaurantsController do
     end
 
     it 'should show My Restaurants on users Nav bar when approved' do
+      register_admin_user
+      click_on 'Log Out'
       user = User.where(:email => "user@example.com").first_or_create(
                :email => "user@example.com",
                :full_name => "bo jangles",
@@ -160,6 +166,8 @@ describe RestaurantsController do
     end
 
     it 'should email user when new restaurant is approved' do
+      register_admin_user
+      click_on 'Log Out'
       user = User.where(:email => "user@example.com").first_or_create(
                :email => "user@example.com",
                :full_name => "bo jangles",
