@@ -6,6 +6,7 @@ Foodfight::Application.routes.draw do
   get "/guest" => "orders#guest_purchase", as: :guest_purchase
   get "dashboard" => "dashboard#index", :as => 'dashboard'
   put "/:slug/approve" => "restaurants#approve", :as => :approve_restaurant
+  
 
   resources :categories
 
@@ -30,18 +31,22 @@ Foodfight::Application.routes.draw do
   resources :sessions
   get "/code" => redirect("https://github.com/JonahMoses/dinner_dash")
   resources :item_categories
-  resources :items, except: [:index, :show, :new]
+  resources :items, except: [:index, :show, :new, :create]
+  post ":slug/items",               to: "items#create",                   as: :create_item
+  
+
 
   resources :restaurants
-  get ":slug",                      to: "restaurants#show",     as: :restaurant_name
-  post ":slug/order/:item_id",      to: "order_items#create",   as: :create_restaurant_order
-  get ":slug/order/:id",            to: "orders#show",          as: :restaurant_order
-  delete ":slug/order/:id",         to: "orders#destroy",       as: :destroy_restaurant_order
-  post ":slug/orders/:id/purchase", to: "orders#purchase",      as: :purchase_order
-  get ":slug/details",              to: "restaurants#details",  as: :restaurant_details
-  get ":slug/:id",                  to: "items#show",           as: :restaurant_item
-  get ":slug/items/new",            to: "items#new",            as: :new_restaurant_item
-
+  get "/my_restaurants",            to: "restaurants#admin_restaurants",  as: :admin_restaurants
+  get ":slug",                      to: "restaurants#show",               as: :restaurant_name
+  post ":slug/order/:item_id",      to: "order_items#create",             as: :create_restaurant_order
+  get ":slug/order/:id",            to: "orders#show",                    as: :restaurant_order
+  delete ":slug/order/:id",         to: "orders#destroy",                 as: :destroy_restaurant_order
+  post ":slug/orders/:id/purchase", to: "orders#purchase",                as: :purchase_order
+  get ":slug/details",              to: "restaurants#details",            as: :restaurant_details
+  get ":slug/:id",                  to: "items#show",                     as: :restaurant_item
+  get ":slug/items/new",            to: "items#new",                      as: :new_restaurant_item
+  
 
   mount Sidekiq::Web, at: '/sidekiq', :constraints => AdminConstraint.new
 

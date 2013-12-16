@@ -38,6 +38,10 @@ class RestaurantsController < ApplicationController
 
   end
 
+  def admin_restaurants
+    @restaurants = current_user.my_restaurants
+  end
+
   def approve
     current_restaurant.approve
     # Locate the creator_id
