@@ -8,4 +8,9 @@
   <dt><strong>Status:</strong></dt>
   <dd><%= restaurant.status %></dd>
 </dl>
+
+<%= link_to 'View Menu', restaurant.slug, class: "item-show btn btn-default", id: "btn-view-menu-#{restaurant.id}" %>
+
 <% end %>
+
+

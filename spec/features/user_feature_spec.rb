@@ -61,7 +61,7 @@ end
 
 describe "member" do
 
-  it "cannot edit item" do
+  xit "cannot edit item" do
     item = make_an_item_via_db
     register_user
     visit edit_item_path(item)

@@ -29,7 +29,7 @@ class Permission < Struct.new(:user)
   end
 
   def restuarant_admin_access(controller, action)
-    return true if controller == "items" && action.in?(%w[new create])
+    return true if controller == "items" && action.in?(%w[new create destroy update edit])
   end
 
 

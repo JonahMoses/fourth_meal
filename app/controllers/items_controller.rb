@@ -14,6 +14,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @current_restaurant = Restaurant.where(id: @item.restaurant_id).first
   end
 
   def create
@@ -33,9 +34,10 @@ class ItemsController < ApplicationController
   end
 
   def update
+    @restaurant_id = @item.restaurant_id
     respond_to do |format|
       if @item.update(item_params)
-        @item.categories = categories(params[:item][:item_categories])
+        @item.update(restaurant_id: @restaurant_id)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
       else
         format.html { render action: 'edit' }
@@ -45,8 +47,9 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
+    restaurant = Restaurant.where(id: @item.restaurant_id).first
     respond_to do |format|
-      format.html { redirect_to items_url }
+      format.html { redirect_to "/#{restaurant.slug}", notice: "#{@item.title} was deleted from menu" }
     end
   end
 
