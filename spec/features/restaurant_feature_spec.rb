@@ -135,7 +135,7 @@ describe RestaurantsController do
 
       end
 
-      it 'should email user when new restaurant approved' do
+      it 'should email user when new restaurant git approved' do
       user = User.where(:email => "user@example.com").first_or_create(
                :email => "user@example.com",
                :full_name => "bo jangles",
