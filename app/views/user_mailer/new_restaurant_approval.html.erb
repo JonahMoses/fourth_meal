@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><b><%=link_to "FoodFight.com", @url2 %></b></h1>
+    <b>Dear <%= @user.full_name %>, </b>
+    <p>
+      Thank you for submitting your new restaurant to FoodFight!
+    </p>
+    <p> <%= @restaurant.title %> has been approved!</p>
+    <p>
+      Your restaurant title is: <%= @restaurant.title %>.<br/>
+      Your restaurant description is: <%= @restaurant.description %>.
+    </p>
+    <p>
+      Your restaurant has been reviewed and meets FoodFights standards. Please log into your account at <%=link_to "FoodFight.com", @url2 %> and click on the "My Restaurants" link in the navigation bar. You can then fill out the forms to add items to your restaurant.  Once you are ready to begin accepting orders simply click the "Activate Restaurant" button to "open" your restaurant.
+    </p>
+    <p>Thanks for your submission and have a great day!</p>
+  </body>
+</html>
