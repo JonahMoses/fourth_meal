@@ -51,7 +51,7 @@ class OrdersController < ApplicationController
   def purchase
     if @order.purchaseable?
       @order.purchase!
-      UserMailer.order_confirmation(@current_user, @order).deliver
+      UserMailer.order_confirmation(@order.id).deliver
       session[:order_id] = nil
       redirect_to confirmation_order_path(@order)
     elsif @order.user.guest

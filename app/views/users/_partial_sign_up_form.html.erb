@@ -1,0 +1,80 @@
+<%= form_for @user, html: {class: "update_guest_to_user"} do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :full_name %><br />
+    <%= f.text_field :full_name %>
+  </p>
+  <p>
+    <%= f.label :display_name %><br />
+    <%= f.text_field :display_name %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.label :credit_card_number %><br />
+    <%= f.text_field :credit_card_number %>
+  </p>
+<strong>Billing Info:</strong>
+  <p>
+    <%= f.label :street %><br />
+    <%= f.text_field :billing_street %>
+  </p>
+  <p>
+    <%= f.label :apt %><br />
+    <%= f.text_field :billing_apt %>
+  </p>
+  <p>
+    <%= f.label :city %><br />
+    <%= f.text_field :billing_city %>
+  </p>
+  <p>
+    <%= f.label :state %><br />
+    <%= f.text_field :billing_state %>
+  </p>
+  <p>
+    <%= f.label :zip_code %><br />
+    <%= f.text_field :billing_zip_code %>
+  </p>
+<strong>Shipping Info:</strong>
+  <p>
+    <%= f.label :street %><br />
+    <%= f.text_field :shipping_street %>
+  </p>
+  <p>
+    <%= f.label :apt %><br />
+    <%= f.text_field :shipping_apt %>
+  </p>
+  <p>
+    <%= f.label :city %><br />
+    <%= f.text_field :shipping_city %>
+  </p>
+  <p>
+    <%= f.label :state %><br />
+    <%= f.text_field :shipping_state %>
+  </p>
+  <p>
+    <%= f.label :zip_code %><br />
+    <%= f.text_field :shipping_zip_code %>
+  </p>
+  <p class="button"><%= f.submit %></p>
+<% end %>
