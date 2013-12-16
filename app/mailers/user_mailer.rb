@@ -33,4 +33,12 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email,
           subject: 'Thank you for submitting a New Restaurant to FoodFight')
   end
+
+  def new_restaurant_approval(user, restaurant)
+    @user = user
+    @restaurant = restaurant
+    @url2 = 'http://fourth-meal.herokuapp.com'
+    mail(to: @user.email,
+          subject: "Your New Restaurant submission has been approved for FoodFight")
+  end
 end

@@ -43,6 +43,7 @@ class RestaurantsController < ApplicationController
   end
 
   def approve
+    @user = User.where(id: current_restaurant.creator_id).first
     current_restaurant.approve
     # Locate the creator_id
     # locate user_id from creator_id
@@ -51,6 +52,7 @@ class RestaurantsController < ApplicationController
     # change role from default "default role"
       # to "Admin"
     pending_restaurant_job.update(role: "Admin")
+    UserMailer.new_restaurant_approval(@user, @restaurant).deliver
     redirect_to '/dashboard'
   end
 

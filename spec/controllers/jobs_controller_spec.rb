@@ -1,4 +1,4 @@
-require 'spec_helper'
+# require 'spec_helper'
 
 # describe JobsController do
 
@@ -7,8 +7,8 @@ require 'spec_helper'
 #     expect(job.role).to eq "Creator"
 #   end
 
-  # it "changes the default role to admin" do
-  #   Job.create(role:)
-  # end
+#   # it "changes the default role to admin" do
+#   #   Job.create(role:)
+#   # end
 
 # end
