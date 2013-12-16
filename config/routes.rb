@@ -9,6 +9,8 @@ Foodfight::Application.routes.draw do
   
 
   resources :categories
+  
+  resources :regions
 
   root :to => "restaurants#index"
 

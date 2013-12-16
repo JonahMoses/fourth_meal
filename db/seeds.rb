@@ -8,6 +8,7 @@ class Seeder
     end
     create_restaurants
     create_users
+    create_regions
   end
 
 private
@@ -37,12 +38,33 @@ private
   def create_restaurants
     restaurant_names.each do |restaurant_name|
       restaurant = Restaurant.create(
-                         title: restaurant_name,
-                         description: Faker::Lorem.words(25).join(" "),
-                         status: "active"
+                          title: restaurant_name,
+                          description: Faker::Lorem.words(25).join(" "),
+                          status: "active",
+                          region_id: sample_region_ids.sample
                         )
       puts "Created restaurant: #{restaurant.title}"
     end
+  end
+
+  def create_regions
+    region_names.each do |region_name|
+      region = Region.create(
+        name: region_name)
+    end
+  end
+
+  def region_names
+    [ "Boston",
+      "NYC",
+      "Chicago",
+      "Denver", 
+      "LA"
+    ]
+  end
+
+  def sample_region_ids
+    [1, 2, 3, 4, 5]
   end
 
   def restaurant_names

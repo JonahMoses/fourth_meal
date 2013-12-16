@@ -18,8 +18,7 @@
     </div>
     <div id="view-menu">
 
-      <%= link_to 'View Menu', restaurant.slug, class: "item-show btn btn-default", id: "btn-view-menu-#{restaurant.id}" %>
-
+      <%= link_to 'View Menu', restaurant_name_path(restaurant.slug), class: "item-show btn btn-default", id: "btn-view-menu-#{restaurant.id}" %>
     </div>
   </div>
 </div>

@@ -4,6 +4,7 @@ class Restaurant < ActiveRecord::Base
   has_many  :items
   has_many  :orders
   has_many  :jobs
+  belongs_to :region
 
   after_create :set_defaults
 

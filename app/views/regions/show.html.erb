@@ -1,0 +1,14 @@
+
+<%- model_class = Restaurant -%>
+<div class="jumbotron center-text">
+  <h1>WELCOME TO FOOD FIGHT!</h1>
+  <div class="container">
+    <%= render partial: 'restaurants/restaurant', collection: @restaurants %>
+  </div>
+</div>
+<div class="col-lg-12">
+  <% if @current_user && @current_user.authenticated? %>
+    <%= render 'layouts/footer' %>
+  <% end %>
+</div>
+

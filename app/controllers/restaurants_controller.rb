@@ -4,6 +4,7 @@ class RestaurantsController < ApplicationController
   def index
     @restaurants = Restaurant.where(:status => "active")
     @current_user = current_user
+    @regions = Region.all
   end
 
   def create

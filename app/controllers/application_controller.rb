@@ -29,8 +29,13 @@ private
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def current_region
+    @current_region ||= Region.find_by(id: params[:id])
+  end
+
   def all_restaurants
     @restaurants ||= Restaurant.all
+    @regions = Region.all
   end
 
   def create_and_log_in_guest_user
