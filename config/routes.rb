@@ -29,7 +29,6 @@ Foodfight::Application.routes.draw do
   end
 
   resources :sessions
-  get "/code" => redirect("https://github.com/JonahMoses/dinner_dash")
   resources :item_categories
   resources :items, except: [:index, :show, :new, :create]
   post ":slug/items",               to: "items#create",                   as: :create_item
