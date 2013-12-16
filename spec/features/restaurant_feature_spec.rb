@@ -64,6 +64,28 @@ describe RestaurantsController do
     end
   end
 
+    it 'should email Platform admin when new restaurant is submitted' do
+      register_admin_user
+      click_on 'Log Out'
+      user = User.where(:email => "user@example.com").first_or_create(
+               :email => "user@example.com",
+               :full_name => "bo jangles",
+               :display_name => "bj",
+               :password => "foobarbaz",
+               :password_confirmation => "foobarbaz")
+      visit '/log_in'
+      fill_in 'email',    :with => "user@example.com"
+      fill_in 'password', :with => "foobarbaz"
+      click_button 'Log In'
+      visit restaurants_path
+      click_button 'Create New Restaurant'
+      fill_in "restaurant_title", with: "Tito's5"
+      fill_in "restaurant_description", with: "Jorge's favorite place"
+      click_button('Create Restaurant')
+      expect(ActionMailer::Base.deliveries.length).to eq(2)
+      # 2 emails as user AND Platform admin gets email when submitting
+    end
+
     it "creator id should be current user id" do
       user = User.where(:email => "user@example.com").first_or_create(
                :email => "user@example.com",
@@ -137,7 +159,7 @@ describe RestaurantsController do
       expect(page).to have_content("Jorge's favorite place")
     end
 
-    it 'should email user when new restaurant git approved' do
+    it 'should email user when new restaurant is approved' do
       user = User.where(:email => "user@example.com").first_or_create(
                :email => "user@example.com",
                :full_name => "bo jangles",
@@ -166,8 +188,7 @@ describe RestaurantsController do
       expect(page).to have_content("Logged in")
       visit "/dashboard"
       click_on "Approve"
-      expect(ActionMailer::Base.deliveries.length).to eq(2)
-      # 2 emails as user gets email when submitting email as well
+      expect(ActionMailer::Base.deliveries.length).to eq(3)
+      # 3 emails as user and platform admin gets email when submitting email as well
     end
-
 end
