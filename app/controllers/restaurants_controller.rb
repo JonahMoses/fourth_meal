@@ -25,10 +25,6 @@ class RestaurantsController < ApplicationController
     Job.create(user_id: user_id, restaurant_id: restaurant_id)
   end
 
-  #create job when restaurant is created
-  # job user_id = restuarant creator_id
-  #job restaurant id = @restaurant_id
-
   def new
     @restaurant = Restaurant.new
   end
@@ -40,6 +36,10 @@ class RestaurantsController < ApplicationController
 
   def details
 
+  end
+
+  def admin_restaurants
+    @restaurants = current_user.my_restaurants
   end
 
   def approve

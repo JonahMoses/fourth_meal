@@ -82,11 +82,15 @@ class User < ActiveRecord::Base
   end
 
   def restaurant_admin?
-    # is current user_id == any jobs user ids
-    # is that jobs role admin?
     unless Job.where(user_id: self.id).empty?
       Job.where(user_id: self.id)
       job.role == "Admin"
+    end
+  end
+
+  def my_restaurants
+    unless Restaurant.where(creator_id: self.id).empty?
+      Restaurant.where(creator_id: self.id)
     end
   end
 
