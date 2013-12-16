@@ -66,4 +66,25 @@ describe UserMailer do
     end
   end
 
+  describe "user's new restaurant approval" do
+    let(:user) { User.create(email: "me@example.com",
+                        full_name: "Antony",
+                        password: "hellothere",
+                        password_confirmation: "hellothere") }
+    let(:restaurant) { Restaurant.create(title: 'BilyBob', description: "Ur Fine Dinin Road Kil Caffe!") }
+    let(:mail) { UserMailer.new_restaurant_approval(user, restaurant)}
+
+    it "renders the headers" do
+      mail.subject.should eq("Your New Restaurant submission has been approved for FoodFight")
+      mail.to.should eq(["me@example.com"])
+      mail.from.should eq(["foodfightinfo@gmail.com"])
+    end
+
+    it "renders the body" do
+      mail.body.encoded.should match("BilyBob has been approved!")
+      mail.body.encoded.should match("Dear Antony,")
+    end
+  end
+
+
 end
