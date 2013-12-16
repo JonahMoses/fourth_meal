@@ -58,6 +58,11 @@ class RestaurantsController < ApplicationController
     redirect_to '/dashboard'
   end
 
+  def reject
+    current_restaurant.reject
+    redirect_to '/dashboard'
+  end
+
 private
 
   def restaurant_params

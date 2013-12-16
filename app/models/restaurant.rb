@@ -15,6 +15,10 @@ class Restaurant < ActiveRecord::Base
     self.update(:status => "approved")
   end
 
+  def reject
+    self.update(:status => "rejected")
+  end
+
   def set_defaults
     self.update(slug: title.parameterize)
   end
