@@ -1,44 +1,43 @@
-# katrina_user = User.create(
-#   email: "demo+katrina@jumpstartlab.com",
-#   full_name: "Katrina Owen",
-#   display_name: "kytrinyx",
-#   password: "password",
-#   password_confirmation: "password",
-#   admin: "true"
-# )
+katrina_user = User.create(
+  email: "demo+katrina@jumpstartlab.com",
+  full_name: "Katrina Owen",
+  display_name: "kytrinyx",
+  password: "password",
+  password_confirmation: "password",
+  admin: "true"
+)
 
-# jeff_user = User.create(
-#   email: "demo+jeff@jumpstartlab.com",
-#   full_name: "Jeff Casimir",
-#   display_name: "j3",
-#   password: "password",
-#   password_confirmation: "password",
-#   admin: "true"
-# )
+jeff_user = User.create(
+  email: "demo+jeff@jumpstartlab.com",
+  full_name: "Jeff Casimir",
+  display_name: "j3",
+  password: "password",
+  password_confirmation: "password",
+  admin: "true"
+)
 
-# platform_admin_1 = User.create(
-#   email: "jonahkmoses+admin1@gmail.com",
-#   full_name: "admin",
-#   display_name: "admin",
-#   password: "password",
-#   password_confirmation: "password",
-#   admin: "true"
-# )
+platform_admin_1 = User.create(
+  email: "jonahkmoses+admin1@gmail.com",
+  full_name: "admin",
+  display_name: "admin",
+  password: "password",
+  password_confirmation: "password",
+  admin: "true"
+)
 
-#  platform_admin_2 = User.create(
-#   email: "jonahkmoses+admin2@gmail.com",
-#   full_name: "admin",
-#   display_name: "admin",
-#   password: "password",
-#   password_confirmation: "password",
-#   admin: "true"
-# )
+ platform_admin_2 = User.create(
+  email: "jonahkmoses+admin2@gmail.com",
+  full_name: "admin",
+  display_name: "admin",
+  password: "password",
+  password_confirmation: "password",
+  admin: "true"
+)
 
 # regions = %w[ Akron Albuquerque Anaheim Arlington Atlanta Aurora Austin Bakersfield Dallas Detroit Durham Fayetteville Fontana Fremont Fresno Garland Glendale Greensboro Henderson Hialeah Irvine Laredo Lincoln Lubbock Madison Memphis Mesa Miami Milwaukee Minneapolis Modesto Montgomery Newark Oakland Omaha Orlando Oxnard Phoenix Pittsburgh Plano Portland Raleigh Reno Riverside Seattle ]
 # regions.each do |region|
 #   Region.create(name: region)
 # end
-
 
 class Seeder
 
@@ -153,76 +152,6 @@ private
     end
 
     item.save
-  end
-
-  def create_user_1
-    user = User.create(
-      email: "demo+franklin@jumpstartlab.com",
-      full_name: "Franklin Webber",
-      password: "password",
-      password_confirmation: "password"
-    )
-   user_validation(user)
-  end
-
-  def create_user_2
-    user = User.create(
-      email: "demo+jeff@jumpstartlab.com",
-      full_name: "Jeff",
-      display_name: "j3",
-      password: "password",
-      password_confirmation: "password"
-    )
-    user_validation(user)
-  end
-
-  def create_user_3
-    user = User.create(
-      email: "demo+katrina@jumpstartlab.com",
-      full_name: "Katrina Owen",
-      display_name: "kytrinyx",
-      password: "password",
-      password_confirmation: "password",
-      admin: "true"
-    )
-    user_validation(user)
-  end
-
-  def create_admin_user
-    user = User.create(
-      email: "admin@example.com",
-      full_name: "admin",
-      display_name: "admin",
-      password: "password",
-      password_confirmation: "password"
-    )
-    if user.valid?
-      puts "Created user #{user.full_name}"
-      user.admin = true
-      user.save
-      if user.admin
-        puts "Set #{user.email} to be an admin"
-      else
-        puts "Failed to set #{user.email} to be an admin"
-      end
-    else
-      puts "Not valid user: #{user.full_name}"
-    end
-  end
-
-  def user_validation(user)
-    if user.valid?
-      puts "Created user #{user.full_name}"
-    else
-      puts "Not valid user: #{user.full_name}"
-    end
-  end
-
-  def create_users
-    create_user_1
-    create_user_2
-    create_user_3
-    create_admin_user
   end
 
   def create_orders
