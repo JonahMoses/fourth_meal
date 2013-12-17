@@ -4,19 +4,41 @@ class RestaurantsController < ApplicationController
   def index
     @restaurants = Restaurant.where(:status => "active")
     @current_user = current_user
+    @regions = Region.all
   end
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
     @user = current_user
+    @platform_admin = platform_admin
     @restaurant.creator_id = @user.id
     respond_to do |format|
       if @restaurant.save
         create_job(@user.id, @restaurant.id)
         UserMailer.new_restaurant_submission_confirmation(@user, @restaurant).deliver
+        UserMailer.new_restaurant_submission_notification(@platform_admin, @user, @restaurant).deliver
         format.html { redirect_to '/', notice: 'Restaurant is submitted and pending approval' }
       else
         format.html { render action: 'new' }
+      end
+    end
+  end
+
+  def update
+    @restaurant = Restaurant.where(id: params[:id]).first
+    @user = User.where(id: @restaurant.creator_id).first
+    respond_to do |format|
+      if @restaurant.update(restaurant_params)
+        if @restaurant.status == "approved" && !@restaurant.jobs.empty?
+          @restaurant.jobs.first.update(role: "Admin")
+          job = Job.where(restaurant_id: @restaurant.id).first
+          @user.update(job_id: job.id)
+          UserMailer.new_restaurant_approval(@user, @restaurant).deliver
+          format.html { redirect_to :back }
+        end
+          format.html { redirect_to :back }
+      else
+        format.html { render :back }
       end
     end
   end
@@ -27,6 +49,7 @@ class RestaurantsController < ApplicationController
 
   def new
     @restaurant = Restaurant.new
+    @regions = Region.all
   end
 
   def show
@@ -56,10 +79,21 @@ class RestaurantsController < ApplicationController
     redirect_to '/dashboard'
   end
 
+  def activate
+    current_restaurant.activate
+    redirect_to :back
+  end
+
+
+  def reject
+    current_restaurant.reject
+    redirect_to '/dashboard'
+  end
+
 private
 
   def restaurant_params
-    params.require(:restaurant).permit(:title, :description, :id, :status)
+    params.require(:restaurant).permit(:title, :description, :id, :status, :region_id)
   end
 
   def pending_restaurant_job

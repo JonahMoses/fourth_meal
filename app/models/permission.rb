@@ -19,6 +19,7 @@ class Permission < Struct.new(:user)
     return true if controller == "orders" && action.in?(%w[new create destroy show index guest_purchase guest_confirm_purchase])
     return true if controller == "users" && action.in?(%w[new create show purchase])
     return true if controller == "items" && action.in?(%w[index show])
+    return true if controller == "regions"
   end
 
   def logged_in_user_access(controller, action)
