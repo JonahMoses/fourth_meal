@@ -9,7 +9,7 @@ Foodfight::Application.routes.draw do
   put "/:slug/reject" => "restaurants#reject", :as => :reject_restaurant
 
   resources :categories
-  
+
   resources :regions
 
   root :to => "restaurants#index"

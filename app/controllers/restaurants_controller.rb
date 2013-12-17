@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
   before_action :create_and_log_in_guest_user, only: [:show]
 
+
   def index
     @restaurants = Restaurant.where(:status => "active")
     @current_user = current_user
@@ -40,6 +41,14 @@ class RestaurantsController < ApplicationController
       else
         format.html { render :back }
       end
+    end
+  end
+
+  def destroy
+    @restaurant = Restaurant.where(id: params[:id]).first
+    @restaurant.destroy
+    respond_to do |format|
+      format.html { redirect_to dashboard_path, notice: "#{@restaurant.title} was deleted from FoodFight" }
     end
   end
 
