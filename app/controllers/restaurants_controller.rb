@@ -3,7 +3,7 @@ class RestaurantsController < ApplicationController
 
 
   def index
-    @restaurants = Restaurant.where(:status => "active")
+    @restaurants = Restaurant.where(status: "active").page(params[:page]).per(6)
     @current_user = current_user
     @regions = Region.all
   end
