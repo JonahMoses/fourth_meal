@@ -36,15 +36,13 @@ class OrderItemsController < ApplicationController
 
   def update
     @order_item = OrderItem.find_by(id: params[:item_id])
-    respond_to do |format|
       if order_quantity_set_to_zero?
         @order_item.destroy
-        format.html { redirect_to :back, notice: 'Item was removed from the order.' }
+        redirect_to :back, notice: 'Item was removed from the order.'
       else
         @order_item.update(quantity: params[:order_item][:quantity].to_i)
-        format.html { redirect_to :back, notice: 'Order item was successuflly updated.' }
+        redirect_to :back, notice: 'Order item was successuflly updated.' 
       end
-    end
   end
 
   def order_quantity_set_to_zero?
@@ -53,9 +51,7 @@ class OrderItemsController < ApplicationController
 
   def destroy
     @order_item.destroy
-    respond_to do |format|
-      format.html { redirect_to :back }
-    end
+    redirect_to :back 
   end
 
 private
