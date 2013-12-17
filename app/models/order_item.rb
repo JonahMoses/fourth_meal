@@ -7,6 +7,10 @@ class OrderItem < ActiveRecord::Base
     quantity*item.price
   end
 
+  def increment(additional = 1)
+    self.quantity += additional
+    self.save!
+  end
 
   def active?
     item.active

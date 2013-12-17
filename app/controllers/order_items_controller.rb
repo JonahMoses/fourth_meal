@@ -19,19 +19,19 @@ class OrderItemsController < ApplicationController
   end
 
   def create
+    verify_item_is_active(params[:item_id])
     @order_item = @order.order_items.find_or_initialize_by(item_id: params[:item_id])
-    if @order_item.active?
-      @order_item.quantity += 1
-      respond_to do |format|
-        if @order_item.save
-          format.html { redirect_to "/#{current_restaurant.slug}", notice: 'Successfully added product to cart.' }
-        else
-          format.html { render action: 'new' }
-        end
-      end
-    else
-      redirect_to orders_path, notice: 'Item currently is not actively for sale.'
+    @order_item.increment
+    redirect_to "/#{current_restaurant.slug}",
+                notice: 'Successfully added product to cart.'
+  end
+
+  def verify_item_is_active(item_id)
+    item = Item.find(item_id)
+    unless item.active?
+      redirect_to orders_path, notice: 'Item is not currently available.'
     end
+    return item
   end
 
   def update
