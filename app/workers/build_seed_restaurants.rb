@@ -10,7 +10,7 @@ class BuildSeedRestaurants
         status: "active",
         slug: name.parameterize,
         description: description,
-        region_id: rand[1...50])
+        region_id: rand(1..50))
       2.times do |u|
         user = User.create(
           email: "#{u}"+Faker::Internet.email,

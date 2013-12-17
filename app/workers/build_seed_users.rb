@@ -3,7 +3,7 @@ class BuildSeedUsers
 
   def perform
     100.times do |p|
-      email                 = (p + Faker::Internet.email)
+      email                 = "#{p}" + Faker::Internet.email
       full_name             = Faker::Name.name
       password              = "password"
       password_confirmation = "password"
@@ -12,7 +12,7 @@ class BuildSeedUsers
       billing_apt           = "G6"
       billing_city          = "Denver"
       billing_state         = "CO"
-      billing_zip_code      = "80204"
+      billing_zip_code      = 80204
       user = User.create(
         email: email,
         full_name: full_name,

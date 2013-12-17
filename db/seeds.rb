@@ -39,7 +39,7 @@
 #       restaurant = Restaurant.create(
 #                          title: restaurant_name,
 #                          description: Faker::Lorem.words(25).join(" "),
-#                          status: "active"
+#                          status: "active",
 #                         )
 #       puts "Created restaurant: #{restaurant.title}"
 #     end
