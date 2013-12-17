@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Order has been deleted'}
+      format.html { redirect_to :back, notice: 'Order has been deleted'}
     end
   end
 

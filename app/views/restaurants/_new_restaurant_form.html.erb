@@ -13,6 +13,9 @@
       <%= f.text_field :description, :class => 'text_field' %>
     </div>
   </div>
+ 
+
+   <%= f.collection_radio_buttons :region_id, @regions, :id, :name %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

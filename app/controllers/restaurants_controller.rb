@@ -26,9 +26,18 @@ class RestaurantsController < ApplicationController
 
   def update
     @restaurant = Restaurant.where(id: params[:id]).first
+    @user = User.where(id: @restaurant.creator_id).first
     respond_to do |format|
       if @restaurant.update(restaurant_params)
-        format.html { redirect_to :back }
+        if @restaurant.status == "approved" && !@restaurant.jobs.empty?
+          @restaurant.jobs.first.update(role: "Admin")
+          fail
+          job = Job.where(restaurant_id: @restaurant.id).first
+          @user.update(job_id: job.id)
+          UserMailer.new_restaurant_approval(@user, @restaurant).deliver
+          format.html { redirect_to :back }
+        end
+          format.html { redirect_to :back }
       else
         format.html { render :back }
       end
@@ -41,6 +50,7 @@ class RestaurantsController < ApplicationController
 
   def new
     @restaurant = Restaurant.new
+    @regions = Region.all
   end
 
   def show
@@ -65,6 +75,7 @@ class RestaurantsController < ApplicationController
       # user_id & restuarant_id
     # change role from default "default role"
       # to "Admin"
+      fail
     pending_restaurant_job.update(role: "Admin")
     UserMailer.new_restaurant_approval(@user, @restaurant).deliver
     redirect_to '/dashboard'
@@ -78,7 +89,7 @@ class RestaurantsController < ApplicationController
 private
 
   def restaurant_params
-    params.require(:restaurant).permit(:title, :description, :id, :status)
+    params.require(:restaurant).permit(:title, :description, :id, :status, :region_id)
   end
 
   def pending_restaurant_job
