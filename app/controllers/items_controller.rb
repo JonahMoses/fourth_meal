@@ -19,18 +19,9 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-
-
-    # assign current restaurant's ID to restaurant_id for item
-
-    respond_to do |format|
-      if @item.save
-        @item.update(restaurant_id: current_restaurant.id)
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-      else
-        format.html { render action: 'new' }
-      end
-    end
+    @item.save
+    @item.update(restaurant_id: current_restaurant.id)
+    redirect_to @item, notice: 'Item was successfully created.' 
   end
 
   def update
