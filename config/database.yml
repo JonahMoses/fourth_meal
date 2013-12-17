@@ -6,7 +6,7 @@ development:
   adapter: postgresql
   database: fourthmeal_development
   host: localhost
-  pool: 25
+  pool: 100
 
 test:
   adapter: sqlite3

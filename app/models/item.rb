@@ -21,7 +21,7 @@ class Item < ActiveRecord::Base
     process_in_background :image
 
   def price=(input)
-    input.delete!("$")
+    input.delete!("$") if input.to_s.start_with?("$")
     super
   end
 

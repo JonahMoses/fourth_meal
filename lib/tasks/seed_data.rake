@@ -1,18 +1,25 @@
-desc "20 jobs to make 20 stores"
+desc "creating restaurants"
 task :seed_restaurants => :environment do
-  10.times do |i|
-    BuildSeedRestaurants.perform_async
-    puts "creating restaurants job #{i}"
+  100.times do |i|
+    BuildSeedRestaurants.perform_async(i)
+    puts "creating restaurant job #{i}"
   end
 end
 
-# desc "20 jobs to make 400 items"
-# task :seed_items => :environment do
-#   20.times do |i|
-#     BuildSeedItems.perform_async
-#     puts "creating items job #{i}"
-#   end
-# end
+desc "creating users"
+task :seed_users => :environment do
+  1000.times do |i|
+    BuildSeedUsers.perform_async
+    puts "creating user job #{i}"
+  end
+end
 
-# BACKGROUND WORKER - 100,000 known users
+desc "creating items"
+task :seed_items => :environment do
+  10000.times do |i|
+    BuildSeedItems.perform_async(i)
+    puts "creating item job #{i}"
+  end
+end
+
 

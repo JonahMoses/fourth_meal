@@ -1,15 +1,16 @@
 class BuildSeedRestaurants
   include Sidekiq::Worker
 
-  def perform
-    10.times do |i|
-      name = Faker::Company.name + "#{i}"
+  def perform(r)
+    100.times do |i|
+      name = Faker::Company.name + "#{i}, #{r}"
       description = Faker::Company.catch_phrase
       store = Restaurant.create(
         title: name,
         status: "active",
         slug: name.parameterize,
-        description: description)
+        description: description,
+        region_id: rand[1...50])
       2.times do |u|
         user = User.create(
           email: "#{u}"+Faker::Internet.email,

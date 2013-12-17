@@ -2,15 +2,28 @@ class BuildSeedUsers
   include Sidekiq::Worker
 
   def perform
-    20.times do |p|
-      sleep 1
-      name = Faker::Commerce.product_name
-      description = Faker::Commerce.department + " #{p}"
-      price = "#{Faker::Number.digit}"
-      restaurant_id = "#{p}"+1
-      item = Item.create(title: name, description: description, price: price, active: true, restaurant_id: restaurant_id )
+    100.times do |p|
+      email                 = (p + Faker::Internet.email)
+      full_name             = Faker::Name.name
+      password              = "password"
+      password_confirmation = "password"
+      credit_card_number    = "4242424242424242"
+      billing_street        = "1234 Maple St"
+      billing_apt           = "G6"
+      billing_city          = "Denver"
+      billing_state         = "CO"
+      billing_zip_code      = "80204"
+      user = User.create(
+        email: email,
+        full_name: full_name,
+        password: password,
+        password_confirmation: password_confirmation,
+        credit_card_number: credit_card_number,
+        billing_street: billing_street,
+        billing_apt: billing_apt,
+        billing_city: billing_city,
+        billing_state: billing_state,
+        billing_zip_code: billing_zip_code)
     end
   end
 end
-
-
