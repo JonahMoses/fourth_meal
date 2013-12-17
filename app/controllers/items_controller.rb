@@ -19,10 +19,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-
-
     # assign current restaurant's ID to restaurant_id for item
-
     respond_to do |format|
       if @item.save
         @item.update(restaurant_id: current_restaurant.id)

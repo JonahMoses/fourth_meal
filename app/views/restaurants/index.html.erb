@@ -2,6 +2,8 @@
 <div class="jumbotron center-text">
   <h1>WELCOME TO FOOD FIGHT!</h1>
   <div class="container">
+    <%= paginate @restaurants %>
+    <br />
     <%= render partial: 'restaurants/restaurant', collection: @restaurants %>
   </div>
 </div>

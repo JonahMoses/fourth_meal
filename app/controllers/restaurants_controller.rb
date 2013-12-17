@@ -1,17 +1,16 @@
 class RestaurantsController < ApplicationController
   before_action :create_and_log_in_guest_user, only: [:show]
 
-
   def index
-    @restaurants = Restaurant.where(:status => "active")
+    @restaurants = Restaurant.where(:status => "active").page(params[:page]).per(20)
     @current_user = current_user
     @regions = Region.all
   end
 
   def create
-    @restaurant = Restaurant.new(restaurant_params)
-    @user = current_user
-    @platform_admin = platform_admin
+    @restaurant            = Restaurant.new(restaurant_params)
+    @user                  = current_user
+    @platform_admin        = platform_admin
     @restaurant.creator_id = @user.id
     respond_to do |format|
       if @restaurant.save
