@@ -31,7 +31,6 @@ class RestaurantsController < ApplicationController
       if @restaurant.update(restaurant_params)
         if @restaurant.status == "approved" && !@restaurant.jobs.empty?
           @restaurant.jobs.first.update(role: "Admin")
-          fail
           job = Job.where(restaurant_id: @restaurant.id).first
           @user.update(job_id: job.id)
           UserMailer.new_restaurant_approval(@user, @restaurant).deliver
