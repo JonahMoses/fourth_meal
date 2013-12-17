@@ -1,35 +1,37 @@
 <h1>Your Order</h1>
 
-<p>Restaurant: <%= current_restaurant.title %></p>
-
-
-<p>Status: <%= @order.status %></p>
-<p>Items: <%= @order.order_items.count %></p>
-
-<div id="order_items_table">
-  <% @order.order_items.each_with_index do |item, index| %>
-    <div class="order_item_<%= index %>">
-      <%= form_for item, {url: update_order_item_path("#{current_restaurant.slug}", @order.id, item.id)} do |f| %>
-        <div>
-          <%= item.item.title %>
-          <%= f.text_field :quantity, :class => 'item_quantity' %>
-          <%= print_price item.item.price %>
-          <%= print_price item.subtotal %>
-          <%= f.submit 'Update' %>
-          <%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+<div class="row">
+  <div class="col-md-4">
+    <p>Restaurant: <%= current_restaurant.title %></p>
+    <p>Status: <%= @order.status %></p>
+    <p>Items: <%= @order.order_items.count %></p>
+    <div id="order_items_table">
+      <% @order.order_items.each_with_index do |item, index| %>
+        <div class="order_item_<%= index %>">
+          <%= form_for item, {url: update_order_item_path("#{current_restaurant.slug}", @order.id, item.id)} do |f| %>
+            <div>
+              <%= item.item.title %>
+              <%= f.text_field :quantity, :class => 'item_quantity' %>
+              <%= print_price item.item.price %>
+              <%= print_price item.subtotal %>
+              <%= f.submit 'Update' %>
+              <%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
+    <p class="cart_total_price"><strong>Total:</strong><%= print_price @order.total %></p>
+    <%= link_to "Checkout", purchase_order_path(current_restaurant.slug, @order), method: :post %>
+    <%= link_to "Empty Cart", destroy_restaurant_order_path(current_restaurant.slug, @order), data: { confirm: 'Are you sure?' }, method: :delete %>
+    <% if allow? "orders", "edit" %>
+      <%= link_to 'Edit', edit_order_path(@order) %>
+    <% end %>
+    <%= link_to 'Back', orders_path %>
+  </div>
+  <% if current_user.email? %>
+    <div class="col-md-8">
+      <%= render 'partial_form' %>
+    </div>
   <% end %>
-</div>
-
-<p class="cart_total_price"><strong>Total:</strong><%= print_price @order.total %></p>
-
-<%= link_to "Checkout", purchase_order_path(current_restaurant.slug, @order), method: :post %>
-<%= link_to "Empty Cart", destroy_restaurant_order_path(current_restaurant.slug, @order), data: { confirm: 'Are you sure?' }, method: :delete %>
-<% if allow? "orders", "edit" %>
-  <%= link_to 'Edit', edit_order_path(@order) %>
-<% end %>
-
-<%= link_to 'Back', orders_path %>
 

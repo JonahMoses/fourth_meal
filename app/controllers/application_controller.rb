@@ -33,6 +33,10 @@ private
     @current_region ||= Region.find_by(id: params[:id])
   end
 
+  def platform_admin
+    @platform_admin ||= User.where(admin: true).last
+  end
+
   def all_restaurants
     @restaurants ||= Restaurant.all
     @regions = Region.all
@@ -51,5 +55,6 @@ private
       redirect_to "/", alert: "Not authorized"
     end
   end
+
 
 end

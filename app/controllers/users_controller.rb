@@ -28,7 +28,7 @@ class UsersController < ApplicationController
         order = (current_order || user.unsubmitted_order)
         redirect_to restaurant_order_path(order.restaurant.slug, order), notice: "redirected to unfinished order"
       else
-        redirect_to user_path(@user)
+        redirect_to :back, notice: "Updated User"
       end
     else
       render 'new'
@@ -56,7 +56,23 @@ private
   end
 
   def user_params
-    params.require(:user).permit(:email, :full_name, :display_name, :password, :password_confirmation)
+    params.require(:user).permit(
+      :email,
+      :full_name,
+      :display_name,
+      :password,
+      :password_confirmation,
+      :credit_card_number,
+      :billing_street,
+      :billing_apt,
+      :billing_city,
+      :billing_state,
+      :billing_zip_code,
+      :shipping_street,
+      :shipping_apt,
+      :shipping_city,
+      :shipping_state,
+      :shipping_zip_code,)
   end
 
 end

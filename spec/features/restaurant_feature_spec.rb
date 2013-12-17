@@ -51,20 +51,24 @@ describe RestaurantsController do
 
   describe 'create a new restaurant' do
     it 'should have a form for user to fill out with restaurant info' do
+      register_admin_user
+      click_on 'Log Out'
       register_user
       visit restaurants_path
       click_button 'Create New Restaurant'
       expect(page).to have_content 'New Restaurant Form'
       expect(page).to have_content 'Restaurant name'
       expect(page).to have_content 'Restaurant description'
-      fill_in "restaurant_title", with: "Tito's"
+      fill_in "restaurant_title", with: "Tito's0"
       fill_in "restaurant_description", with: "Jorge's favorite place"
       click_button('Create Restaurant')
       expect(page).to have_content "Restaurant is submitted and pending approval"
     end
   end
 
-    it "creator id should be current user id" do
+    it 'should email Platform admin when new restaurant is submitted' do
+      register_admin_user
+      click_on 'Log Out'
       user = User.where(:email => "user@example.com").first_or_create(
                :email => "user@example.com",
                :full_name => "bo jangles",
@@ -77,7 +81,29 @@ describe RestaurantsController do
       click_button 'Log In'
       visit restaurants_path
       click_button 'Create New Restaurant'
-      fill_in "restaurant_title", with: "Tito's"
+      fill_in "restaurant_title", with: "Tito's5"
+      fill_in "restaurant_description", with: "Jorge's favorite place"
+      click_button('Create Restaurant')
+      expect(ActionMailer::Base.deliveries.length).to eq(2)
+      # 2 emails as user AND Platform admin gets email when submitting
+    end
+
+    it "creator id should be current user id" do
+      register_admin_user
+      click_on 'Log Out'
+      user = User.where(:email => "user@example.com").first_or_create(
+               :email => "user@example.com",
+               :full_name => "bo jangles",
+               :display_name => "bj",
+               :password => "foobarbaz",
+               :password_confirmation => "foobarbaz")
+      visit '/log_in'
+      fill_in 'email',    :with => "user@example.com"
+      fill_in 'password', :with => "foobarbaz"
+      click_button 'Log In'
+      visit restaurants_path
+      click_button 'Create New Restaurant'
+      fill_in "restaurant_title", with: "Tito's2"
       fill_in "restaurant_description", with: "Jorge's favorite place"
       click_button('Create Restaurant')
       restaurant = Restaurant.first
@@ -97,6 +123,8 @@ describe RestaurantsController do
     end
 
     it 'should show My Restaurants on users Nav bar when approved' do
+      register_admin_user
+      click_on 'Log Out'
       user = User.where(:email => "user@example.com").first_or_create(
                :email => "user@example.com",
                :full_name => "bo jangles",
@@ -109,7 +137,7 @@ describe RestaurantsController do
       click_button 'Log In'
       visit restaurants_path
       click_button 'Create New Restaurant'
-      fill_in "restaurant_title", with: "Tito's"
+      fill_in "restaurant_title", with: "Tito's3"
       fill_in "restaurant_description", with: "Jorge's favorite place"
       click_button('Create Restaurant')
       restaurant = Restaurant.first
@@ -135,6 +163,40 @@ describe RestaurantsController do
       click_link_or_button("My Restaurants")
       expect(page).to have_content("Tito's")
       expect(page).to have_content("Jorge's favorite place")
-      end
+    end
 
+    it 'should email user when new restaurant is approved' do
+      register_admin_user
+      click_on 'Log Out'
+      user = User.where(:email => "user@example.com").first_or_create(
+               :email => "user@example.com",
+               :full_name => "bo jangles",
+               :display_name => "bj",
+               :password => "foobarbaz",
+               :password_confirmation => "foobarbaz")
+      visit '/log_in'
+      fill_in 'email',    :with => "user@example.com"
+      fill_in 'password', :with => "foobarbaz"
+      click_button 'Log In'
+      visit restaurants_path
+      click_button 'Create New Restaurant'
+      fill_in "restaurant_title", with: "Tito's4"
+      fill_in "restaurant_description", with: "Jorge's favorite place"
+      click_button('Create Restaurant')
+      restaurant = Restaurant.first
+      expect(restaurant.creator_id).to eq user.id
+      expect(restaurant.jobs.count).to eq 1
+      expect(restaurant.jobs.last.restaurant_id).to eq restaurant.id
+      expect(restaurant.jobs.last.user_id).to eq user.id
+      expect(restaurant.jobs.last.role).to eq "Creator"
+      click_on "Log Out"
+      expect(page).to have_content("Logged out")
+      click_on "Log In"
+      register_admin_user
+      expect(page).to have_content("Logged in")
+      visit "/dashboard"
+      click_on "Approve"
+      expect(ActionMailer::Base.deliveries.length).to eq(3)
+      # 3 emails as user and platform admin gets email when submitting email as well
+    end
 end

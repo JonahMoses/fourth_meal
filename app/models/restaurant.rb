@@ -16,13 +16,12 @@ class Restaurant < ActiveRecord::Base
     self.update(:status => "approved")
   end
 
-  def set_defaults
-    self.update(slug: title.parameterize)
+  def reject
+    self.update(:status => "rejected")
   end
 
-  def pending_restaurant
-    creator_id = current_restaurant.creator_id
-    current_restaurant.jobs.where(user_id == creator_id)
+  def set_defaults
+    self.update(slug: title.parameterize)
   end
 
 end

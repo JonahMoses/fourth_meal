@@ -66,4 +66,48 @@ describe UserMailer do
     end
   end
 
+  describe "Platform Admin new restaurant notification" do
+    let(:user) { User.create(email: "me@example.com",
+                        full_name: "Antony",
+                        password: "hellothere",
+                        password_confirmation: "hellothere") }
+    let(:restaurant) { Restaurant.create(title: 'BilyBob', description: "Ur Fine Dinin Road Kil Caffe!") }
+    let(:platform_admin) { User.create(email: "admin@example.com",
+                            full_name: "Admin",
+                            password: "password",
+                            password_confirmation: "password",
+                            admin: true)}
+    let(:mail) { UserMailer.new_restaurant_submission_notification(platform_admin, user, restaurant)}
+
+    it "renders the headers" do
+      mail.subject.should eq("A New Restaurant has been submitted to FoodFight")
+      mail.to.should eq(["admin@example.com"])
+      mail.from.should eq(["foodfightinfo@gmail.com"])
+    end
+
+    it "renders the body" do
+      mail.body.encoded.should match("A new restaurant, BilyBob, has been submitted by me@example.com for review.")
+      mail.body.encoded.should match("Dear Admin,")
+    end
+  end
+
+  describe "user's new restaurant approval" do
+    let(:user) { User.create(email: "me@example.com",
+                        full_name: "Antony",
+                        password: "hellothere",
+                        password_confirmation: "hellothere") }
+    let(:restaurant) { Restaurant.create(title: 'BilyBob', description: "Ur Fine Dinin Road Kil Caffe!") }
+    let(:mail) { UserMailer.new_restaurant_approval(user, restaurant)}
+
+    it "renders the headers" do
+      mail.subject.should eq("Your New Restaurant submission has been approved for FoodFight")
+      mail.to.should eq(["me@example.com"])
+      mail.from.should eq(["foodfightinfo@gmail.com"])
+    end
+
+    it "renders the body" do
+      mail.body.encoded.should match("BilyBob has been approved!")
+      mail.body.encoded.should match("Dear Antony,")
+    end
+  end
 end
