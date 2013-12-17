@@ -13,6 +13,14 @@ class Restaurant < ActiveRecord::Base
     where(:status => "active")
   end
 
+  def self.rejected
+    where(:status => 'rejected')
+  end
+
+  def self.admin_visible
+    where("status IS NOT 'rejected'")
+  end
+
   def approve
     self.update(:status => "approved")
   end

@@ -8,6 +8,10 @@ class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :restaurant
 
+  def self.for_status(status)
+    where(:status => status.downcase)
+  end
+
   def total
     order_items.map(&:subtotal).reduce(:+)
   end

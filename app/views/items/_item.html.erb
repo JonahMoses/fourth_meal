@@ -10,6 +10,7 @@
     <div class="item-details">
       <h5>
         <%= item.title %>
+       
       </h5>
       <p class="item-description">
         <%= item.description[0..25] %>
@@ -27,10 +28,10 @@
       </div>
 
       <div class="pull-left" data-no-turbolink>
-        <% if current_user.admin? || current_user.restaurant_admin? %>
+        <% if current_user.admin? ||  current_user.current_restaurant_admin?(current_restaurant) %>
           <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "item-delete btn btn-danger btn-xs" %>
         <% end %>
-        <% if current_user.admin? || current_user.restaurant_admin? %>
+        <% if current_user.admin? || current_user.current_restaurant_admin?(current_restaurant) %>
           <%= link_to 'Edit', edit_item_path(item), class: "item-edit btn btn-default btn-xs item-admin"%>
         <% end %>
       </div>

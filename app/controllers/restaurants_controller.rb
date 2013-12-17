@@ -3,7 +3,7 @@ class RestaurantsController < ApplicationController
 
 
   def index
-    @restaurants = Restaurant.where(:status => "active")
+    @restaurants = Restaurant.where(status: "active").page(params[:page]).per(6)
     @current_user = current_user
     @regions = Region.all
   end
@@ -67,25 +67,10 @@ class RestaurantsController < ApplicationController
   end
 
   def details
-
   end
 
   def admin_restaurants
     @restaurants = current_user.my_restaurants
-  end
-
-  def approve
-    @user = User.where(id: current_restaurant.creator_id).first
-    current_restaurant.approve
-    # Locate the creator_id
-    # locate user_id from creator_id
-    # Locate the jobs table row that has the
-      # user_id & restuarant_id
-    # change role from default "default role"
-      # to "Admin"
-    pending_restaurant_job.update(role: "Admin")
-    UserMailer.new_restaurant_approval(@user, @restaurant).deliver
-    redirect_to '/dashboard'
   end
 
   def activate
