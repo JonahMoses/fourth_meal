@@ -9,6 +9,10 @@ class Restaurant < ActiveRecord::Base
 
   after_create :set_defaults
 
+  def self.form_statuses
+    ["pending", "approved", "active", "inactive", "rejected"].freeze
+  end
+
   def self.active
     where(:status => "active")
   end
