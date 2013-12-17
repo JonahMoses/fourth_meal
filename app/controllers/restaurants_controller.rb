@@ -24,6 +24,17 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def update
+    @restaurant = Restaurant.where(id: params[:id]).first
+    respond_to do |format|
+      if @restaurant.update(restaurant_params)
+        format.html { redirect_to :back }
+      else
+        format.html { render :back }
+      end
+    end
+  end
+
   def create_job(user_id, restaurant_id)
     Job.create(user_id: user_id, restaurant_id: restaurant_id)
   end
