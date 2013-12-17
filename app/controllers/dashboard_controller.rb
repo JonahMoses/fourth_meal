@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
 
   def index
-    @orders_by_status = Order.count(:group => "status")
+    # @orders_by_status = Order.count(:group => "status")
     if params[:status]
       @filtered_orders = Order.where(:status => params[:status])
     else
