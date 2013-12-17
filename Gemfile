@@ -8,12 +8,15 @@ gem 'less-rails'
 gem 'therubyracer'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'kaminari'
 gem 'figaro'
 gem 'sidekiq'
 gem 'delayed_paperclip'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'actionmailer'
+gem 'memcachier'
+gem 'dalli'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'

@@ -83,8 +83,8 @@ class User < ActiveRecord::Base
 
   def restaurant_admin?
     unless Job.where(user_id: self.id).empty?
-      Job.where(user_id: self.id)
-      job.role == "Admin"
+      jobs = Job.where(user_id: self.id)
+      jobs.any? { |job| job.role == "Admin" }
     end
   end
 

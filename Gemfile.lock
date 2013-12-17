@@ -63,6 +63,7 @@ GEM
     coffee-script-source (1.6.3)
     commonjs (0.2.7)
     connection_pool (1.2.0)
+    dalli (2.6.4)
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     delayed_paperclip (2.6.1)
@@ -100,6 +101,9 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    kaminari (0.15.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.2)
       addressable (~> 2.3)
     less (2.4.0)
@@ -116,6 +120,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcachier (0.0.2)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_portile (0.5.2)
@@ -256,6 +261,7 @@ DEPENDENCIES
   binding_of_caller
   capybara
   coffee-rails (~> 4.0.0)
+  dalli
   database_cleaner
   delayed_paperclip
   factory_girl_rails (~> 4.0)
@@ -265,8 +271,10 @@ DEPENDENCIES
   guard-rspec
   jbuilder (~> 1.2)
   jquery-rails
+  kaminari
   launchy
   less-rails
+  memcachier
   paperclip
   pg
   pry

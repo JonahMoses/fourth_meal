@@ -22,6 +22,9 @@ Foodfight::Application.configure do
       :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
+
+  config.cache_store = :dalli_store
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
