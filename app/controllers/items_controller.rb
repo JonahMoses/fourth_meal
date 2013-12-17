@@ -26,14 +26,9 @@ class ItemsController < ApplicationController
 
   def update
     @restaurant_id = @item.restaurant_id
-    respond_to do |format|
-      if @item.update(item_params)
-        @item.update(restaurant_id: @restaurant_id)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-      else
-        format.html { render action: 'edit' }
-      end
-    end
+    @item.update(item_params)
+    @item.update(restaurant_id: @restaurant_id)
+    redirect_to @item, notice: 'Item was successfully updated.' 
   end
 
   def destroy
