@@ -19,9 +19,12 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.save
-    @item.update(restaurant_id: current_restaurant.id)
-    redirect_to @item, notice: 'Item was successfully created.' 
+    if @item.save
+      @item.update(restaurant_id: current_restaurant.id)
+      redirect_to restaurant_name_path(@restaurant.slug), notice: 'Item was successfully created.' 
+    else
+      redirect_to :back, notice: "Price should be a number"
+    end
   end
 
   def update
@@ -34,7 +37,7 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     restaurant = Restaurant.where(id: @item.restaurant_id).first
-    redirect_to "/#{restaurant.slug}", notice: "#{@item.title} was deleted from menu" 
+    redirect_to restaurant_name_path(restaurant.slug), notice: "#{@item.title} was deleted from menu" 
   end
 
 private
