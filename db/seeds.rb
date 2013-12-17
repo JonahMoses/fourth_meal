@@ -34,10 +34,10 @@ platform_admin_1 = User.create(
   admin: "true"
 )
 
-# regions = %w[ Akron Albuquerque Anaheim Arlington Atlanta Aurora Austin Bakersfield Dallas Detroit Durham Fayetteville Fontana Fremont Fresno Garland Glendale Greensboro Henderson Hialeah Irvine Laredo Lincoln Lubbock Madison Memphis Mesa Miami Milwaukee Minneapolis Modesto Montgomery Newark Oakland Omaha Orlando Oxnard Phoenix Pittsburgh Plano Portland Raleigh Reno Riverside Seattle ]
-# regions.each do |region|
-#   Region.create(name: region)
-# end
+regions = %w[ Akron Albuquerque Anaheim Arlington Atlanta Aurora Austin Bakersfield Dallas Detroit Durham Fayetteville Fontana Fremont Fresno Garland Glendale Greensboro Henderson Hialeah Irvine Laredo Lincoln Lubbock Madison Memphis Mesa Miami Milwaukee Minneapolis Modesto Montgomery Newark Oakland Omaha Orlando Oxnard Phoenix Pittsburgh Plano Portland Raleigh Reno Riverside Seattle ]
+regions.each do |region|
+  Region.create(name: region)
+end
 
 class Seeder
 
