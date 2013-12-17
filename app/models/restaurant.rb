@@ -17,6 +17,10 @@ class Restaurant < ActiveRecord::Base
     self.update(:status => "approved")
   end
 
+  def activate
+    self.update(:status => "active")
+  end
+
   def reject
     self.update(:status => "rejected")
   end

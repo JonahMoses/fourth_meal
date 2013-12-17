@@ -74,11 +74,16 @@ class RestaurantsController < ApplicationController
       # user_id & restuarant_id
     # change role from default "default role"
       # to "Admin"
-      fail
     pending_restaurant_job.update(role: "Admin")
     UserMailer.new_restaurant_approval(@user, @restaurant).deliver
     redirect_to '/dashboard'
   end
+
+  def activate
+    current_restaurant.activate
+    redirect_to :back
+  end
+
 
   def reject
     current_restaurant.reject
