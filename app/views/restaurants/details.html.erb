@@ -18,4 +18,13 @@ Restaurant Details
     <dt><strong>Creator Email:</strong></dt>
     <dd><%= User.where(id: job.user_id).first.email %></dd>
   <% end %>
+
+  <% if current_user.admin? %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              restaurant_path(current_restaurant),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'item-delete btn btn-danger btn-xs' %>
+  <% end %>
+
 </dl>
