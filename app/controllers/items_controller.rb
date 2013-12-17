@@ -34,9 +34,7 @@ class ItemsController < ApplicationController
   def destroy
     @item.destroy
     restaurant = Restaurant.where(id: @item.restaurant_id).first
-    respond_to do |format|
-      format.html { redirect_to "/#{restaurant.slug}", notice: "#{@item.title} was deleted from menu" }
-    end
+    redirect_to "/#{restaurant.slug}", notice: "#{@item.title} was deleted from menu" 
   end
 
 private
