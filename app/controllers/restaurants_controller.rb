@@ -41,6 +41,7 @@ class RestaurantsController < ApplicationController
 
   def new
     @restaurant = Restaurant.new
+    @regions = Region.all
   end
 
   def show
@@ -78,7 +79,7 @@ class RestaurantsController < ApplicationController
 private
 
   def restaurant_params
-    params.require(:restaurant).permit(:title, :description, :id, :status)
+    params.require(:restaurant).permit(:title, :description, :id, :status, :region_id)
   end
 
   def pending_restaurant_job

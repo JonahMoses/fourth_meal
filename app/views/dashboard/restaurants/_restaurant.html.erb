@@ -3,21 +3,14 @@
   <td><%= restaurant.description %></td>
   <td><%= link_to "Details", restaurant_details_path(restaurant.slug), method: "get" %></td>
 
-  <% if restaurant.status == "pending"   %>
-  <td><%= link_to 'Approve', approve_restaurant_path(restaurant.slug), method: "put" %></td>
-  <td><%= link_to 'Reject', reject_restaurant_path(restaurant.slug), method: "put" %></td>
-  <% end %>
 <td>
-
-<td>
-
-<div>
 <%= form_for restaurant do |f| %>
 <%= f.select :status, [["pending"], ["approved"], ["active"], ["inactive"]] %>
+</td>
 <td>
-</div>
-
-  <%= f.submit "Change Status", :class => 'btn btn-primary btn-xs' %>
-
+ <%= f.submit "Change Status", :class => 'btn btn-primary btn-xs' %>
+ </td>
 <% end %>
+
+
 </tr>
