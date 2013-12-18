@@ -23,22 +23,23 @@ class RestaurantsController < ApplicationController
       end
   end
 
-  def update
+   def update
     @restaurant = Restaurant.where(id: params[:id]).first
     @user = User.where(id: @restaurant.creator_id).first
-
+    respond_to do |format|
       if @restaurant.update(restaurant_params)
         if @restaurant.status == "approved" && !@restaurant.jobs.empty?
           @restaurant.jobs.first.update(role: "Admin")
           job = Job.where(restaurant_id: @restaurant.id).first
           @user.update(job_id: job.id)
           UserMailer.new_restaurant_approval(@user, @restaurant).deliver
-          redirect_to :back
+          format.html { redirect_to :back }
         end
-          redirect_to :back
+          format.html { redirect_to :back }
       else
-        redirect_to :back
+        format.html { redirect_to :back }
       end
+    end
   end
 
   def destroy
@@ -62,6 +63,7 @@ class RestaurantsController < ApplicationController
   end
 
   def details
+    @restaurant = current_restaurant
   end
 
   def admin_restaurants

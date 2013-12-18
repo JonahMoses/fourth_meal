@@ -34,6 +34,15 @@ platform_admin_1 = User.create(
   admin: "true"
 )
 
+  platform_admin_2 = User.create(
+    email: "admin@example.com",
+    full_name: "adminadmin",
+    display_name: "adminadmin",
+    password: "password",
+    password_confirmation: "password",
+    admin: "true"
+  )
+
 regions = %w[ Garland Glendale Greensboro Henderson Hialeah Irvine Laredo Lincoln Lubbock Madison Memphis Mesa Miami Milwaukee Minneapolis Modesto Montgomery Newark Oakland Omaha Orlando Oxnard Phoenix Pittsburgh Plano Portland Raleigh Reno Riverside Seattle ]
 regions.each do |region|
   Region.create(name: region)
@@ -44,6 +53,9 @@ class Seeder
 
   def create_data
     create_categories
+    200.times do
+      create_item
+    end
     create_restaurants
     create_regions
   end
@@ -84,7 +96,6 @@ private
     end
   end
 
-<<<<<<< HEAD
   def create_regions
     region_names.each do |region_name|
       region = Region.create(
@@ -104,27 +115,6 @@ private
   def sample_region_ids
     [1, 2, 3, 4, 5]
   end
-=======
-  # def create_regions
-  #   region_names.each do |region_name|
-  #     region = Region.create(
-  #       name: region_name)
-  #   end
-  # end
-
-  # def region_names
-  #   [ "Boston",
-  #     "NYC",
-  #     "Chicago",
-  #     "Denver",
-  #     "LA"
-  #   ]
-  # end
-
-  # def sample_region_ids
-  #   [1, 2, 3, 4, 5]
-  # end
->>>>>>> demo_cleanup
 
   def restaurant_names
     [
@@ -191,12 +181,9 @@ private
      'cancelled'
    ]
   end
-<<<<<<< HEAD
 
 end
 
-=======
-end
->>>>>>> demo_cleanup
+
 Seeder.new.create_data
 
