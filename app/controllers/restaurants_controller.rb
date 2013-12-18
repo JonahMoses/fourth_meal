@@ -12,14 +12,14 @@ class RestaurantsController < ApplicationController
     @user                  = current_user
     @platform_admin        = platform_admin
     @restaurant.creator_id = @user.id
-    respond_to do |format|
+
       if @restaurant.save
         create_job(@user.id, @restaurant.id)
         UserMailer.new_restaurant_submission_confirmation(@user, @restaurant).deliver
         UserMailer.new_restaurant_submission_notification(@platform_admin, @user, @restaurant).deliver
-        format.html { redirect_to '/', notice: 'Restaurant is submitted and pending approval' }
+        redirect_to '/', notice: 'Restaurant is submitted and pending approval'
       else
-        format.html { render action: 'new' }
+        render action: 'new'
       end
     end
   end
@@ -27,18 +27,18 @@ class RestaurantsController < ApplicationController
   def update
     @restaurant = Restaurant.where(id: params[:id]).first
     @user = User.where(id: @restaurant.creator_id).first
-    respond_to do |format|
+
       if @restaurant.update(restaurant_params)
         if @restaurant.status == "approved" && !@restaurant.jobs.empty?
           @restaurant.jobs.first.update(role: "Admin")
           job = Job.where(restaurant_id: @restaurant.id).first
           @user.update(job_id: job.id)
           UserMailer.new_restaurant_approval(@user, @restaurant).deliver
-          format.html { redirect_to :back }
+          redirect_to :back
         end
-          format.html { redirect_to :back }
+          redirect_to :back
       else
-        format.html { redirect_to :back }
+        redirect_to :back
       end
     end
   end
@@ -46,8 +46,8 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant = Restaurant.where(id: params[:id]).first
     @restaurant.destroy
-    respond_to do |format|
-      format.html { redirect_to dashboard_path, notice: "#{@restaurant.title} was deleted from FoodFight" }
+
+      redirect_to dashboard_path, notice: "#{@restaurant.title} was deleted from FoodFight"
     end
   end
 

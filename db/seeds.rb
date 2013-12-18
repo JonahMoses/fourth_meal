@@ -44,10 +44,6 @@ class Seeder
 
   def create_data
     create_categories
-    #create_orders
-    500.times do
-      create_item
-    end
     create_restaurants
     create_regions
   end
@@ -88,6 +84,7 @@ private
     end
   end
 
+<<<<<<< HEAD
   def create_regions
     region_names.each do |region_name|
       region = Region.create(
@@ -107,6 +104,27 @@ private
   def sample_region_ids
     [1, 2, 3, 4, 5]
   end
+=======
+  # def create_regions
+  #   region_names.each do |region_name|
+  #     region = Region.create(
+  #       name: region_name)
+  #   end
+  # end
+
+  # def region_names
+  #   [ "Boston",
+  #     "NYC",
+  #     "Chicago",
+  #     "Denver",
+  #     "LA"
+  #   ]
+  # end
+
+  # def sample_region_ids
+  #   [1, 2, 3, 4, 5]
+  # end
+>>>>>>> demo_cleanup
 
   def restaurant_names
     [
@@ -173,8 +191,12 @@ private
      'cancelled'
    ]
   end
+<<<<<<< HEAD
 
 end
 
+=======
+end
+>>>>>>> demo_cleanup
 Seeder.new.create_data
 
