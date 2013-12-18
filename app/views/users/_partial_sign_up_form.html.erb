@@ -11,11 +11,11 @@
     </div>
   <% end %>
   <p>
-    <%= f.label :email %><br />
+    <%= f.label :email, "Email (required)" %><br />
     <%= f.text_field :email %>
   </p>
   <p>
-    <%= f.label :full_name %><br />
+    <%= f.label :full_name, "Full Name (required)" %><br />
     <%= f.text_field :full_name %>
   </p>
   <p>
@@ -23,20 +23,17 @@
     <%= f.text_field :display_name %>
   </p>
   <p>
-    <%= f.label :password %><br />
+    <%= f.label :password, "Password (required)"  %><br />
     <%= f.password_field :password %>
   </p>
   <p>
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, "Password Confirmation (required)" %><br />
     <%= f.password_field :password_confirmation %>
   </p>
-  <p>
-    <%= f.label :credit_card_number %><br />
-    <%= f.text_field :credit_card_number %>
-  </p>
+
 <strong>Billing Info:</strong>
   <p>
-    <%= f.label :street %><br />
+    <%= f.label :street, "Street (required)" %><br />
     <%= f.text_field :billing_street %>
   </p>
   <p>
@@ -44,18 +41,18 @@
     <%= f.text_field :billing_apt %>
   </p>
   <p>
-    <%= f.label :city %><br />
+    <%= f.label :city, "City (required()" %><br />
     <%= f.text_field :billing_city %>
   </p>
   <p>
-    <%= f.label :state %><br />
+    <%= f.label :state, "State (required)" %><br />
     <%= f.text_field :billing_state %>
   </p>
   <p>
-    <%= f.label :zip_code %><br />
+    <%= f.label :zip_code, "Zip Code (required)" %><br />
     <%= f.text_field :billing_zip_code %>
   </p>
-<strong>Shipping Info:</strong>
+<strong>Delivery Info:</strong>
   <p>
     <%= f.label :street %><br />
     <%= f.text_field :shipping_street %>

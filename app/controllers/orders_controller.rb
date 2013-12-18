@@ -71,6 +71,7 @@ class OrdersController < ApplicationController
       order = current_order
       GuestOrderMailerWorker.perform_async(order.id)
       session[:order_id] = nil
+      current_user.update(email: "")
       redirect_to confirmation_order_path(order)
     else
       render :guest_purchase

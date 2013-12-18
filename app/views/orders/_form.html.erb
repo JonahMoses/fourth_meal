@@ -12,26 +12,26 @@
   <% end %>
 
   <p>
-    <%= f.label :full_name %><br />
+    <%= f.label :full_name, "Full Name (required)" %><br />
     <%= f.text_field :full_name %>
   </p>
   <p>
-    <%= f.label :email %><br />
+    <%= f.label :email, "Email, (required)" %><br />
     <%= f.text_field :email %>
   </p>
   <p>
-    <%= f.label :credit_card_number %><br />
+    <%= f.label :credit_card_number, "Credit Card Number (required)" %><br />
     <%= f.text_field :credit_card_number %>
   </p>
 
   <h2>Billing Address:</h2>
-  Default Shipping Address<br><br>
+  Default Delivery Address<br><br>
   <p>
-    <%= f.label :Street %><br />
+    <%= f.label :Street, "Street (required)" %><br />
     <%= f.text_field :billing_street %>
   </p>
    <p>
-    <%= f.label :City %><br />
+    <%= f.label :City, "City (required)" %><br />
     <%= f.text_field :billing_city %>
   </p>
    <p>
@@ -39,11 +39,11 @@
     <%= f.text_field :billing_apt %>
   </p>
    <p>
-    <%= f.label :State %><br />
+    <%= f.label :State, "State (required)" %><br />
     <%= f.text_field :billing_state %>
   </p>
   <p>
-    <%= f.label :Zip %><br />
+    <%= f.label :Zip, "Zip Code (required)" %><br />
     <%= f.text_field :billing_zip_code %>
   </p>
   <h2>Shipping Information:</h2>

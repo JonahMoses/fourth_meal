@@ -38,7 +38,7 @@ class Restaurant < ActiveRecord::Base
   end
 
   def self.admin_visible
-    where("status IS NOT 'rejected'")
+    where("status NOT LIKE 'rejected'")
   end
 
   def approve
