@@ -1,7 +1,8 @@
-<%- model_class = Restaurant -%>
+
 <div class="jumbotron center-text">
   <h1>WELCOME TO FOOD FIGHT!</h1>
   <div class="container">
+
     <%= render partial: 'restaurants/restaurant', collection: @restaurants %>
     <%= paginate @restaurants %>
   </div>
