@@ -88,6 +88,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def current_restaurant_admin?(restaurant)
+    unless Job.where(user_id: self.id).empty?
+      job = Job.where(user_id: self.id).first
+      job.restaurant_id == restaurant.id
+    end
+  end
+
   def my_restaurants
     unless Restaurant.where(creator_id: self.id).empty?
       Restaurant.where(creator_id: self.id)

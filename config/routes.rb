@@ -2,6 +2,10 @@ require 'sidekiq/web'
 require 'admin_constraint'
 
 Foodfight::Application.routes.draw do
+  # todo: slugs shouldn't match images, javascripts, or stylesheets
+  # Figure out regex to make that happen
+
+  mount Sidekiq::Web, at: '/sidekiq' #:constraints => AdminConstraint.new
   post "/guest_confirm_purchase" => "orders#guest_confirm_purchase", as: :guest_confirm_purchase
   get "/guest" => "orders#guest_purchase", as: :guest_purchase
   get "dashboard" => "dashboard#index", :as => 'dashboard'
@@ -36,7 +40,6 @@ Foodfight::Application.routes.draw do
   resources :items, except: [:index, :show, :new, :create]
   post ":slug/items",               to: "items#create",                   as: :create_item
 
-
   resources :restaurants
   get "/my_restaurants",            to: "restaurants#admin_restaurants",  as: :admin_restaurants
   get ":slug",                      to: "restaurants#show",               as: :restaurant_name
@@ -44,12 +47,9 @@ Foodfight::Application.routes.draw do
   get ":slug/order/:id",            to: "orders#show",                    as: :restaurant_order
   delete ":slug/order/:id",         to: "orders#destroy",                 as: :destroy_restaurant_order
   post ":slug/orders/:id/purchase", to: "orders#purchase",                as: :purchase_order
-  get "/:slug/activate" => "restaurants#activate", :as => :activate_restaurant
+  get "/:slug/activate",            to: "restaurants#activate",           as: :activate_restaurant
   get ":slug/details",              to: "restaurants#details",            as: :restaurant_details
   get ":slug/:id",                  to: "items#show",                     as: :restaurant_item
   get ":slug/items/new",            to: "items#new",                      as: :new_restaurant_item
-
-
-  mount Sidekiq::Web, at: '/sidekiq', :constraints => AdminConstraint.new
 
 end

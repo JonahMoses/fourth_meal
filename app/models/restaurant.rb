@@ -1,7 +1,10 @@
-
 class Restaurant < ActiveRecord::Base
   validates :title, :description, presence: true
   validates :title, uniqueness: true
+  validate :title_not_forbidden
+
+  FORBIDDEN_NAMES = %w[javascripts stylesheets images]
+
   has_many  :items
   has_many  :orders
   has_many  :jobs
@@ -22,6 +25,9 @@ class Restaurant < ActiveRecord::Base
     validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
 
     # process_in_background :image
+  def self.form_statuses
+    ["pending", "approved", "active", "inactive", "rejected"].freeze
+  end
 
   def self.active
     where(:status => "active")
@@ -49,6 +55,14 @@ class Restaurant < ActiveRecord::Base
 
   def set_defaults
     self.update(slug: title.parameterize)
+  end
+
+private
+
+  def title_not_forbidden
+    if self.title.in? FORBIDDEN_NAMES
+      errors.add(:title, 'Pick another title')
+    end
   end
 
 end
