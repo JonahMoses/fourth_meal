@@ -25,9 +25,9 @@
 
     <ul class="nav navbar-nav navbar-right">
       <% if @current_order != nil %>
-          <% if current_restaurant.id == @current_order.restaurant_id %>
-            <li><%= link_to "View Items in Cart: #{@current_order.items_count}", "/#{current_restaurant.slug}/order/#{@current_order.id}", class: "View Items" %></a></li>
-          <% end %>
+        <% if current_restaurant.id == @current_order.restaurant_id %>
+          <li><%= link_to "View Items in Cart: #{@current_order.items_count}", "/#{current_restaurant.slug}/order/#{@current_order.id}", class: "View Items" %></a></li>
+        <% end %>
       <% else %>
           <li><a>Empty Cart :(</a></li>
       <% end %>
