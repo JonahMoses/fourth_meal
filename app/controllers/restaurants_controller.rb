@@ -21,7 +21,6 @@ class RestaurantsController < ApplicationController
       else
         render action: 'new'
       end
-    end
   end
 
   def update
@@ -40,15 +39,12 @@ class RestaurantsController < ApplicationController
       else
         redirect_to :back
       end
-    end
   end
 
   def destroy
     @restaurant = Restaurant.where(id: params[:id]).first
     @restaurant.destroy
-
       redirect_to dashboard_path, notice: "#{@restaurant.title} was deleted from FoodFight"
-    end
   end
 
   def create_job(user_id, restaurant_id)

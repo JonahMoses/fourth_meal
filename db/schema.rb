@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20131217205307) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "categories", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -41,7 +38,7 @@ ActiveRecord::Schema.define(version: 20131217205307) do
     t.integer  "restaurant_id"
   end
 
-  add_index "items", ["active"], name: "index_items_on_active", using: :btree
+  add_index "items", ["active"], name: "index_items_on_active"
 
   create_table "jobs", force: true do |t|
     t.string  "role",          default: "Creator"
@@ -65,7 +62,7 @@ ActiveRecord::Schema.define(version: 20131217205307) do
     t.integer  "restaurant_id"
   end
 
-  add_index "orders", ["status"], name: "index_orders_on_status", using: :btree
+  add_index "orders", ["status"], name: "index_orders_on_status"
 
   create_table "regions", force: true do |t|
     t.string "name"
@@ -86,8 +83,8 @@ ActiveRecord::Schema.define(version: 20131217205307) do
     t.datetime "image_updated_at"
   end
 
-  add_index "restaurants", ["region_id"], name: "index_restaurants_on_region_id", using: :btree
-  add_index "restaurants", ["status"], name: "index_restaurants_on_status", using: :btree
+  add_index "restaurants", ["region_id"], name: "index_restaurants_on_region_id"
+  add_index "restaurants", ["status"], name: "index_restaurants_on_status"
 
   create_table "users", force: true do |t|
     t.string   "email"
