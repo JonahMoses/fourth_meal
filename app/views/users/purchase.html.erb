@@ -1,16 +1,66 @@
-<div class="row">
-  <div class="col-md-4">
-    <h1>Sign Up</h1>
+<!-- <div class="row">
+  <div class="col-md-4 panel">
+    <h1 class="panel-title">Sign Up</h1>
     <%= render 'partial_sign_up_form' %>
   </div>
 
-  <div class="col-md-4">
-    <h1>Log In</h1>
+  <div class="col-md-4 panel">
+    <h1 class="panel-title">Log In</h1>
     <%= render 'sessions/form' %>
   </div>
 
-  <div class="col-md-4">
-    <h1>Checkout As Guest</h1>
+  <div class="col-md-4 panel">
+    <h1 class="panel-title">Checkout As Guest</h1>
     <%= render 'orders/form' %>
   </div>
+
+</div> -->
+
+
+<div data-no-turbolink>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            Sign Up
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <%= render 'partial_sign_up_form' %>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+            Log In
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse">
+        <div class="panel-body">
+          <%= render 'sessions/form' %>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+            Checkout As Guest
+          </a>
+        </h4>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse">
+        <div class="panel-body">
+          <%= render 'orders/form' %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
