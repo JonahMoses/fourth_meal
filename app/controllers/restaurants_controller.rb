@@ -39,7 +39,7 @@ class RestaurantsController < ApplicationController
         end
           format.html { redirect_to :back }
       else
-        format.html { render :back }
+        format.html { redirect_to :back }
       end
     end
   end
@@ -77,12 +77,6 @@ class RestaurantsController < ApplicationController
   def approve
     @user = User.where(id: current_restaurant.creator_id).first
     current_restaurant.approve
-    # Locate the creator_id
-    # locate user_id from creator_id
-    # Locate the jobs table row that has the
-      # user_id & restuarant_id
-    # change role from default "default role"
-      # to "Admin"
     pending_restaurant_job.update(role: "Admin")
     UserMailer.new_restaurant_approval(@user, @restaurant).deliver
     redirect_to '/dashboard'
@@ -102,7 +96,7 @@ class RestaurantsController < ApplicationController
 private
 
   def restaurant_params
-    params.require(:restaurant).permit(:title, :description, :id, :status, :region_id)
+    params.require(:restaurant).permit(:title, :description, :id, :status, :region_id, :image)
   end
 
   def pending_restaurant_job

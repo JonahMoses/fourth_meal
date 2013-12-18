@@ -1,16 +1,46 @@
 
 <% @restaurants.each do |restaurant| %>
-<center><%= restaurant.title %></center></br>
- 
-<dl class="dl-horizontal">
-  <dt><strong> Description:</strong></dt>
-  <dd><%= restaurant.description %></dd>
-  <dt><strong>Status:</strong></dt>
-  <dd><%= restaurant.status %></dd>
-</dl>
+<center><h2><%= restaurant.title %></h2></center></br>
+<center><strong>Status:</strong></center>
+<center><%= restaurant.status %></center>
+<%= form_for restaurant, :html => { :class => 'form-horizontal',
+                                    :multipart => true } do |f| %>
 
-<%= link_to 'View Menu', restaurant.slug, class: "item-show btn btn-default", id: "btn-view-menu-#{restaurant.id}" %>
+    <div class="control-group">
+      <%= f.label :Restaurant_name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :title, :class => 'text_field' %>
+      </div>
+    </div>
 
+    <div class="control-group">
+      <%= f.label :Restaurant_description, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :description, :class => 'text_area' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+     <div class="image-display">
+      <%= image_tag restaurant.image.url(:square) %>
+    </div>
+
+    <div class="control-group">
+      <div class="image-upload">
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+      </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Update Menu', restaurant.slug, class: "item-show btn btn-primary", id: "btn-view-menu-#{restaurant.id}" %>
+      <% if restaurant.status == 'approved' %>
+        <%= link_to "Open Restaurant", "/#{restaurant.slug}/activate", :class => 'btn btn-primary' %>
+      <% end %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  root_path, :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
 <% end %>
 
 
