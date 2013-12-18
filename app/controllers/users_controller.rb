@@ -71,7 +71,7 @@ private
       :shipping_apt,
       :shipping_city,
       :shipping_state,
-      :shipping_zip_code,)
+      :shipping_zip_code)
   end
 
 end

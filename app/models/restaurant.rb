@@ -1,13 +1,13 @@
 class Restaurant < ActiveRecord::Base
   validates :title, :description, presence: true
   validates :title, uniqueness: true
-  validate :title_not_forbidden
+  validate  :title_not_forbidden
 
   FORBIDDEN_NAMES = %w[javascripts stylesheets images]
 
-  has_many  :items
-  has_many  :orders
-  has_many  :jobs
+  has_many   :items
+  has_many   :orders
+  has_many   :jobs
   belongs_to :region
 
   after_create :set_defaults

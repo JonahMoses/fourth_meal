@@ -30,9 +30,7 @@ class Item < ActiveRecord::Base
   end
 
   def category_names
-    self.categories.collect do |c|
-      c.name
-    end.join(", ")
+    categories.pluck(:name).join(", ")
   end
 
   def add_categories(ids)

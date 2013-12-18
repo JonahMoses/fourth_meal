@@ -12,15 +12,13 @@ class RestaurantsController < ApplicationController
     @user                  = current_user
     @platform_admin        = platform_admin
     @restaurant.creator_id = @user.id
-    respond_to do |format|
-      if @restaurant.save
-        create_job(@user.id, @restaurant.id)
-        UserMailer.new_restaurant_submission_confirmation(@user, @restaurant).deliver
-        UserMailer.new_restaurant_submission_notification(@platform_admin, @user, @restaurant).deliver
-        format.html { redirect_to '/', notice: 'Restaurant is submitted and pending approval' }
-      else
-        format.html { render action: 'new' }
-      end
+    if @restaurant.save
+      create_job(@user.id, @restaurant.id)
+      UserMailer.new_restaurant_submission_confirmation(@user, @restaurant).deliver
+      UserMailer.new_restaurant_submission_notification(@platform_admin, @user, @restaurant).deliver
+      redirect_to '/', notice: 'Restaurant is submitted and pending approval'
+    else
+      render action: 'new'
     end
   end
 

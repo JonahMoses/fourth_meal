@@ -15,5 +15,4 @@ describe "dashboard controller" do
     expect(page).to have_content("approved")
   end
 
-
 end
