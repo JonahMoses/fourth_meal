@@ -22,29 +22,26 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.new(order_params)
-    respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        redirect_to @order, notice: 'Order was successfully created.'
       else
-        format.html { render action: 'new' }
+        render action: 'new'
       end
     end
   end
 
   def update
-    respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        redirect_to @order, notice: 'Order was successfully updated.'
       else
-        format.html { render action: 'edit' }
+        render action: 'edit'
       end
     end
   end
 
   def destroy
     @order.destroy
-    respond_to do |format|
-      format.html { redirect_to :back, notice: 'Order has been deleted'}
+      redirect_to :back, notice: 'Order has been deleted'
     end
   end
 
