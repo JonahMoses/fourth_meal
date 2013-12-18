@@ -1,17 +1,19 @@
-<tr>
-  <td><%= restaurant.title %></td>
-  <td><%= restaurant.description %></td>
-  <td><%= link_to "Details", restaurant_details_path(restaurant.slug), method: "get" %></td>
+<% cache restaurant do  %>
+  <tr>
+    <td><%= restaurant.title %></td>
+    <td><%= restaurant.description %></td>
+    <td><%= link_to "Details", restaurant_details_path(restaurant.slug), method: "get" %></td>
 
-<td>
-<%= form_for restaurant do |f| %>
-<%= f.select :status, [["pending"], ["approved"], ["active"], ["inactive"], ["rejected"]] %>
-</td>
+  <td>
+  <%= form_for restaurant do |f| %>
+  <%= f.select :status, Restaurant.form_statuses %>
+  </td>
 
-<td>
- <%= f.submit "Change Status", :class => 'btn btn-primary btn-xs' %>
- </td>
+  <td>
+   <%= f.submit "Change Status", :class => 'btn btn-primary btn-xs' %>
+   </td>
+  <% end %>
+
+
+  </tr>
 <% end %>
-
-
-</tr>

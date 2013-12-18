@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
+gem 'kaminari'
 gem 'bcrypt-ruby', :require => "bcrypt"
 gem 'faker'
 gem 'twitter-bootstrap-rails'

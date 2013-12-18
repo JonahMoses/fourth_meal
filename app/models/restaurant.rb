@@ -12,8 +12,20 @@ class Restaurant < ActiveRecord::Base
 
   after_create :set_defaults
 
+  def self.form_statuses
+    ["pending", "approved", "active", "inactive", "rejected"].freeze
+  end
+
   def self.active
     where(:status => "active")
+  end
+
+  def self.rejected
+    where(:status => 'rejected')
+  end
+
+  def self.admin_visible
+    where("status IS NOT 'rejected'")
   end
 
   def approve

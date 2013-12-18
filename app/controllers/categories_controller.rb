@@ -17,14 +17,8 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
-
-    respond_to do |format|
-      if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
-      else
-        format.html { render action: 'new' }
-      end
-    end
+    @category.save!
+    redirect_to @category, notice: 'Category was successfully created.' }
   end
 
   def update
