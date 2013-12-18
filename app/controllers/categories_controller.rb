@@ -18,7 +18,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     @category.save!
-    redirect_to @category, notice: 'Category was successfully created.' }
+    redirect_to @category, notice: 'Category was successfully created.'
   end
 
   def update
