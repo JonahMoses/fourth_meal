@@ -12,6 +12,19 @@ class Restaurant < ActiveRecord::Base
 
   after_create :set_defaults
 
+  has_attached_file :image, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+    },
+    :default_url => "food_fight_logo.png",
+    :url => "/assets/images/:id_logo.png",
+    :path => ":rails_root/public/assets/images/:id_logo.png"
+
+    validates_attachment_size :image, :less_than => 5.megabytes
+    validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
+
+    # process_in_background :image
   def self.form_statuses
     ["pending", "approved", "active", "inactive", "rejected"].freeze
   end
@@ -25,7 +38,7 @@ class Restaurant < ActiveRecord::Base
   end
 
   def self.admin_visible
-    where("status IS NOT 'rejected'")
+    where("status NOT LIKE 'rejected'")
   end
 
   def approve

@@ -22,7 +22,7 @@ class RestaurantsController < ApplicationController
     end
   end
 
-  def update
+   def update
     @restaurant = Restaurant.where(id: params[:id]).first
     @user = User.where(id: @restaurant.creator_id).first
     respond_to do |format|
@@ -36,7 +36,7 @@ class RestaurantsController < ApplicationController
         end
           format.html { redirect_to :back }
       else
-        format.html { render :back }
+        format.html { redirect_to :back }
       end
     end
   end
@@ -44,9 +44,7 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant = Restaurant.where(id: params[:id]).first
     @restaurant.destroy
-    respond_to do |format|
-      format.html { redirect_to dashboard_path, notice: "#{@restaurant.title} was deleted from FoodFight" }
-    end
+      redirect_to dashboard_path, notice: "#{@restaurant.title} was deleted from FoodFight"
   end
 
   def create_job(user_id, restaurant_id)
@@ -64,10 +62,19 @@ class RestaurantsController < ApplicationController
   end
 
   def details
+    @restaurant = current_restaurant
   end
 
   def admin_restaurants
     @restaurants = current_user.my_restaurants
+  end
+
+  def approve
+    @user = User.where(id: current_restaurant.creator_id).first
+    current_restaurant.approve
+    pending_restaurant_job.update(role: "Admin")
+    UserMailer.new_restaurant_approval(@user, @restaurant).deliver
+    redirect_to '/dashboard'
   end
 
   def activate
@@ -84,7 +91,7 @@ class RestaurantsController < ApplicationController
 private
 
   def restaurant_params
-    params.require(:restaurant).permit(:title, :description, :id, :status, :region_id)
+    params.require(:restaurant).permit(:title, :description, :id, :status, :region_id, :image)
   end
 
   def pending_restaurant_job

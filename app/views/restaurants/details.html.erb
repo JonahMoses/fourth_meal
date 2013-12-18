@@ -15,7 +15,7 @@ Restaurant Details
     <dd><%= job.role %></dd>
     <dt><strong>User ID:</strong></dt>
     <dd><%= job.user_id %></dd>
-    <dt><strong>Creator Email:</strong></dt>
+    <dt><strong>Restaurant Admin Email:</strong></dt>
     <dd><%= User.where(id: job.user_id).first.email %></dd>
   <% end %>
 

@@ -1,5 +1,5 @@
 <div class="row center" style="text-align: center;">
-  <%= image_tag("restaurants_logo.png", class: "header-images pull-left") %>
+  <%= image_tag("#{@restaurant.id}_logo.png", class: "header-images pull-left") %>
   <font style="font-weight: bold; display: inline-block; padding-top: 35px; font-size: 300%"><%= current_restaurant.title %></font>
-  <%= image_tag("restaurants_logo.png", class: "header-images pull-right") %>
+  <%= image_tag("#{@restaurant.id}_logo.png", class: "header-images pull-right") %>
 </div>

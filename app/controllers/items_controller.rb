@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @restaurant = current_restaurant
   end
 
   def new

@@ -22,30 +22,24 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.new(order_params)
-    respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        redirect_to @order, notice: 'Order was successfully created.'
       else
-        format.html { render action: 'new' }
+        render action: 'new'
       end
-    end
   end
 
   def update
-    respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-      else
-        format.html { render action: 'edit' }
-      end
+    if @order.update(order_params)
+      redirect_to @order, notice: 'Order was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   def destroy
     @order.destroy
-    respond_to do |format|
-      format.html { redirect_to :back, notice: 'Order has been deleted'}
-    end
+      redirect_to :back, notice: 'Order has been deleted'
   end
 
   def purchase
@@ -71,6 +65,7 @@ class OrdersController < ApplicationController
       order = current_order
       GuestOrderMailerWorker.perform_async(order.id)
       session[:order_id] = nil
+      current_user.update(email: "")
       redirect_to confirmation_order_path(order)
     else
       render :guest_purchase
@@ -81,17 +76,6 @@ class OrdersController < ApplicationController
   end
 
 private
-
-  # require 'twilio-ruby'
-
-  #   account_sid = "AC14a7433b640c35adf748c8e7fb2c7c1f"
-  #   auth_token = "5d61bfcd8c12c9fe222f2a056871ac21"
-
-  #   @client = Twilio::REST::Client.new account_sid, auth_token
-
-  #   @message = @client.account.messages.create({:to => "+12316851234",
-  #                                      :from => "+15555555555",
-  #                                      :body => "Hello there!"})
 
   def set_order
     if current_user.admin?
@@ -107,19 +91,19 @@ private
 
   def user_params
     params.require(:user).permit(
-      :email,
-      :full_name,
-      :credit_card_number,
-      :billing_street,
-      :billing_city,
-      :billing_apt,
-      :billing_state,
-      :billing_zip_code,
-      :shipping_street,
-      :shipping_city,
-      :shipping_apt,
-      :shipping_state,
-      :shipping_zip_code)
+                          :email,
+                          :full_name,
+                          :credit_card_number,
+                          :billing_street,
+                          :billing_city,
+                          :billing_apt,
+                          :billing_state,
+                          :billing_zip_code,
+                          :shipping_street,
+                          :shipping_city,
+                          :shipping_apt,
+                          :shipping_state,
+                          :shipping_zip_code)
   end
 
 end
