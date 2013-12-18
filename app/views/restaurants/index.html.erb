@@ -3,6 +3,7 @@
   <h1>WELCOME TO FOOD FIGHT!</h1>
   <div class="container">
     <%= render partial: 'restaurants/restaurant', collection: @restaurants %>
+    <br />
     <%= paginate @restaurants %>
   </div>
 </div>
