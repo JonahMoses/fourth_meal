@@ -18,7 +18,9 @@
 
 <h2>Restaurants by Status</h2>
 
+<%= paginate @restaurants %>
 <%= render partial: 'dashboard/restaurants/restaurant_table', locals: {restaurants: @restaurants} %>
 
 <h4>Rejected Restaurants</h4>
 <%= render partial: 'dashboard/restaurants/restaurant_table', locals: {restaurants: @rejected_restaurants} %>
+
