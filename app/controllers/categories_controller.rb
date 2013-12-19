@@ -22,31 +22,26 @@ class CategoriesController < ApplicationController
   end
 
   def update
-      if @category.update(category_params)
-         redirect_to @category, notice: 'Category was successfully updated.'
-         redirect_to @category, notice: 'Category was successfully updated.'
-      else
-         render action: 'edit'
-         render action: 'edit'
-      end
+    if @category.update(category_params)
+       redirect_to @category, notice: 'Category was successfully updated.'
+    else
+       render action: 'edit'
     end
   end
 
   def destroy
     @category.destroy
-       redirect_to categories_url
-       redirect_to categories_url
-    end
+    redirect_to categories_url
   end
 
 private
 
-    def set_category
-      @category = Category.find(params[:id])
-    end
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
-    def category_params
-      params.require(:category).permit(:name)
-    end
+  def category_params
+    params.require(:category).permit(:name)
+  end
 
 end

@@ -4,14 +4,14 @@
       <div class="item-image">
         <div class="image-display">
           <%= link_to restaurant_name_path(restaurant.slug) do %>
-            <%= image_tag("#{restaurant.id}_logo.png", class: "front-page-images img-circle") %>
+            <%= image_tag(restaurant.image_file_name, class: "front-page-images img-circle") %>
           <% end %>
         </div>
       </div>
       <div class="item-details">
         <font size="5em">
-          <%= restaurant.title[0..20] %>
-          <%= "" if restaurant.title.length > 20 %>
+          <%= restaurant.title[0..21] %>
+          <%= "" if restaurant.title.length > 21 %>
           <br />
           <%= link_to 'View Menu', restaurant_name_path(restaurant.slug), class: "item-show btn btn-xs btn-warning", id: "btn-view-menu-#{restaurant.id}" %>
         </font>

@@ -7,7 +7,6 @@ class BuildSeedUsers
       full_name             = Faker::Name.name
       password              = "password"
       password_confirmation = "password"
-      credit_card_number    = "4242424242424242"
       billing_street        = "1234 Maple St"
       billing_apt           = "G6"
       billing_city          = "Denver"
@@ -18,7 +17,6 @@ class BuildSeedUsers
         full_name: full_name,
         password: password,
         password_confirmation: password_confirmation,
-        credit_card_number: credit_card_number,
         billing_street: billing_street,
         billing_apt: billing_apt,
         billing_city: billing_city,
