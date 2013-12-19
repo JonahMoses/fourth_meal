@@ -15,14 +15,14 @@
   </div>
 
   <div class="control-group">
-    <label class="radio inline control-label",  style="padding-right: 300px;">
+    <label class="radio inline control-label",  style="padding-right: 100px;">
    <%= f.collection_radio_buttons :region_id, @regions, :id, :name, :class => 'control-label'%>
    </label>
  </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+    <%= link_to '.cancel', :default => "helpers.links.cancel",
                 root_path, :class => 'btn' %>
   </div>
 <% end %>

@@ -37,7 +37,7 @@
       <% if restaurant.status == 'approved' %>
         <%= link_to "Open Restaurant", "/#{restaurant.slug}/activate", :class => 'btn btn-primary' %>
       <% end %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+      <%= link_to '.cancel', :default => "helpers.links.cancel",
                   root_path, :class => 'btn btn-primary' %>
     </div>
   <% end %>
