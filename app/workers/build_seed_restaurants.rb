@@ -2,7 +2,7 @@ class BuildSeedRestaurants
   include Sidekiq::Worker
 
   def perform(r)
-    10.times do |i|
+    100.times do |i|
       name = restaurant_names.sample + "'s" + " Restaurant" + " #{i}, #{r}"
       description = "Gourmet " + Faker::Lorem.sentence
       number = rand(1...13)
