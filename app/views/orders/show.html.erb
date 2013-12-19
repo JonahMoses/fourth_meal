@@ -10,24 +10,24 @@
         <div class="order_item_<%= index %>">
           <%= form_for item, {url: update_order_item_path("#{current_restaurant.slug}", @order.id, item.id)} do |f| %>
             <div>
-              <%= item.item.title %>
-              <%= f.text_field :quantity, :class => 'item_quantity' %>
-              <%= print_price item.item.price %>
-              <%= print_price item.subtotal %>
-              <%= f.submit 'Update' %>
-              <%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %>
+              Item: <%= item.item.title %>
+              <%= f.text_field :quantity, :class => 'item_quantity' %></br>
+              Item Price:  <%= print_price item.item.price %></br>
+              Subtotal: <%= print_price item.subtotal %></br>
+              <%= f.submit 'Update', :class => 'btn btn-xs btn-primary'%>
+              <%= link_to 'Remove', item, method: :delete, :class => 'btn btn-xs btn-primary', data: { confirm: 'Are you sure?' } %>
             </div>
           <% end %>
         </div>
       <% end %>
     </div>
     <p class="cart_total_price"><strong>Total:</strong><%= print_price @order.total %></p>
-    <%= link_to "Checkout", purchase_order_path(current_restaurant.slug, @order), method: :post %>
-    <%= link_to "Empty Cart", destroy_restaurant_order_path(current_restaurant.slug, @order), data: { confirm: 'Are you sure?' }, method: :delete %>
+    <%= link_to "Checkout", purchase_order_path(current_restaurant.slug, @order), method: :post, :class => 'btn btn-xs btn-primary' %>
+    <%= link_to "Empty Cart", destroy_restaurant_order_path(current_restaurant.slug, @order), data: { confirm: 'Are you sure?' }, method: :delete, :class => 'btn btn-xs btn-primary' %>
     <% if allow? "orders", "edit" %>
-      <%= link_to 'Edit', edit_order_path(@order) %>
+      <%= link_to 'Edit', edit_order_path(@order), :class => 'btn btn-xs btn-primary' %>
     <% end %>
-    <%= link_to 'Back', orders_path %>
+    <%= link_to 'Back', orders_path, :class => 'btn btn-xs btn-primary' %>
   </div>
 
   <% if !current_user.guest? %>
