@@ -3,8 +3,8 @@ class BuildSeedRestaurants
 
   def perform(r)
     100.times do |i|
-      name = Faker::Company.name + "#{i}, #{r}"
-      description = Faker::Company.catch_phrase
+      name = restaurant_names.sample + " #{i}, #{r}"
+      description = "Gourmet " + Faker::Lorem.sentence
       store = Restaurant.create(
         title: name,
         status: "active",
@@ -26,6 +26,11 @@ class BuildSeedRestaurants
       end
     end
   end
+
+  def restaurant_names
+    %w[ Adam Louisa Katrina Romeeka Billy Ben George Bryana Rolen Ben Tyler Luke Will Jonah Darryl Kevin Antony Lauren Quentin Nikhil Simon Bree Nathaniel Brian Persa Jeff Billy Franklin Jorge ]
+  end
+
 
 end
 

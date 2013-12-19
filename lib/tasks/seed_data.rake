@@ -21,5 +21,3 @@ task :seed_items => :environment do
     puts "creating item job #{i}"
   end
 end
-
-
