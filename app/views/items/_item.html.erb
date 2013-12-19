@@ -4,7 +4,8 @@
   <div class="pull-left text-left", style="padding-left: 2%; padding-top: 3%;">
     <font size="5em">
       <strong>Title:</strong> <%= item.title %></h4><br />
-      <strong>Description:</strong> <%= item.description %><br />
+      <strong>Description:</strong> <%= item.description[0...48] %>
+          <%= "…" if item.description.length > 48 %><br />
       <strong>Status:</strong> <%= print_status item.active %>
   </div>
   <div class="pull-right", style="padding-right: 5%; padding-top: 3%">
