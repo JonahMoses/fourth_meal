@@ -1,10 +1,33 @@
 <% cache item do   %>
-  <div class="span4 well well-sm">
+<div class="row well well-sm">
+  <%= image_tag item.image.url(:square), class: "img-circle pull-left" %>
+  <div class="pull-left text-left", style="padding-left: 2%; padding-top: 3%;">
+    <font size="5em">
+      <strong>Title:</strong> <%= item.title %></h4><br />
+      <strong>Description:</strong> <%= item.description %><br />
+      <strong>Status:</strong> <%= print_status item.active %>
+  </div>
+  <div class="pull-right", style="padding-right: 5%; padding-top: 3%">
+    <div style="display: block", class="text-right">
+    <strong><%= print_price item.price %></strong>
+      <%= link_to 'Add to Cart', "#{current_restaurant.slug}/order/#{item.id}", { method: :post, class: 'btn btn-success btn-sm' } %><br /><br />
+      <%= link_to 'Details', restaurant_item_path(item.restaurant.slug, item), class: "item-show btn btn-default btn-sm"%>
+      <% if current_user.admin? || current_user.current_restaurant_admin?(current_restaurant) %>
+        <%= link_to 'Edit', edit_item_path(item), class: "item-edit btn btn-default btn-sm item-admin"%>
+        <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "item-delete btn btn-danger btn-sm" %>
+      <% end %>
+    </div>
+    </font>
+  </div>
+
+</div>
+
+<!--   <div class="span4 well well-sm">
     <div class="item">
       <div class="item-image">
         <td>
           <div class="image-display">
-            <%= image_tag item.image.url(:square) %>
+            <%= image_tag item.image.url(:square), class: "img-circle" %>
           </div>
         </td>
       </div>
@@ -37,5 +60,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 <% end %>

@@ -1,8 +1,4 @@
-<div class="jumbotron center-text">
-  <%= @restaurant.title %></br>
-  <%= @restaurant.description %></br>
-  Status: <%= @restaurant.status %>
-
+<div class="center-text" style="margin-left: 4%">
   <div class="container">
     <%= render partial: 'items/item', collection: @restaurant.items %>
   </div>

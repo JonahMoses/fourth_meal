@@ -2,7 +2,7 @@ class RestaurantsController < ApplicationController
   before_action :create_and_log_in_guest_user, only: [:show]
 
   def index
-    @restaurants = Restaurant.where(status: "active").page(params[:page]).per(21)
+    @restaurants = Restaurant.where(status: "active").page(params[:page]).per(9)
     @current_user = current_user
     @regions = Region.all
   end

@@ -8,6 +8,7 @@ class BuildSeedItems
       price = 500
       item = Item.create!(title: name, description: description, price: price, active: true, restaurant_id: restaurant_id )
     end
+
   end
 end
 
