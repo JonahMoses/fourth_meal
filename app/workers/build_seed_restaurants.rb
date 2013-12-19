@@ -31,7 +31,7 @@ class BuildSeedRestaurants
   end
 
   def restaurant_names
-    %w[ Adam Louisa Katrina Romeeka BBQ_Billy Ben George Bryana Rolen Ben Tyler Luke Will Jonah Darryl Kevin Antony Lauren Quentin Nikhil Simon Bree Nathaniel Brian Persa Jeff Billy Franklin Jorge ]
+    %w[ Adam Louisa Katrina Romeeka BBQ_Billy BenH George Bryana Rolen BenL Tyler Luke Will Jonah Darryl Kevin Antony Lauren Quentin Nikhil Simon Bree Nathaniel Brian Persa Jeff Billy Franklin Jorge ]
   end
 
 
