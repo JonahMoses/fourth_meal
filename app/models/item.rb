@@ -16,7 +16,12 @@ class Item < ActiveRecord::Base
     square: '200x200#',
     medium: '300x300>'
     },
-    :default_url => "default_image.png"
+    :default_url => "default_image.png",
+    :url => "/assets/images/items/item_:id.png",
+    :path => ":rails_root/public/assets/images/items/item_:id.png"
+
+    validates_attachment_size :image, :less_than => 5.megabytes
+    validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png']
 
     process_in_background :image
 
