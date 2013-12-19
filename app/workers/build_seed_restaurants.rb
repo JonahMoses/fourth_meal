@@ -3,12 +3,11 @@ class BuildSeedRestaurants
 
   def perform(r)
     100.times do |i|
-      name = restaurant_names.sample + "'s" + " Restaurant" + " #{i}, #{r}"
+      name = restaurant_names.sample
       description = "Gourmet " + Faker::Lorem.sentence
-      number = rand(1...13)
-      image = "#{number}_logo.png"
+      image = "#{name}_logo.png"
       store = Restaurant.create(
-        title: name,
+        title: name + "'s" + " Restaurant" + " #{i}, #{r}",
         status: "active",
         slug: name.parameterize,
         image_file_name: image,
@@ -31,7 +30,7 @@ class BuildSeedRestaurants
   end
 
   def restaurant_names
-    %w[ Adam Louisa Katrina Romeeka BBQ_Billy Ben George Bryana Rolen Ben Tyler Luke Will Jonah Darryl Kevin Antony Lauren Quentin Nikhil Simon Bree Nathaniel Brian Persa Jeff Billy Franklin Jorge ]
+    %w[ Adam Louisa Katrina Romeeka BBQ_Billy BenH George Bryana Rolen BenL Tyler Luke Will Jonah Darryl Kevin Antony Lauren Quentin Nikhil Simon Bree Nathaniel Brian Persa Jeff Billy Franklin Jorge ]
   end
 
 

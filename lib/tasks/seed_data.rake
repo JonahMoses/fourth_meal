@@ -8,7 +8,7 @@ end
 
 desc "creating users"
 task :seed_users => :environment do
-  1000.times do |i|
+  10.times do |i|
     BuildSeedUsers.perform_async
     puts "creating user job #{i}"
   end
