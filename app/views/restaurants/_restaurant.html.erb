@@ -4,7 +4,7 @@
       <div class="item-image">
         <div class="image-display">
           <%= link_to restaurant_name_path(restaurant.slug) do %>
-            <%= image_tag restaurant.image_file_name, class: "front-page-images img-circle" %>
+            <%= image_tag "#{restaurant.title.tr('^A-Za-z', '')}_logo.png", class: "front-page-images img-circle" %>
           <% end %>
         </div>
       </div>
