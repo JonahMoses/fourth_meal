@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
       @filtered_orders = @filtered_orders.for_status(params[:status])
     end
 
-    @restaurants = Restaurant.admin_visible
+    @restaurants = Restaurant.admin_visible.page(params[:page]).per(20)
     @rejected_restaurants = Restaurant.rejected
   end
 end
