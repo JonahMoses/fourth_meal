@@ -91,7 +91,8 @@ private
                           title: restaurant_name,
                           description: Faker::Lorem.words(25).join(" "),
                           status: "active",
-                          region_id: sample_region_ids.sample
+                          region_id: sample_region_ids.sample,
+                          image_file_name: "#{sample_restaurant_ids.sample}_logo.png"
                         )
       puts "Created restaurant: #{restaurant.title}"
     end
