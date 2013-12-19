@@ -7,6 +7,6 @@
     <%= link_to "New Item", new_restaurant_item_path, :class => 'btn btn-primary' %></br>
   <% end %>
   <% if current_restaurant.status == 'approved' %>
-  <%= link_to "Activate", "/#{current_restaurant.slug}/activate", :class => 'btn btn-primary' %>
+    <%= link_to "Activate", "/#{current_restaurant.slug}/activate", :class => 'btn btn-primary' %>
   <% end %>
 </div>

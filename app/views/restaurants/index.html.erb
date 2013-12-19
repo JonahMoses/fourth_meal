@@ -1,11 +1,20 @@
-<div class="center-text center" style="margin-left: 4%;">
-  <div class="container">
-    <%= render partial: 'restaurants/restaurant', collection: @restaurants %>
-    <br />
-    <%= paginate @restaurants %>
-  </div>
+<div class="row center" style="text-align: center;">
+  <%= image_tag("food_fight_header_logo.png")%>
+</div>
+<div class="text-center">
+  <font size="5em">Welcome to Food Fight, <br /> home of the greatest restuarants around the country!</font>
 </div>
 
+<div class="text-center">
+  <h2>Select your closest city to see the best restaurants in town!</h2>
+</div>
+<div class="center text-center", style="padding-top: 25px; position: relative;">
+  <% @regions.each do |region| %>
+    <div class="col-md-4 well well-sm">
+      <%= link_to "#{region.name}", region_path(region.id), style: "z-index: 99; position: relative;" %></a>
+    </div>
+  <% end %>
+</div>
 
 <div class="col-lg-12">
   <% if @current_user && @current_user.authenticated? %>

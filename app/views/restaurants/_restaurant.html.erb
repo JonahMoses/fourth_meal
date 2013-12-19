@@ -10,7 +10,9 @@
       </div>
       <div class="item-details">
         <font size="5em">
-          <%= restaurant.title %>
+          <%= restaurant.title[0..20] %>
+          <%= "" if restaurant.title.length > 20 %>
+          <br />
           <%= link_to 'View Menu', restaurant_name_path(restaurant.slug), class: "item-show btn btn-xs btn-warning", id: "btn-view-menu-#{restaurant.id}" %>
         </font>
       </div>

@@ -16,6 +16,7 @@ Foodfight::Application.routes.draw do
 
   resources :regions
 
+  # root :to => "layouts#index"
   root :to => "restaurants#index"
 
   resources :orders do
