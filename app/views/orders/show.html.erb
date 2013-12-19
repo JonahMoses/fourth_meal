@@ -11,9 +11,9 @@
           <%= form_for item, {url: update_order_item_path("#{current_restaurant.slug}", @order.id, item.id)} do |f| %>
             <div>
               Item: <%= item.item.title %>
-              <%= f.text_field :quantity, :class => 'item_quantity' %></br>
-              Item Price:  <%= print_price item.item.price %></br>
-              Subtotal: <%= print_price item.subtotal %></br>
+              <%= f.text_field :quantity, :class => 'item_quantity' %><br><br>
+              Item Price:  <%= print_price item.item.price %><br><br>
+              Subtotal: <%= print_price item.subtotal %><br><br>
               <%= f.submit 'Update', :class => 'btn btn-xs btn-primary'%>
               <%= link_to 'Remove', item, method: :delete, :class => 'btn btn-xs btn-primary', data: { confirm: 'Are you sure?' } %>
             </div>
