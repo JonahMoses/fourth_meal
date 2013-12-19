@@ -1,4 +1,10 @@
 <dl class="dl-horizontal">
+  <div class="item-image">
+        <td>
+          <div class="image-display">
+            <%= image_tag item.image.url(:square) %>
+          </div>
+        </td>
   <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
   <dd><%= item.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
