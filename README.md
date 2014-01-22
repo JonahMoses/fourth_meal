@@ -14,20 +14,20 @@ The project requirements can be found here: [Fourth Meal](http://http://tutorial
 
 ## To set up PG locally
 
-- 'rake db:setup'
-- 'rake db:migrate'
+- rake db:setup
+- rake db:migrate
 
 ## Tests
 
 - rake db:test:prepare will make your test db ready to run tests
 - to run tests, run 'rspec'
 - To create test files using rspec
-  - 'rails g rspec:model'
-  - 'rails g rpec:controller'
+  - rails g rspec:model
+  - rails g rpec:controller
 
 
 ## Redis
-- 'brew install redis'
+- brew install redis
 - 'redis-server' to active a live redis server
 
 *Project built on Rails 4.0.0, and uses Twitter Bootstrap*
