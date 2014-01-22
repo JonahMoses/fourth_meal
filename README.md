@@ -6,6 +6,8 @@ all students of [gSchool](http://gschool.it) under the teaching of @jcasimir.
 
 The project requirements can be found here: [Fourth Meal](http://http://tutorials.jumpstartlab.com/projects/fourth_meal.html).
 
+`bundle`
+
 ## To get started:
 
 - clone the project
